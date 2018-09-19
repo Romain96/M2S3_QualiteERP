@@ -1,2 +1,9 @@
-# M2S3_QualiteERP
-Projet de L'UE "Qualité et ERP"
+# Projet de l'UE "Qualité et ERP"
+
+## Equipe de développement
+
+- Romain Perrin
+- Maxime Seyer
+- Tan Dat Truong
+- Isabelle Wingert
+
