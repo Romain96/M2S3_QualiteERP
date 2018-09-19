@@ -7,3 +7,7 @@
 - Tan Dat Truong
 - Isabelle Wingert
 
+## Liens utiles
+
+QT timeline
+- https://qt.developpez.com/doc/4.7/qtimeline/
