@@ -14,6 +14,10 @@
 - non simulation des maladies (chaque employé travaille exactement 5 jours par semaine)
 - non simulation de l'humeur (l'efficience reste constante)
 - non prise en compte des congés payés
+- il y a toujours au moins un projet actif [à discuter ?]
+- un recrutement de personnel dure exactement 3 mois
+- un nouvel employé a une efficience réduite de moitié le à compter d'exactement un mois après son embauche [à discuter ?]
+- un nouvel employé atteint une efficience maximale (lla même que ses collègues) au bout d'un mois [à discuter ?]
 
 ## Liens utiles
 
