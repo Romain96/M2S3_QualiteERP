@@ -7,7 +7,13 @@
 - Tan Dat Truong
 - Isabelle Wingert
 
-##
+## Hypothèses générales et simplificatrices
+
+- non prise en compte des jours fériés
+- prise en compte des week-end
+- non simulation des maladies (chaque employé travaille exactement 5 jours par semaine)
+- non simulation de l'humeur (l'efficience reste constante)
+- non prise en compte des congés payés
 
 ## Liens utiles
 
