@@ -7,7 +7,7 @@
 - Tan Dat Truong
 - Isabelle Wingert
 
-## Hypothèses générales et simplificatrices
+## Hypothèses simplificatrices
 
 - non prise en compte des jours fériés
 - prise en compte des week-end
@@ -16,13 +16,11 @@
 - non prise en compte des congés payés
 - il y a toujours au moins un projet actif [à discuter ?]
 - un recrutement de personnel dure exactement 3 mois
-- un nouvel employé a une efficience réduite de moitié le à compter d'exactement un mois après son embauche [à discuter ?]
-- un nouvel employé atteint une efficience maximale (lla même que ses collègues) au bout d'un mois [à discuter ?]
+- un nouvel employé a une efficience réduite de moitié le mois de son son embauche [à discuter ?]
+- un nouvel employé atteint une efficience maximale (la même que ses collègues) au bout d'un mois [à discuter ?]
 
 ## Liens utiles
 
-QT timeline
-https://qt.developpez.com/doc/4.7/qtimeline/
+- QT timeline : https://qt.developpez.com/doc/4.7/qtimeline/
 
-QT gif
-https://openclassrooms.com/forum/sujet/qt-gif-anime-dans-un-layout-97436
+- QT gif : https://openclassrooms.com/forum/sujet/qt-gif-anime-dans-un-layout-97436
