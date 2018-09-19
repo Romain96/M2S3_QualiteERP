@@ -7,7 +7,12 @@
 - Tan Dat Truong
 - Isabelle Wingert
 
+##
+
 ## Liens utiles
 
 QT timeline
-- https://qt.developpez.com/doc/4.7/qtimeline/
+https://qt.developpez.com/doc/4.7/qtimeline/
+
+QT gif
+https://openclassrooms.com/forum/sujet/qt-gif-anime-dans-un-layout-97436
