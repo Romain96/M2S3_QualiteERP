@@ -4,23 +4,22 @@ title = "ERP team 1 Example"
 	pdgs = ["Tan Dat"]
 	project_managers = ["Romain"]
 	duty_coordinators = ["Maxime"]
-	developpers = ["Isabelle", "Tan Dat"]
+	developers = ["Isabelle", "Tan Dat"]
 
-[projects]
-	[projects.airbus]
-	name = "AIRBUS"
-	dev_time = 150
-	managing_time = 40
-	deadline = 2018-12-01 00:00:00Z
+[[projects]]
+name = "AIRBUS"
+dev_time = 150
+managing_time = 40
+deadline = 2018-12-01 00:00:00Z
 
-	[projects.ninetendo]
-	name = "NINETENDO"
-	dev_time = 75
-	managing_time = 25
-	deadline = 2018-09-01 00:00:00Z
+[[projects]]
+name = "NINETENDO"
+dev_time = 75
+managing_time = 25
+deadline = 2018-09-01 00:00:00Z
 
-	[projects.htc_vr]
-	name = "HTC VR"
-	dev_time = 150
-	managing_time = 45
-	deadline = 2019-01-01 00:00:00Z
+[[projects]]
+name = "HTC VR"
+dev_time = 150
+managing_time = 45
+deadline = 2019-01-01 00:00:00Z
