@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <include/dialog.h>
 #include <QWidget>
+#include <employeedialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -22,9 +23,12 @@ private slots:
 
     void on_actionImport_triggered();
 
+    void on_pushButton_2_clicked();
+
 private:
 
     Dialog *newproj;
+    EmployeeDialog *newempl;
     Ui::MainWindow *ui;
 
 };

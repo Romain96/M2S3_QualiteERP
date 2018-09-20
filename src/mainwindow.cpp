@@ -44,3 +44,10 @@ void MainWindow::on_actionImport_triggered()
                                                     tr("data (*.toml)"));
 
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    newempl= new EmployeeDialog();
+    newempl->show();
+
+}
