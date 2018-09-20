@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QLabel>
 #include <QMovie>
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -32,5 +34,13 @@ void MainWindow::on_pushButton_clicked()
 {
     newproj= new Dialog();
     newproj->show();
+
+}
+
+void MainWindow::on_actionImport_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "/home",
+                                                    tr("data (*.toml)"));
 
 }

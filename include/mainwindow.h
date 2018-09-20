@@ -20,6 +20,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_actionImport_triggered();
+
 private:
 
     Dialog *newproj;

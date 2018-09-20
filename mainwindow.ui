@@ -108,9 +108,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>190</x>
       <y>380</y>
-      <width>391</width>
+      <width>561</width>
       <height>41</height>
      </rect>
     </property>
@@ -174,9 +174,16 @@
      <x>0</x>
      <y>0</y>
      <width>823</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionImport"/>
+   </widget>
+   <addaction name="menuFichier"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -190,6 +197,11 @@
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
    </property>
   </action>
  </widget>
