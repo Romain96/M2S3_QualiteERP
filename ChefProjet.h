@@ -9,12 +9,14 @@
 
 class ChefProjet : public Personnel
 {
-	public:
+public:
 	
-		// Constructeurs
-		ChefProjet();
-		ChefProjet(std:string nom, std:string prenom);
+	// Constructeurs
+	ChefProjet();
+	ChefProjet(std::string nom, std::string prenom);
 	
+	// méthodes
+	void debug();
 	
 };
 

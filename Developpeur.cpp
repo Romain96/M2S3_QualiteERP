@@ -25,7 +25,7 @@ Developpeur::Developpeur(std::string nom, std::string prenom) :
 void Developpeur::debug()
 {
 	std::cout << "Developpeur :\n" <<
-		"ID : " << this->id <<
-		"Nom : " << this->nom <<
-		"Prenom : " << this->prenom << std::endl;
+		"ID : " << this->id  <<
+		"\nNom : " << this->nom <<
+		"\nPrenom : " << this->prenom << std::endl;
 }

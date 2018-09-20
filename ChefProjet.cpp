@@ -5,7 +5,7 @@
  */ 
 
 ChefProjet::ChefProjet() :
-	Personnel();
+	Personnel()
 {
 	
 }
@@ -14,7 +14,7 @@ ChefProjet::ChefProjet() :
  * Constructeur de base
  */
   
-ChefProjet::ChefProjet(std:string nom, std:string prenom) : 
+ChefProjet::ChefProjet(std::string nom, std::string prenom) : 
 	Personnel(nom, prenom)
 {
 	

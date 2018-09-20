@@ -25,7 +25,7 @@ public:
 	bool isDev();
 	bool isChefProjet();
 
-	virtual void debug();
+	virtual void debug() =0;
 };
 
 #endif
