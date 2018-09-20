@@ -18,7 +18,7 @@
 - un recrutement de personnel dure exactement 3 mois
 - un nouvel employé a une efficience réduite de moitié le mois de son son embauche [à discuter ?]
 - un nouvel employé atteint une efficience maximale (la même que ses collègues) au bout d'un mois [à discuter ?]
-- non prise en des années bissextiles
+- non prise en compte des années bissextiles
 
 ## Liens utiles
 
