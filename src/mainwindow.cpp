@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!movie->isValid())
         {
          // Something went wrong :(
-        printf("ici");
+        printf("here");
         }
 
     // Play GIF
