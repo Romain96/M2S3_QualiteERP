@@ -20,8 +20,20 @@
 - un nouvel employé atteint une efficience maximale (la même que ses collègues) au bout d'un mois [à discuter ?]
 - non prise en compte des années bissextiles
 
+## Conventions de nommage
+
+Langue: Anglais
+Nom des fichers: snake case
+Fichiers source: dossier src
+Fichiers header: dossier include
+Documentation: dossier doc
+Fichiers librairies: dossier lib
+Noms de variable: snake case
+
 ## Liens utiles
 
 - QT timeline : https://qt.developpez.com/doc/4.7/qtimeline/
 
 - QT gif : https://openclassrooms.com/forum/sujet/qt-gif-anime-dans-un-layout-97436
+
+- JUCE GUI, une alternative possible à qt: https://juce.com/
