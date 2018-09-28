@@ -1,61 +1,53 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "../lib/cpptoml.h"
-#include "../include/team.h"
+
+#include "../include/erp_config.h"
 
 using namespace std;
 
+#define DEBUG
+
+#ifdef DEBUG 
+#define D(x) x
+#else 
+#define D(x)
+#endif
+
+void debug(ERPConfig *config)
+{
+	D(cerr << "PDGS:" << endl);
+	for(string pdg: config->get_team()->pdgs)
+	{
+		D(cerr << pdg << endl);
+	}
+	D(cerr << endl);
+
+	for(Project *p: config->get_project_list())
+	{
+		D(cerr << p->get_name() << endl);
+		D(cerr << p->get_dev_time() << endl);
+		D(cerr << p->get_managing_time() << endl);
+		D(cerr << p->get_deadline() << endl << endl);
+	}
+}
+
 int main(int argc, char *argv[]){
-	auto config = cpptoml::parse_file("../data/erp1.toml");
-	auto team = config->get_table("team");
-	
-	auto pdgs = team->get_array_of<string>("pdgs");
-	vector<string> pdg_list, project_manager_list,duty_coordinator_list, developer_list;
-	cout << "PDGs:" << endl;
-	for(const auto& pdg: *pdgs)
+	if (argc != 2)
 	{
-		pdg_list.push_back(pdg);
+		cerr << "Usage: " << argv[0] << " <config file>";
+		return 1;
 	}
-	cout << endl;
-
-	auto project_managers = team->get_array_of<string>("project_managers");
-	cout << "Project managers:" << endl;
-	for(const auto& project_manager: *project_managers)
+	try{
+		ERPConfig *config = new ERPConfig(argv[1]);
+		debug(config);
+	}
+	catch(const cpptoml::parse_exception& e)
 	{
-		project_manager_list.push_back(project_manager);
+		cerr << e.what() << endl;
+		return 1;
 	}
-	cout << endl;
-
-	auto duty_coordinators = team->get_array_of<string>("duty_coordinators");
-	cout << "Duty coordinators:" << endl;
-	for(const auto& duty_coordinator: *duty_coordinators)
-	{
-		duty_coordinator_list.push_back(duty_coordinator);
-	}
-	cout << endl;
-	
-	auto developers = team->get_array_of<string>("developers");
-	cout << "Developers:" << endl;
-	for(const auto& developer: *developers)
-	{
-		developer_list.push_back(developer);
-	}
-	cout << endl;
-
-	Team *t = new Team(pdg_list, project_manager_list, duty_coordinator_list, developer_list);
-
-	auto projects = config->get_table_array("projects");
-	for(const auto& project: *projects)
-	{
-		cout << endl << "Project:" << endl;
-		auto name = project->get_as<string>("name");
-		auto dev_time = project->get_as<int>("dev_time");
-		auto managing_time = project->get_as<int>("managing_time");
-		cout << "Name: " << *name << endl;
-		cout << "Dev time: " << *dev_time << endl;
-		cout << "Managing time: " << *managing_time << endl;
-	}
-
-	return 1;
+	return 0;
 }

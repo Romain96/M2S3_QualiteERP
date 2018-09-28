@@ -17,5 +17,6 @@ class Team{
 			std::vector<std::string> duty_coordinator_list,
 			std::vector<std::string> developer_list
 			);
+		Team(std::string filename);
 
 };
