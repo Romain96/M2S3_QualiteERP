@@ -2,19 +2,31 @@
 
 #include "../include/cpptoml.h"
 
+class Deadline{
+    public:
+        Deadline(int year, int month, int day);
+
+        int get_year();
+        int get_month();
+        int get_day();
+
+    protected:
+        int year, month, day;
+};
+
 class Project{
     public:
         Project();
-        Project(std::string name, int dev_time, int managing_time, cpptoml::local_datetime deadline);
+        Project(std::string name, int dev_time, int managing_time, int deadline_year, int deadline_month, int deadline_day);
         Project(std::string name);
 
         std::string get_name();
         int get_dev_time();
         int get_managing_time();
-        cpptoml::local_datetime get_deadline();
+        Deadline get_deadline();
     protected:
         std::string name;
         int dev_time;
         int managing_time;
-        cpptoml::local_datetime deadline;
+        Deadline deadline;
 };

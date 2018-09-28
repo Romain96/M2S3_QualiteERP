@@ -30,7 +30,7 @@ void debug(ERPConfig *config)
 		D(cerr << p->get_name() << endl);
 		D(cerr << p->get_dev_time() << endl);
 		D(cerr << p->get_managing_time() << endl);
-		D(cerr << p->get_deadline() << endl << endl);
+		D(cerr << p->get_deadline().get_year() << "/" << p->get_deadline().get_month() << "/" << p->get_deadline().get_day() << endl << endl);
 	}
 }
 

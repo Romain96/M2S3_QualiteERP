@@ -28,7 +28,7 @@ ERPConfig::ERPConfig(string filename)
 			cpptoml::local_datetime date;
 			auto deadline = project->get_as<cpptoml::local_datetime>("deadline").value_or(date);
 			// cout << deadline.day << "/" << deadline.month << "/" << deadline.year << endl;
-			this->project_list.push_back(new Project(name, dev_time, managing_time, deadline));
+			this->project_list.push_back(new Project(name, dev_time, managing_time, deadline.year, deadline.month, deadline.day));
 		}
 	}
 	catch(const cpptoml::parse_exception& e)
