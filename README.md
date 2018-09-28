@@ -22,13 +22,13 @@
 
 ## Conventions de nommage
 
-Langue: Anglais
-Nom des fichers: snake case
-Fichiers source: dossier src
-Fichiers header: dossier include
-Documentation: dossier doc
-Fichiers librairies: dossier lib
-Noms de variable: snake case
+- Langue: Anglais
+- Nom des fichers: snake case
+- Fichiers source: dossier src
+- Fichiers header: dossier include
+- Documentation: dossier doc
+- Fichiers librairies: dossier lib
+- Noms de variable: snake case
 
 ## Liens utiles
 
