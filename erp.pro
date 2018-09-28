@@ -27,12 +27,12 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/dialog.cpp \
-    employeedialog.cpp
+    src/employeedialog.cpp
 
 HEADERS += \
     include/mainwindow.h \
     include/dialog.h \
-    employeedialog.h
+    include/employeedialog.h
 
 FORMS += \
         mainwindow.ui \
