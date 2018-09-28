@@ -1,6 +1,9 @@
+#ifndef PROJECT_H
+#define PROJECT_H
+
 #include <string>
 
-#include "../include/cpptoml.h"
+#include "lib/cpptoml.h"
 
 class Deadline{
     public:
@@ -30,3 +33,5 @@ class Project{
         int managing_time;
         Deadline deadline;
 };
+
+#endif

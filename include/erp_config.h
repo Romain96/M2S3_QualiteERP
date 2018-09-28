@@ -1,3 +1,6 @@
+#ifndef ERP_CONFIG_H
+#define ERP_CONFIG_H
+
 #include <string>
 #include <vector>
 
@@ -14,3 +17,5 @@ class ERPConfig{
         Team *team;
         std::vector<Project*> project_list;
 };
+
+#endif

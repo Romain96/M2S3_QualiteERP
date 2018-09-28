@@ -27,12 +27,19 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/dialog.cpp \
-    src/employeedialog.cpp
+    src/employeedialog.cpp \
+    src/erp_config.cpp \
+    src/project.cpp \
+    src/team.cpp \
 
 HEADERS += \
     include/mainwindow.h \
     include/dialog.h \
-    include/employeedialog.h
+    include/employeedialog.h \
+    include/erp_config.h \
+    include/project.h \
+    include/team.h \
+    lib/cpptoml.h
 
 FORMS += \
         mainwindow.ui \

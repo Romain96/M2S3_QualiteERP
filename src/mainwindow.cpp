@@ -43,6 +43,8 @@ void MainWindow::on_actionImport_triggered()
                                                     "/home",
                                                     tr("data (*.toml)"));
 
+    // TODO parser init TEAM
+
 }
 
 void MainWindow::on_pushButton_2_clicked()

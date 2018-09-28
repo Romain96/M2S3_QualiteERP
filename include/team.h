@@ -1,3 +1,6 @@
+#ifndef TEAM_H
+#define TEAM_H
+
 #include <string>
 #include <vector>
 
@@ -20,3 +23,5 @@ class Team{
 		Team(std::string filename);
 
 };
+
+#endif
