@@ -22,7 +22,7 @@
 
 ## Conventions de nommage
 
-- Langue: Anglais
+- Langue: **Anglais**
 - Nom des fichers: **snake\_case**
 - Fichiers source: dossier **src**
 - Fichiers header: dossier **include**
