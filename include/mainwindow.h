@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <include/project_dialog.h>
 #include <QWidget>
+#include "include/project_dialog.h"
 #include "include/employee_dialog.h"
 #include "include/project.h"
 #include "include/team.h"
@@ -30,6 +30,13 @@ private slots:
     void on_actionImport_triggered();
 
     void on_pushButton_new_employee_clicked();
+
+    void project_creation_data_received(std::string project_name,
+                                        int development_time,
+                                        int management_time,
+                                        int deadline_year,
+                                        int deadline_month,
+                                        int deadline_day);
 
 private:
 

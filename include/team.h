@@ -15,7 +15,7 @@ class Team{
 
 		Team();
 		Team(
-			std::vector<std::string>pdg_list,
+            std::vector<std::string> pdg_list,
 			std::vector<std::string> project_manager_list,
 			std::vector<std::string> duty_coordinator_list,
 			std::vector<std::string> developer_list

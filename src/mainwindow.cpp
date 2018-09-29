@@ -40,10 +40,30 @@ MainWindow::~MainWindow()
  */
 void MainWindow::on_pushButton_new_project_clicked()
 {
-    newproj= new ProjectDialog();
+    // creating the dialog window
+    newproj = new ProjectDialog();
     newproj->setWindowTitle("Project creation window");
-    newproj->show();
+    newproj->setModal(true);
 
+    QObject::connect(newproj, SIGNAL(project_creation_send_data(std::string,int,int,int,int,int)),
+                     this, SLOT(project_creation_data_received(std::string,int,int,int,int,int)));
+
+    newproj->show();
+}
+
+void MainWindow::project_creation_data_received(std::string project_name,
+                                                int development_time,
+                                                int management_time,
+                                                int deadline_year,
+                                                int deadline_month,
+                                                int deadline_day)
+{
+    std::cerr << "PROJECT NAME IS " << project_name << std::endl;
+    std::cerr << "DEVELOPMENT TIME IS " << development_time << std::endl;
+    std::cerr << "MANAGEMENT TIME IS " << management_time << std::endl;
+    std::cerr << "DEADLINE IS " << deadline_year
+              << "-" << deadline_month
+              << "-" << deadline_day << std::endl;
 }
 
 /*
