@@ -1,14 +1,14 @@
 #include "include/project_dialog.h"
-#include "ui_dialog.h"
+#include "ui_project_dialog.h"
 
-Dialog::Dialog(QWidget *parent) :
+ProjectDialog::ProjectDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::ProjectDialog)
 {
     ui->setupUi(this);
 }
 
-Dialog::~Dialog()
+ProjectDialog::~ProjectDialog()
 {
     delete ui;
 }

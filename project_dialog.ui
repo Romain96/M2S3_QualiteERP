@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>ProjectDialog</class>
+ <widget class="QDialog" name="ProjectDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -45,62 +45,46 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>29</x>
-     <y>49</y>
-     <width>341</width>
+     <x>10</x>
+     <y>50</y>
+     <width>383</width>
      <height>171</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="2">
-     <widget class="QLineEdit" name="lineEdit_2"/>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_dev_time">
+      <property name="text">
+       <string>Dev time (days)</string>
+      </property>
+     </widget>
     </item>
-    <item row="3" column="2">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
-    <item row="4" column="2">
-     <widget class="QLineEdit" name="lineEdit_4"/>
-    </item>
-    <item row="5" column="2">
-     <widget class="QLineEdit" name="lineEdit_5"/>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLineEdit" name="lineEdit"/>
+    <item row="4" column="3">
+     <widget class="QLineEdit" name="lineEdit_month"/>
     </item>
     <item row="4" column="0">
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="label_deadline">
       <property name="text">
-       <string>Management time (days)</string>
+       <string>Deadline (yyyy-mm-dd)</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label_name">
       <property name="text">
        <string>Name</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Customer</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="label_management_time">
       <property name="text">
-       <string>Dev time (days) </string>
+       <string>Management time (days) </string>
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Price (euros)</string>
-      </property>
-     </widget>
+    <item row="4" column="2">
+     <widget class="QLineEdit" name="lineEdit_year"/>
     </item>
     <item row="1" column="1" rowspan="5">
      <spacer name="verticalSpacer">
@@ -115,6 +99,28 @@
       </property>
      </spacer>
     </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_price">
+      <property name="text">
+       <string>Price (euros)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4">
+     <widget class="QLineEdit" name="lineEdit_day"/>
+    </item>
+    <item row="1" column="2" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_name"/>
+    </item>
+    <item row="2" column="2" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_dev_time"/>
+    </item>
+    <item row="3" column="2" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_management_time"/>
+    </item>
+    <item row="5" column="2" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_price"/>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -123,7 +129,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ProjectDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -139,7 +145,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ProjectDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -34,7 +34,7 @@ private slots:
 private:
 
     // new project creation window
-    Dialog *newproj;
+    ProjectDialog *newproj;
     // new employee recuirtement window
     EmployeeDialog *newempl;
     // main UI

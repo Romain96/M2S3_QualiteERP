@@ -40,7 +40,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::on_pushButton_new_project_clicked()
 {
-    newproj= new Dialog();
+    newproj= new ProjectDialog();
     newproj->setWindowTitle("Project creation window");
     newproj->show();
 
