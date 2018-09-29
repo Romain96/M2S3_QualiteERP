@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     label->setMovie(movie);
     movie->start();
     ui->setupUi(this);
+
+    this->setWindowTitle("Inside Out's very minimalistic ERP");
 }
 
 MainWindow::~MainWindow()
@@ -30,13 +32,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+/*
+ * When "New Project" button is clicked,
+ * adding a new project to the project list
+ */
+void MainWindow::on_pushButton_new_project_clicked()
 {
     newproj= new Dialog();
+    newproj->setWindowTitle("Project creation window");
     newproj->show();
 
 }
 
+/*
+ * Importing a toml data file containing a team of dev/manager and
+ * a list of projects
+ */
 void MainWindow::on_actionImport_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
@@ -47,9 +58,14 @@ void MainWindow::on_actionImport_triggered()
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
+/*
+ * When "New Employee" button is clicked,
+ * adding a new employee (developer or manager) to the team
+ */
+void MainWindow::on_pushButton_new_employee_clicked()
 {
     newempl= new EmployeeDialog();
+    newempl->setWindowTitle("Employee recruitement center");
     newempl->show();
 
 }

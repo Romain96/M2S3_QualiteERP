@@ -21,11 +21,11 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_new_project_clicked();
 
     void on_actionImport_triggered();
 
-    void on_pushButton_2_clicked();
+    void on_pushButton_new_employee_clicked();
 
 private:
 
