@@ -64,6 +64,12 @@ void MainWindow::project_creation_data_received(std::string project_name,
     std::cerr << "DEADLINE IS " << deadline_year
               << "-" << deadline_month
               << "-" << deadline_day << std::endl;
+
+    // creating a new project
+    Project pro = Project(project_name, development_time, management_time, deadline_year, deadline_month, deadline_day);
+
+    // adding it to the project list
+
 }
 
 /*
@@ -123,6 +129,41 @@ void MainWindow::on_actionImport_triggered()
         std::cerr << p->get_deadline().get_year()
                   << "/" << p->get_deadline().get_month()
                   << "/" << p->get_deadline().get_day() << std::endl << std::endl;
+    }
+
+    // *** Initializing team and project list ***
+
+    // clearing current team & project list
+    team.pdgs.clear();
+    team.project_managers.clear();
+    team.duty_coordinators.clear();
+    team.developers.clear();
+    project_list.clear();
+
+    // initializing with config data
+    for(std::string pdg: config->get_team()->pdgs)
+    {
+        team.pdgs.push_back(pdg);
+    }
+
+    for(std::string pm: config->get_team()->project_managers)
+    {
+        team.project_managers.push_back(pm);
+    }
+
+    for(std::string dco: config->get_team()->duty_coordinators)
+    {
+        team.duty_coordinators.push_back(dco);
+    }
+
+    for(std::string dev: config->get_team()->developers)
+    {
+        team.developers.push_back(dev);
+    }
+
+    for(Project *p: config->get_project_list())
+    {
+        project_list.push_back(*p);
     }
 }
 

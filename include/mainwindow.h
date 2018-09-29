@@ -50,6 +50,8 @@ private:
 
     // Inside Out's team
     Team team;
+    // Inside Out's project list
+    std::vector<Project> project_list;
 };
 
 #endif // MAINWINDOW_H
