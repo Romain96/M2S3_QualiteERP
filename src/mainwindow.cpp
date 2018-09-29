@@ -165,6 +165,9 @@ void MainWindow::on_actionImport_triggered()
     {
         project_list.push_back(*p);
     }
+
+    // updating screen infos
+    update();
 }
 
 /*
@@ -173,8 +176,53 @@ void MainWindow::on_actionImport_triggered()
  */
 void MainWindow::on_pushButton_new_employee_clicked()
 {
-    newempl= new EmployeeDialog();
+    newempl = new EmployeeDialog();
     newempl->setWindowTitle("Employee recruitement center");
     newempl->show();
 
+}
+
+/*
+ * When adding a new employee/project
+ * or loading a new config file
+ * updates all infos on screen
+ */
+void MainWindow::update()
+{
+    // *** Updating Team display ***
+
+    std::string line = "";
+
+    line = line + "Chief Executive Officier(s) :\n";
+    for (std::string ceo_elem: team.pdgs)
+    {
+        line = line + "* " + ceo_elem + "\n";
+    }
+
+    line = line + "Duty Coordinator(s) :\n";
+    for (std::string dco_elem: team.duty_coordinators)
+    {
+        line = line + "* " + dco_elem + "\n";
+    }
+
+    line = line + "Project Manager(s) :\n";
+    for (std::string pm_elem: team.project_managers)
+    {
+        line = line + "* " + pm_elem + "\n";
+    }
+
+    line = line + "Developer(s) :\n";
+    for (std::string dev_elem: team.developers)
+    {
+        line = line + "* " + dev_elem + "\n";
+    }
+
+    QString qtext = QString::fromStdString(line);
+    ui->textBrowser_employees->setText(qtext);
+
+    // *** Updating Projects display ***
+    // TODO
+
+    // *** Updating Result display ***
+    // TODO
 }

@@ -22,7 +22,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
+    // updating screen infos (team, projects, result)
+    void update();
 
 private slots:
     void on_pushButton_new_project_clicked();
