@@ -5,6 +5,10 @@
 #include <include/project_dialog.h>
 #include <QWidget>
 #include "include/employee_dialog.h"
+#include "include/project.h"
+#include "include/team.h"
+#include "lib/cpptoml.h"
+#include "include/erp_config.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,10 +33,16 @@ private slots:
 
 private:
 
+    // new project creation window
     Dialog *newproj;
+    // new employee recuirtement window
     EmployeeDialog *newempl;
+    // main UI
     Ui::MainWindow *ui;
 
+
+    // Inside Out's team
+    Team team;
 };
 
 #endif // MAINWINDOW_H
