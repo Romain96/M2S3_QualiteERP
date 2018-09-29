@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <include/dialog.h>
+#include <include/project_dialog.h>
 #include <QWidget>
-#include "include/employeedialog.h"
+#include "include/employee_dialog.h"
 
 namespace Ui {
 class MainWindow;

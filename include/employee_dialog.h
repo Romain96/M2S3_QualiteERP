@@ -1,5 +1,5 @@
-#ifndef EMPLOYEEDIALOG_H
-#define EMPLOYEEDIALOG_H
+#ifndef EMPLOYEE_DIALOG_H
+#define EMPLOYEE_DIALOG_H
 
 #include <QDialog>
 
@@ -19,4 +19,4 @@ private:
     Ui::EmployeeDialog *ui;
 };
 
-#endif // EMPLOYEEDIALOG_H
+#endif // EMPLOYEE_DIALOG_H

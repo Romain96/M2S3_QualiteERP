@@ -1,4 +1,4 @@
-#include "include/employeedialog.h"
+#include "include/employee_dialog.h"
 #include "ui_employeedialog.h"
 
 EmployeeDialog::EmployeeDialog(QWidget *parent) :

@@ -1,5 +1,5 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef PROJECT_DIALOG_H
+#define PROJECT_DIALOG_H
 
 #include <QDialog>
 
@@ -19,4 +19,4 @@ private:
     Ui::Dialog *ui;
 };
 
-#endif // DIALOG_H
+#endif // PROJECT_DIALOG_H

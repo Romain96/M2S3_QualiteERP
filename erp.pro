@@ -26,25 +26,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
-        src/dialog.cpp \
-    src/employeedialog.cpp \
     src/erp_config.cpp \
     src/project.cpp \
     src/team.cpp \
+    src/employee_dialog.cpp \
+    src/project_dialog.cpp
 
 HEADERS += \
     include/mainwindow.h \
-    include/dialog.h \
-    include/employeedialog.h \
     include/erp_config.h \
     include/project.h \
     include/team.h \
-    lib/cpptoml.h
+    lib/cpptoml.h \
+    include/employee_dialog.h \
+    include/project_dialog.h
 
 FORMS += \
         mainwindow.ui \
-    dialog.ui \
-    employeedialog.ui
+    project_dialog.ui \
+    employee_dialog.ui
 
 RESOURCES += \
     src.qrc
