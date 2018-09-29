@@ -36,8 +36,39 @@ void ProjectDialog::on_buttonBox_accepted()
     int deadline_month = ui->lineEdit_month->text().toInt();
     int deadline_year = ui->lineEdit_year->text().toInt();
 
+    // checking values...
+    // dev time > 0 (1 by default)
+    if (dev_time < 1)
+        dev_time = 1;
+    // management time > 0 (1 by default)
+    if (management_time < 1)
+        management_time = 1;
+    // deadline year <= 2019 (2019 by default)
+    if (deadline_year < 2019)
+        deadline_year = 2019;
+    // deadline 1 <= month <= 12 (12 by default)
+    if (deadline_month < 1 || deadline_month > 12)
+        deadline_month = 1;
+    // deadline 1 <= day <= 31 (1 by default)
+    if (deadline_day < 1 || deadline_day > 31)
+        deadline_day = 1;
+
+    // checking validity of day/month
+    if (deadline_month == 2)    // february = 28 (see simplifying hypothesis)
+    {
+        if (deadline_day > 28)
+            deadline_day = 28; // capped at 28
+    }
+    else if (deadline_month == 2 || deadline_month == 4 || deadline_month == 6
+             || deadline_month == 9 || deadline_month == 11)
+    {
+        if (deadline_day > 30)
+            deadline_day = 30; // capped at 30
+    }
+
     // project price (currently unused)
     float price = ui->lineEdit_price->text().toFloat();
 
+    // sending verified data
     emit project_creation_send_data(project_name, dev_time, management_time, deadline_year, deadline_month, deadline_day);
 }
