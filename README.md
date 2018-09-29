@@ -14,26 +14,18 @@
 - non simulation des maladies (chaque employé travaille exactement 5 jours par semaine)
 - non simulation de l'humeur (l'efficience reste constante)
 - non prise en compte des congés payés
-- il y a toujours au moins un projet actif [à discuter ?]
+- il y a toujours au moins un projet actif
 - un recrutement de personnel dure exactement 3 mois
-- un nouvel employé a une efficience réduite de moitié le mois de son son embauche [à discuter ?]
-- un nouvel employé atteint une efficience maximale (la même que ses collègues) au bout d'un mois [à discuter ?]
+- un nouvel employé a une efficience nulle le mois de son embauche (il est considéré en formation)
+- un nouvel employé atteint l'efficience globale au bout d'exactement un mois
 - non prise en compte des années bissextiles
 
 ## Conventions de nommage
 
 - Langue: Anglais
-- Nom des fichers: snake case
-- Fichiers source: dossier src
-- Fichiers header: dossier include
-- Documentation: dossier doc
-- Fichiers librairies: dossier lib
-- Noms de variable: snake case
-
-## Liens utiles
-
-- QT timeline : https://qt.developpez.com/doc/4.7/qtimeline/
-
-- QT gif : https://openclassrooms.com/forum/sujet/qt-gif-anime-dans-un-layout-97436
-
-- JUCE GUI, une alternative possible à qt: https://juce.com/
+- Nom des fichers: **snake\_case**
+- Fichiers source: dossier **src**
+- Fichiers header: dossier **include**
+- Documentation: dossier **doc**
+- Fichiers librairies: dossier **lib**
+- Noms de variable: **snake\_case**
