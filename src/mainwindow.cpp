@@ -58,17 +58,14 @@ void MainWindow::project_creation_data_received(std::string project_name,
                                                 int deadline_month,
                                                 int deadline_day)
 {
-    std::cerr << "PROJECT NAME IS " << project_name << std::endl;
-    std::cerr << "DEVELOPMENT TIME IS " << development_time << std::endl;
-    std::cerr << "MANAGEMENT TIME IS " << management_time << std::endl;
-    std::cerr << "DEADLINE IS " << deadline_year
-              << "-" << deadline_month
-              << "-" << deadline_day << std::endl;
-
     // creating a new project
     Project pro = Project(project_name, development_time, management_time, deadline_year, deadline_month, deadline_day);
 
     // adding it to the project list
+    project_list.push_back(pro);
+
+    // updating project infos
+    update_projects();
 
 }
 
@@ -206,6 +203,7 @@ void MainWindow::employee_creation_data_received(std::string employee_name,
     // TODO taking the recruitement date into account
 
     // updating the display of employees
+    update_employees();
 }
 
 /*
@@ -215,40 +213,72 @@ void MainWindow::employee_creation_data_received(std::string employee_name,
  */
 void MainWindow::update()
 {
+    // *** updating team infos ***
+    update_employees();
+
+    // *** Updating Projects display ***
+    update_projects();
+
+    // *** Updating Result display ***
+    // TODO
+}
+
+/*
+ * Updates the employees infos
+ */
+void MainWindow::update_employees()
+{
     // *** Updating Team display ***
 
-    std::string line = "";
+    std::string line = "Employees :\n\n";
 
-    line = line + "Chief Executive Officier(s) :\n";
+    line = line + " * Chief Executive Officier(s) :\n";
     for (std::string ceo_elem: team.pdgs)
     {
-        line = line + "* " + ceo_elem + "\n";
+        line = line + "\t" + ceo_elem + "\n";
     }
 
-    line = line + "Duty Coordinator(s) :\n";
+    line = line + " * Duty Coordinator(s) :\n";
     for (std::string dco_elem: team.duty_coordinators)
     {
-        line = line + "* " + dco_elem + "\n";
+        line = line + "\t" + dco_elem + "\n";
     }
 
-    line = line + "Project Manager(s) :\n";
+    line = line + " * Project Manager(s) :\n";
     for (std::string pm_elem: team.project_managers)
     {
-        line = line + "* " + pm_elem + "\n";
+        line = line + "\t" + pm_elem + "\n";
     }
 
-    line = line + "Developer(s) :\n";
+    line = line + " * Developer(s) :\n";
     for (std::string dev_elem: team.developers)
     {
-        line = line + "* " + dev_elem + "\n";
+        line = line + "\t" + dev_elem + "\n";
     }
 
     QString qtext = QString::fromStdString(line);
     ui->textBrowser_employees->setText(qtext);
+}
 
-    // *** Updating Projects display ***
-    // TODO
+/*
+ *  Updates the project infos
+ */
+void MainWindow::update_projects()
+{
+    // *** updating project infos ***
 
-    // *** Updating Result display ***
-    // TODO
+    std::string line = "Projects :\n\n";
+
+    for (Project pro: project_list)
+    {
+        line = line + " * " + pro.get_name() + "\n"
+                + "\tdev time : " + std::to_string(pro.get_dev_time()) + " day(s)\n"
+                + "\tmanagement time : " + std::to_string(pro.get_managing_time()) + " day(s)\n"
+                + "\tdeadline : " + std::to_string(pro.get_deadline().get_year()) + "-"
+                + std::to_string(pro.get_deadline().get_month()) + "-"
+                + std::to_string(pro.get_deadline().get_day()) + "\n";
+    }
+
+    QString qtext = QString::fromStdString(line);
+    ui->textBrowser_projects->setText(qtext);
 }

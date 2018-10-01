@@ -25,6 +25,12 @@ public:
     // updating screen infos (team, projects, result)
     void update();
 
+    // updating employee infos only
+    void update_employees();
+
+    // updating project infos only
+    void update_projects();
+
 private slots:
     void on_pushButton_new_project_clicked();
 

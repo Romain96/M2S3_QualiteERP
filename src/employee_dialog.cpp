@@ -22,7 +22,7 @@ EmployeeDialog::~EmployeeDialog()
 void EmployeeDialog::on_buttonBox_accepted()
 {
     // name of the employee
-    std::string employee_name = ui->label_name->text().toStdString();
+    std::string employee_name = ui->lineEdit_name->text().toStdString();
 
     // job (0 = CEO, 1 = DC, 2 = PM, 3 = DEV)
     int employee_job = ui->comboBox_type->currentIndex();
