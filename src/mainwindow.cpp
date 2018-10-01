@@ -178,8 +178,34 @@ void MainWindow::on_pushButton_new_employee_clicked()
 {
     newempl = new EmployeeDialog();
     newempl->setWindowTitle("Employee recruitement center");
+    newempl->setModal(true);
+
+    QObject::connect(newempl, SIGNAL(employee_creation_send_data(std::string, int, int, int, int)),
+                     this, SLOT(employee_creation_data_received(std::string, int, int, int, int)));
+
     newempl->show();
 
+}
+
+void MainWindow::employee_creation_data_received(std::string employee_name,
+                                                 int employee_job,
+                                                 int employee_year,
+                                                 int employee_month,
+                                                 int employee_day)
+{
+    // adding the new employee to the list
+    switch (employee_job)
+    {
+    case 0: team.pdgs.push_back(employee_name); break;
+    case 1: team.duty_coordinators.push_back(employee_name); break;
+    case 2: team.project_managers.push_back(employee_name); break;
+    case 3: team.developers.push_back(employee_name); break;
+    default: std::cerr << "ERROR index of employee is invalid !" << std::endl;
+    }
+
+    // TODO taking the recruitement date into account
+
+    // updating the display of employees
 }
 
 /*

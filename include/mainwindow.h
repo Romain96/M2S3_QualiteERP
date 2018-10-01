@@ -32,12 +32,20 @@ private slots:
 
     void on_pushButton_new_employee_clicked();
 
+    // used to receive the signal containing data from new project
     void project_creation_data_received(std::string project_name,
                                         int development_time,
                                         int management_time,
                                         int deadline_year,
                                         int deadline_month,
                                         int deadline_day);
+
+    // used to receive the signal containing data from new employee
+    void employee_creation_data_received(std::string employee_name,
+                                         int employee_job,
+                                         int employee_year,
+                                         int employee_month,
+                                         int employee_day);
 
 private:
 

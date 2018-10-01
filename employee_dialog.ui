@@ -86,12 +86,22 @@
      <widget class="QComboBox" name="comboBox_type">
       <item>
        <property name="text">
-        <string>Developer</string>
+        <string>Chief Executive Officer</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Duty Coordinator</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>Project Manager</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Developer</string>
        </property>
       </item>
      </widget>
