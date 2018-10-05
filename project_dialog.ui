@@ -13,6 +13,17 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{background:rgb(231, 238, 245);
+color:rgb(0, 0, 127);
+
+}
+QMenuBar {
+background-color: black;
+color:white;
+}
+</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -60,7 +71,11 @@
      </widget>
     </item>
     <item row="4" column="3">
-     <widget class="QLineEdit" name="lineEdit_month"/>
+     <widget class="QLineEdit" name="lineEdit_month">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_deadline">
@@ -84,7 +99,11 @@
      </widget>
     </item>
     <item row="4" column="2">
-     <widget class="QLineEdit" name="lineEdit_year"/>
+     <widget class="QLineEdit" name="lineEdit_year">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="1" rowspan="5">
      <spacer name="verticalSpacer">
@@ -107,19 +126,39 @@
      </widget>
     </item>
     <item row="4" column="4">
-     <widget class="QLineEdit" name="lineEdit_day"/>
+     <widget class="QLineEdit" name="lineEdit_day">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="2" colspan="3">
-     <widget class="QLineEdit" name="lineEdit_name"/>
+     <widget class="QLineEdit" name="lineEdit_name">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="2" column="2" colspan="3">
-     <widget class="QLineEdit" name="lineEdit_dev_time"/>
+     <widget class="QLineEdit" name="lineEdit_dev_time">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="3" column="2" colspan="3">
-     <widget class="QLineEdit" name="lineEdit_management_time"/>
+     <widget class="QLineEdit" name="lineEdit_management_time">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="5" column="2" colspan="3">
-     <widget class="QLineEdit" name="lineEdit_price"/>
+     <widget class="QLineEdit" name="lineEdit_price">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
