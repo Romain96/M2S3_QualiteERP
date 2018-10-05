@@ -158,6 +158,7 @@ void MainWindow::on_actionImport_triggered()
     }
 
     team.team_efficiency = config->get_team()->team_efficiency;
+    team.starting_date = config->get_team()->starting_date;
 
     for(Project *p: config->get_project_list())
     {
@@ -224,7 +225,12 @@ void MainWindow::update()
     ui->progressBar_efficiency->setValue(team.team_efficiency);
 
     // updating starting date display
-    ui->label_start_date->setText("on sait pas...");
+    std::string date = "";
+    date = date + std::to_string(team.starting_date.year()) + "-"
+            + std::to_string(team.starting_date.month()) + "-"
+            + std::to_string(team.starting_date.day());
+    QString qdate = QString::fromStdString(date);
+    ui->label_start_date->setText(qdate);
 
     // *** Updating Result display ***
     // TODO
