@@ -13,6 +13,17 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{background:rgb(231, 238, 245);
+color:rgb(0, 0, 127);
+
+}
+QMenuBar {
+background-color: black;
+color:white;
+}
+</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -34,13 +45,17 @@
     <rect>
      <x>29</x>
      <y>49</y>
-     <width>341</width>
+     <width>344</width>
      <height>171</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="2">
-     <widget class="QLineEdit" name="lineEdit_year"/>
+     <widget class="QLineEdit" name="lineEdit_year">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_name">
@@ -77,10 +92,18 @@
      </spacer>
     </item>
     <item row="3" column="3">
-     <widget class="QLineEdit" name="lineEdit_month"/>
+     <widget class="QLineEdit" name="lineEdit_month">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="3" column="4">
-     <widget class="QLineEdit" name="lineEdit_day"/>
+     <widget class="QLineEdit" name="lineEdit_day">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
     <item row="2" column="2" colspan="3">
      <widget class="QComboBox" name="comboBox_type">
@@ -107,7 +130,11 @@
      </widget>
     </item>
     <item row="1" column="2" colspan="3">
-     <widget class="QLineEdit" name="lineEdit_name"/>
+     <widget class="QLineEdit" name="lineEdit_name">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -116,7 +143,7 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>181</width>
+     <width>191</width>
      <height>21</height>
     </rect>
    </property>
