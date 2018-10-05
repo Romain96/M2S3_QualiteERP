@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/team.h"
+#include "../include/project.h"
 #include "../lib/cpptoml.h"
 
 using namespace std;
@@ -9,8 +10,8 @@ Team::Team()
 
 }
 
-Team::Team(vector<string> pdg_list, vector<string> project_manager_list, vector<string> duty_coordinator_list, vector<string> developer_list, int efficiency):
-    pdgs(pdg_list), project_managers(project_manager_list), duty_coordinators(duty_coordinator_list), developers(developer_list), team_efficiency(efficiency)
+Team::Team(vector<string> pdg_list, vector<string> project_manager_list, vector<string> duty_coordinator_list, vector<string> developer_list, int efficiency, Date start_date):
+    pdgs(pdg_list), project_managers(project_manager_list), duty_coordinators(duty_coordinator_list), developers(developer_list), team_efficiency(efficiency), starting_date(start_date)
 {
 
 }
@@ -21,6 +22,10 @@ Team::Team(string filename)
 	{
 		auto config = cpptoml::parse_file(filename);
         this->team_efficiency = config->get_as<int>("team_efficiency").value_or(100);
+        cpptoml::local_date date;
+        auto starting_date = config->get_as<cpptoml::local_date>("starting_date").value_or(date);
+        this->starting_date = Date(starting_date.year, starting_date.month, starting_date.day);
+        cerr << "Starting date: " << this->starting_date.get_year() << "/" << this->starting_date.get_month() << "/" << this->starting_date.get_day() << endl;
 		auto team = config->get_table("team");
 		
 		auto pdgs = team->get_array_of<string>("pdgs");

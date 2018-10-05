@@ -30,7 +30,8 @@ SOURCES += \
     src/project.cpp \
     src/team.cpp \
     src/employee_dialog.cpp \
-    src/project_dialog.cpp
+    src/project_dialog.cpp \
+    src/event.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     include/team.h \
     lib/cpptoml.h \
     include/employee_dialog.h \
-    include/project_dialog.h
+    include/project_dialog.h \
+    include/event.h
 
 FORMS += \
         mainwindow.ui \

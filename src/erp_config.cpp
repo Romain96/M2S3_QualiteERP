@@ -26,7 +26,7 @@ ERPConfig::ERPConfig(string filename)
 			auto dev_time = project->get_as<int>("dev_time").value_or(0);
 			auto managing_time = project->get_as<int>("managing_time").value_or(0);
 			cpptoml::local_datetime date;
-			auto deadline = project->get_as<cpptoml::local_datetime>("deadline").value_or(date);
+            auto deadline = project->get_as<cpptoml::local_date>("deadline").value_or(date);
 			// cout << deadline.day << "/" << deadline.month << "/" << deadline.year << endl;
 			this->project_list.push_back(new Project(name, dev_time, managing_time, deadline.year, deadline.month, deadline.day));
 		}
