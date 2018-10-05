@@ -18,13 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
         }
 
     // Play GIF
-    QLabel *label=new QLabel(this);
-
-    label->setGeometry(0,20,100,120);
-  //  label->size(new size(100,100));
-    label->setMovie(movie);
-    movie->start();
     ui->setupUi(this);
+    ui->icone->setGeometry(10,10,100,100);
+
+    ui->icone->setMovie(movie);
+    movie->start();
+
 
     this->setWindowTitle("Inside Out's very minimalistic ERP");
 }

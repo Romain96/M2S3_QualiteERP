@@ -284,7 +284,20 @@ QPushButton:!hover {
      <string notr="true">background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 255), stop:0.25 rgba(28, 17, 145, 255), stop:0.474576 rgba(14, 8, 73, 255), stop:1 rgba(0, 0, 0, 255));</string>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="icone">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <zorder>label</zorder>
@@ -302,6 +315,7 @@ QPushButton:!hover {
    <zorder>label_employees</zorder>
    <zorder>textBrowser_employees</zorder>
    <zorder>textBrowser_projects</zorder>
+   <zorder>icone</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
