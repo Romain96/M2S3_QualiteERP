@@ -23,6 +23,31 @@
       <height>28</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:!hover {
+background-color:rgb(201, 205, 231);
+    -moz-border-radius:16px;
+    -webkit-border-radius:16px;
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: rgb(0, 0, 127);
+}
+
+QPushButton:hover {
+    background-color:rgb(85, 86, 200);
+    -moz-border-radius:16px;
+    -webkit-border-radius:16px;
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: back;
+
+}
+</string>
+    </property>
     <property name="text">
      <string>New Project</string>
     </property>
@@ -143,6 +168,31 @@
       <height>28</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:!hover {
+background-color:rgb(201, 205, 231);
+    -moz-border-radius:16px;
+    -webkit-border-radius:16px;
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: rgb(0, 0, 127);
+}
+
+QPushButton:hover {
+    background-color:rgb(85, 86, 200);
+    -moz-border-radius:16px;
+    -webkit-border-radius:16px;
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: back;
+
+}
+</string>
+    </property>
     <property name="text">
      <string>New Employee</string>
     </property>
@@ -155,6 +205,33 @@
       <width>131</width>
       <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:hover {
+background-color:rgb(85, 86, 200);
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:20px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-weight:bold;
+    font-size:20 px;
+    color: white;
+}
+
+QPushButton:!hover {
+    background-color:rgb(255, 255, 255);
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:20px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:20px;
+    font-weight:bold;
+
+
+}
+</string>
     </property>
     <property name="text">
      <string>Simulate</string>
