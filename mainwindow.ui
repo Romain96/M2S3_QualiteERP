@@ -37,8 +37,6 @@ color:white;
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
 background-color:rgb(201, 205, 231);
-    -moz-border-radius:16px;
-    -webkit-border-radius:16px;
     border-radius:10px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
@@ -48,8 +46,6 @@ background-color:rgb(201, 205, 231);
 
 QPushButton:hover {
     background-color:rgb(85, 86, 200);
-    -moz-border-radius:16px;
-    -webkit-border-radius:16px;
     border-radius:10px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
@@ -204,8 +200,6 @@ background-color:rgb(201, 205, 231);
 
 QPushButton:hover {
     background-color:rgb(85, 86, 200);
-    -moz-border-radius:16px;
-    -webkit-border-radius:16px;
     border-radius:10px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
