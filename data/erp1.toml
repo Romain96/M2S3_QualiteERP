@@ -1,4 +1,5 @@
 title = "ERP team 1 Example"
+team_efficiency = 100
 
 [team]
 	pdgs = ["Tan Dat"]
