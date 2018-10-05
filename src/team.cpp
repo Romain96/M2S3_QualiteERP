@@ -9,8 +9,8 @@ Team::Team()
 
 }
 
-Team::Team(vector<string> pdg_list, vector<string> project_manager_list, vector<string> duty_coordinator_list, vector<string> developer_list):
-    pdgs(pdg_list), project_managers(project_manager_list), duty_coordinators(duty_coordinator_list), developers(developer_list)
+Team::Team(vector<string> pdg_list, vector<string> project_manager_list, vector<string> duty_coordinator_list, vector<string> developer_list, int efficiency):
+    pdgs(pdg_list), project_managers(project_manager_list), duty_coordinators(duty_coordinator_list), developers(developer_list), team_efficiency(efficiency)
 {
 
 }
@@ -20,7 +20,7 @@ Team::Team(string filename)
 	try
 	{
 		auto config = cpptoml::parse_file(filename);
-		this->team_efficiency = config->get_as<int>("team_efficiency");
+        this->team_efficiency = config->get_as<int>("team_efficiency").value_or(100);
 		auto team = config->get_table("team");
 		
 		auto pdgs = team->get_array_of<string>("pdgs");

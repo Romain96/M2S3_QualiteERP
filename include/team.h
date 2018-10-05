@@ -20,7 +20,7 @@ class Team{
 			std::vector<std::string> project_manager_list,
 			std::vector<std::string> duty_coordinator_list,
 			std::vector<std::string> developer_list,
-			int team_efficiency;
+            int team_efficiency
 			);
 		Team(std::string filename);
 

@@ -158,6 +158,8 @@ void MainWindow::on_actionImport_triggered()
         team.developers.push_back(dev);
     }
 
+    team.team_efficiency = config->get_team()->team_efficiency;
+
     for(Project *p: config->get_project_list())
     {
         project_list.push_back(*p);
@@ -218,6 +220,8 @@ void MainWindow::update()
 
     // *** Updating Projects display ***
     update_projects();
+
+    ui->progressBar_efficiency->setValue(team.team_efficiency);
 
     // *** Updating Result display ***
     // TODO
