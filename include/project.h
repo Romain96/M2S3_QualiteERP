@@ -5,9 +5,9 @@
 
 #include "lib/cpptoml.h"
 
-class Deadline{
+class Date{
     public:
-        Deadline(int year, int month, int day);
+        Date(int year, int month, int day);
 
         int get_year();
         int get_month();
@@ -26,12 +26,12 @@ class Project{
         std::string get_name();
         int get_dev_time();
         int get_managing_time();
-        Deadline get_deadline();
+        Date get_deadline();
     protected:
         std::string name;
         int dev_time;
         int managing_time;
-        Deadline deadline;
+        Date deadline;
 };
 
 #endif
