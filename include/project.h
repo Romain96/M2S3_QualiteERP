@@ -2,21 +2,9 @@
 #define PROJECT_H
 
 #include <string>
-
+#include <QDate>
 #include "lib/cpptoml.h"
 
-class Date{
-    public:
-        Date();
-        Date(int year, int month, int day);
-
-        int get_year();
-        int get_month();
-        int get_day();
-
-    protected:
-        int year, month, day;
-};
 
 class Project{
     public:
@@ -27,12 +15,12 @@ class Project{
         std::string get_name();
         int get_dev_time();
         int get_managing_time();
-        Date get_deadline();
+        QDate get_deadline();
     protected:
         std::string name;
         int dev_time;
         int managing_time;
-        Date deadline;
+        QDate deadline;
 };
 
 #endif

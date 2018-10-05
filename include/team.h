@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <QDate>
 #include "../include/project.h"
 
 class Team{
@@ -14,7 +15,7 @@ class Team{
 		std::vector<std::string> duty_coordinators;
 		std::vector<std::string> developers;
 		int team_efficiency;
-        Date starting_date;
+        QDate starting_date;
 
 		Team();
 		Team(
@@ -23,7 +24,7 @@ class Team{
 			std::vector<std::string> duty_coordinator_list,
 			std::vector<std::string> developer_list,
             int team_efficiency,
-            Date start_date
+            QDate start_date
 			);
 		Team(std::string filename);
 

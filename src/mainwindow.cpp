@@ -123,9 +123,9 @@ void MainWindow::on_actionImport_triggered()
         std::cerr << p->get_name() << std::endl;
         std::cerr << p->get_dev_time() << std::endl;
         std::cerr << p->get_managing_time() << std::endl;
-        std::cerr << p->get_deadline().get_year()
-                  << "/" << p->get_deadline().get_month()
-                  << "/" << p->get_deadline().get_day() << std::endl << std::endl;
+        std::cerr << p->get_deadline().year()
+                  << "/" << p->get_deadline().month()
+                  << "/" << p->get_deadline().day() << std::endl << std::endl;
     }
 
     // *** Initializing team and project list ***
@@ -278,9 +278,9 @@ void MainWindow::update_projects()
         line = line + " * " + pro.get_name() + "\n"
                 + "\tdev time : " + std::to_string(pro.get_dev_time()) + " day(s)\n"
                 + "\tmanagement time : " + std::to_string(pro.get_managing_time()) + " day(s)\n"
-                + "\tdeadline : " + std::to_string(pro.get_deadline().get_year()) + "-"
-                + std::to_string(pro.get_deadline().get_month()) + "-"
-                + std::to_string(pro.get_deadline().get_day()) + "\n";
+                + "\tdeadline : " + std::to_string(pro.get_deadline().year()) + "-"
+                + std::to_string(pro.get_deadline().month()) + "-"
+                + std::to_string(pro.get_deadline().day()) + "\n";
     }
 
     QString qtext = QString::fromStdString(line);
