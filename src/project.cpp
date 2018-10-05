@@ -5,6 +5,11 @@
 
 using namespace std;
 
+Date::Date():year(0), month(0), day(0)
+{
+
+}
+
 Date::Date(int year, int month, int day): year(year), month(month), day(day)
 {
 

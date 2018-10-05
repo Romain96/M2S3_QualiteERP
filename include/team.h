@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "../include/project.h"
 
 class Team{
 
@@ -13,6 +14,7 @@ class Team{
 		std::vector<std::string> duty_coordinators;
 		std::vector<std::string> developers;
 		int team_efficiency;
+        Date starting_date;
 
 		Team();
 		Team(
@@ -20,7 +22,8 @@ class Team{
 			std::vector<std::string> project_manager_list,
 			std::vector<std::string> duty_coordinator_list,
 			std::vector<std::string> developer_list,
-            int team_efficiency
+            int team_efficiency,
+            Date start_date
 			);
 		Team(std::string filename);
 
