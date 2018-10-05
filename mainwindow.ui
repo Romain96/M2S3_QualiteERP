@@ -13,12 +13,23 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{background:rgb(231, 238, 245);
+color:rgb(0, 0, 127);
+
+}
+QMenuBar {
+background-color: black;
+color:white;
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton_new_project">
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>330</y>
+      <y>360</y>
       <width>131</width>
       <height>28</height>
      </rect>
@@ -63,7 +74,8 @@ QPushButton:hover {
     </property>
     <property name="styleSheet">
      <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;
-color:white;</string>
+color:white;
+background-color:none;</string>
     </property>
     <property name="text">
      <string>Inside Out</string>
@@ -72,11 +84,24 @@ color:white;</string>
    <widget class="QProgressBar" name="progressBar_efficiency">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>330</y>
-      <width>231</width>
+      <x>440</x>
+      <y>400</y>
+      <width>341</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar {
+border: 2px solid grey;
+border-radius: 5px;
+color:white;
+}
+
+QProgressBar::chunk {
+background-color: rgb(0, 0, 127);
+width: 20px;
+}
+</string>
     </property>
     <property name="value">
      <number>24</number>
@@ -85,8 +110,8 @@ color:white;</string>
    <widget class="QLabel" name="label_efficiency">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>320</y>
+      <x>350</x>
+      <y>390</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -104,6 +129,9 @@ color:white;</string>
       <height>381</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:none;</string>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
     </property>
@@ -112,34 +140,42 @@ color:white;</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>130</y>
+      <y>170</y>
       <width>321</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:none;</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_dev_team">
+   <widget class="QLabel" name="label_dev_team1">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>380</y>
-      <width>561</width>
-      <height>41</height>
+      <x>70</x>
+      <y>130</y>
+      <width>191</width>
+      <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:none;
+font-size:10pt;
+color:white;</string>
+    </property>
     <property name="text">
-     <string>Tan Dat Truong | Romain Perrin | Maxime Seyer | Isabelle Wingert</string>
+     <string>Tan Dat Truong | Romain Perrin</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_projects">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>190</y>
-      <width>101</width>
+      <x>350</x>
+      <y>240</y>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -147,24 +183,11 @@ color:white;</string>
      <string>Projects</string>
     </property>
    </widget>
-   <widget class="Line" name="line_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>380</y>
-      <width>821</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_new_employee">
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>290</y>
+      <y>320</y>
       <width>131</width>
       <height>28</height>
      </rect>
@@ -172,8 +195,6 @@ color:white;</string>
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
 background-color:rgb(201, 205, 231);
-    -moz-border-radius:16px;
-    -webkit-border-radius:16px;
     border-radius:10px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
@@ -202,7 +223,7 @@ QPushButton:hover {
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>180</y>
+      <y>210</y>
       <width>131</width>
       <height>71</height>
      </rect>
@@ -210,8 +231,6 @@ QPushButton:hover {
     <property name="styleSheet">
      <string notr="true">QPushButton:hover {
 background-color:rgb(85, 86, 200);
-    -moz-border-radius:28px;
-    -webkit-border-radius:28px;
     border-radius:20px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
@@ -222,8 +241,6 @@ background-color:rgb(85, 86, 200);
 
 QPushButton:!hover {
     background-color:rgb(255, 255, 255);
-    -moz-border-radius:28px;
-    -webkit-border-radius:28px;
     border-radius:20px;
     border:1px solid rgb(201, 205, 231);
     font-family:Arial;
@@ -241,8 +258,8 @@ QPushButton:!hover {
    <widget class="QLabel" name="label_employees">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>30</y>
+      <x>350</x>
+      <y>70</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -254,30 +271,38 @@ QPushButton:!hover {
    <widget class="QTextBrowser" name="textBrowser_employees">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>20</y>
-      <width>291</width>
-      <height>131</height>
+      <x>440</x>
+      <y>60</y>
+      <width>341</width>
+      <height>151</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_projects">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>180</y>
-      <width>291</width>
-      <height>121</height>
+      <x>440</x>
+      <y>240</y>
+      <width>341</width>
+      <height>141</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);</string>
+    </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_fond">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>321</width>
-      <height>381</height>
+      <height>431</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -300,22 +325,68 @@ QPushButton:!hover {
      <string/>
     </property>
    </widget>
-   <zorder>label</zorder>
+   <widget class="QLabel" name="label_dev_team2">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>150</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:none;
+font-size:10pt;
+color:white;</string>
+    </property>
+    <property name="text">
+     <string>Maxime Seyer | Isabelle Wingert</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="start_date">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>20</y>
+      <width>141</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_date">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>20</y>
+      <width>51</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Date:</string>
+    </property>
+   </widget>
+   <zorder>label_fond</zorder>
    <zorder>pushButton_new_project</zorder>
    <zorder>label_company_name</zorder>
    <zorder>progressBar_efficiency</zorder>
    <zorder>label_efficiency</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
-   <zorder>label_dev_team</zorder>
+   <zorder>label_dev_team1</zorder>
    <zorder>label_projects</zorder>
-   <zorder>line_3</zorder>
    <zorder>pushButton_new_employee</zorder>
    <zorder>pushButton_simulate</zorder>
    <zorder>label_employees</zorder>
    <zorder>textBrowser_employees</zorder>
    <zorder>textBrowser_projects</zorder>
    <zorder>icone</zorder>
+   <zorder>label_dev_team2</zorder>
+   <zorder>start_date</zorder>
+   <zorder>label_date</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -333,14 +404,6 @@ QPushButton:!hover {
     <addaction name="actionImport"/>
    </widget>
    <addaction name="menuFichier"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuitter">
