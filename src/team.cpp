@@ -20,6 +20,7 @@ Team::Team(string filename)
 	try
 	{
 		auto config = cpptoml::parse_file(filename);
+		this->team_efficiency = config->get_as<int>("team_efficiency");
 		auto team = config->get_table("team");
 		
 		auto pdgs = team->get_array_of<string>("pdgs");
