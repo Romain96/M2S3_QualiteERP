@@ -343,7 +343,7 @@ color:white;</string>
      <string>Maxime Seyer | Isabelle Wingert</string>
     </property>
    </widget>
-   <widget class="QLabel" name="start_date">
+   <widget class="QLabel" name="label_start_date">
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -385,7 +385,7 @@ color:white;</string>
    <zorder>textBrowser_projects</zorder>
    <zorder>icone</zorder>
    <zorder>label_dev_team2</zorder>
-   <zorder>start_date</zorder>
+   <zorder>label_start_date</zorder>
    <zorder>label_date</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">

@@ -220,7 +220,11 @@ void MainWindow::update()
     // *** Updating Projects display ***
     update_projects();
 
+    // updating efficiency display
     ui->progressBar_efficiency->setValue(team.team_efficiency);
+
+    // updating starting date display
+    ui->label_start_date->setText("on sait pas...");
 
     // *** Updating Result display ***
     // TODO
