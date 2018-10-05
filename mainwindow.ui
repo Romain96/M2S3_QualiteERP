@@ -62,7 +62,8 @@ QPushButton:hover {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;
+color:white;</string>
     </property>
     <property name="text">
      <string>Inside Out</string>
@@ -270,6 +271,37 @@ QPushButton:!hover {
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>321</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 255), stop:0.25 rgba(28, 17, 145, 255), stop:0.474576 rgba(14, 8, 73, 255), stop:1 rgba(0, 0, 0, 255));</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>pushButton_new_project</zorder>
+   <zorder>label_company_name</zorder>
+   <zorder>progressBar_efficiency</zorder>
+   <zorder>label_efficiency</zorder>
+   <zorder>line</zorder>
+   <zorder>line_2</zorder>
+   <zorder>label_dev_team</zorder>
+   <zorder>label_projects</zorder>
+   <zorder>line_3</zorder>
+   <zorder>pushButton_new_employee</zorder>
+   <zorder>pushButton_simulate</zorder>
+   <zorder>label_employees</zorder>
+   <zorder>textBrowser_employees</zorder>
+   <zorder>textBrowser_projects</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
