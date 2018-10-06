@@ -5,9 +5,9 @@ Event::Event()
     // nothing
 }
 
-Event::Event(Project *pro, QDate date) :
-    proj(pro),
-    date(date)
+Event::Event(Project pro, QDate date) :
+    date(date),
+    proj(pro)
 {
     // nothing
 }

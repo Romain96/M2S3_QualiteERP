@@ -11,10 +11,10 @@ class Event
 
 public:
     QDate date;
-    Project *proj;
+    Project proj;
 
     Event();
-    Event(Project *pro, QDate date);
+    Event(Project pro, QDate date);
 };
 
 #endif // EVENT_H

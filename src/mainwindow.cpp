@@ -4,6 +4,8 @@
 #include <QMovie>
 #include <QFileDialog>
 #include <iostream>
+#include "include/event.h"
+#include "include/eventstack.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -294,4 +296,13 @@ void MainWindow::update_projects()
 
     QString qtext = QString::fromStdString(line);
     ui->textBrowser_projects->setText(qtext);
+}
+
+/*
+ * Running simulation
+ */
+void MainWindow::on_pushButton_simulate_clicked()
+{
+    EventStack es;
+    es.build_event_stack(project_list);
 }

@@ -53,6 +53,8 @@ private slots:
                                          int employee_month,
                                          int employee_day);
 
+    void on_pushButton_simulate_clicked();
+
 private:
 
     // new project creation window

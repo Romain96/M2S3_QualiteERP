@@ -31,7 +31,8 @@ SOURCES += \
     src/team.cpp \
     src/employee_dialog.cpp \
     src/project_dialog.cpp \
-    src/event.cpp
+    src/event.cpp \
+    src/eventstack.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     lib/cpptoml.h \
     include/employee_dialog.h \
     include/project_dialog.h \
-    include/event.h
+    include/event.h \
+    include/eventstack.h
 
 FORMS += \
         mainwindow.ui \
