@@ -10,7 +10,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    team()
+    team(),
+    current_date()
 {
     QMovie *movie=new QMovie(":/img/img/giphy.gif");
     if (!movie->isValid())
@@ -161,6 +162,7 @@ void MainWindow::on_actionImport_triggered()
 
     team.team_efficiency = config->get_team()->team_efficiency;
     team.starting_date = config->get_team()->starting_date;
+    current_date = team.starting_date;
 
     for(Project *p: config->get_project_list())
     {
@@ -303,6 +305,86 @@ void MainWindow::update_projects()
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
+    // building event stack
     EventStack es;
     es.build_event_stack(project_list);
+
+    // for each project, computing the end date and comparing it to the deadline of the project
+    while (!es.event_stack.empty())
+    {
+        // retrieving current "closest deadline" event
+        Event e = es.event_stack.top();
+
+        // computing the end date of the project according to the current workforce
+        int dev_days = e.proj.get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
+        int man_days = e.proj.get_managing_time() / team.project_managers.size();
+
+        // adding max(dev_time,man_time) to current date (5 days/week -> mon-fri)
+        int days = std::max(dev_days, man_days);
+
+        // going to first monday (1=monday, 7=sunday)
+        switch (current_date.dayOfWeek())
+        {
+        // monday
+        case 1:
+            // already on right starting day
+            break;
+        // tuesday
+        case 2:
+            // advancing 6 days (4 working days)
+            current_date = current_date.addDays(6);
+            days -= 4;
+            break;
+        // wednesday
+        case 3:
+            // advancing 5 days (3 working days)
+            current_date = current_date.addDays(5);
+            days -= 3;
+            break;
+        // thursday
+        case 4:
+            // advancing 4 days (2 working days)
+            current_date = current_date.addDays(4);
+            days -= 2;
+            break;
+        // friday
+        case 5:
+            // advancing 3 days (1 working day)
+            current_date = current_date.addDays(3);
+            days -= 1;
+            break;
+        // saturday
+        case 6:
+            // advancing 2 days (no working day)
+            current_date = current_date.addDays(2);
+            break;
+        // sunday
+        case 7:
+            // advancing 1 day (no working day)
+            current_date = current_date.addDays(1);
+            break;
+        default: std::cerr << "ERROR dayOfWeek outside of range 1-7 !" << std::endl;
+        }
+
+        // advancing the number of weeks
+        int weeks = days/5;
+        days = days - weeks*5;
+        current_date = current_date.addDays(7*weeks + days);
+
+        // comparing end date with deadline
+        if (current_date < e.proj.get_deadline())
+        {
+            std::cerr << "Project " << e.proj.get_name() << " validated ( "
+                      << current_date.toString("yyyy.MM.dd").toStdString() << " < "
+                      << e.proj.get_deadline().toString("yyyy.MM.dd").toStdString() << ")" << std::endl;
+        }
+        else
+        {
+            std::cerr << "Project " << e.proj.get_name() << " invalidated ( "
+                      << current_date.toString("yyyy.MM.dd").toStdString() << " >= "
+                      << e.proj.get_deadline().toString("yyyy.MM.dd").toStdString() << ")" << std::endl;
+        }
+
+        es.event_stack.pop();
+    }
 }

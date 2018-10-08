@@ -27,13 +27,4 @@ void EventStack::build_event_stack(std::vector<Project>& project_list)
         std::cout << "pushing " << pro.get_name() << std::endl;
         event_stack.push(Event(pro, pro.get_deadline()));
     }
-
-    // debug
-    while (!event_stack.empty())
-    {
-        Event e = event_stack.top();
-        std::cout << "Project : " << e.proj.get_name() << " with deadline "
-                  << e.date.year() << "-" << e.date.month() << "-" << e.date.day() << std::endl;
-        event_stack.pop();
-    }
 }

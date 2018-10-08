@@ -69,6 +69,8 @@ private:
     Team team;
     // Inside Out's project list
     std::vector<Project> project_list;
+    // current date
+    QDate current_date;
 };
 
 #endif // MAINWINDOW_H
