@@ -196,6 +196,7 @@ void MainWindow::employee_creation_data_received(std::string employee_name,
                                                  int employee_month,
                                                  int employee_day)
 {
+    /*
     // adding the new employee to the list
     switch (employee_job)
     {
@@ -205,8 +206,10 @@ void MainWindow::employee_creation_data_received(std::string employee_name,
     case 3: team.developers.push_back(employee_name); break;
     default: std::cerr << "ERROR index of employee is invalid !" << std::endl;
     }
+    */
 
-    // TODO taking the recruitement date into account
+    // adding the new employee to the recruitement center
+    rc.add_employee(employee_name, employee_job, QDate(employee_year, employee_month, employee_day));
 
     // updating the display of employees
     update_employees();
@@ -306,7 +309,6 @@ void MainWindow::update_projects()
 void MainWindow::on_pushButton_simulate_clicked()
 {
     // building event stack
-    EventStack es;
     es.build_event_stack(project_list);
 
     // for each project, computing the end date and comparing it to the deadline of the project
@@ -322,6 +324,7 @@ void MainWindow::on_pushButton_simulate_clicked()
         // adding max(dev_time,man_time) to current date (5 days/week -> mon-fri)
         int days = std::max(dev_days, man_days);
 
+        std::cerr << "starting on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         // going to first monday (1=monday, 7=sunday)
         switch (current_date.dayOfWeek())
         {
@@ -370,6 +373,7 @@ void MainWindow::on_pushButton_simulate_clicked()
         int weeks = days/5;
         days = days - weeks*5;
         current_date = current_date.addDays(7*weeks + days);
+        std::cerr << "finishing on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
         // comparing end date with deadline
         if (current_date < e.proj.get_deadline())

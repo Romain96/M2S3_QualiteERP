@@ -32,7 +32,8 @@ SOURCES += \
     src/employee_dialog.cpp \
     src/project_dialog.cpp \
     src/event.cpp \
-    src/eventstack.cpp
+    src/eventstack.cpp \
+    src/recruitementcenter.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     include/employee_dialog.h \
     include/project_dialog.h \
     include/event.h \
-    include/eventstack.h
+    include/eventstack.h \
+    include/recruitementcenter.h
 
 FORMS += \
         mainwindow.ui \

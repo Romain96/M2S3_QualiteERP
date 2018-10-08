@@ -9,6 +9,9 @@
 #include "include/team.h"
 #include "lib/cpptoml.h"
 #include "include/erp_config.h"
+#include "include/event.h"
+#include "include/eventstack.h"
+#include "include/recruitementcenter.h"
 
 namespace Ui {
 class MainWindow;
@@ -71,6 +74,10 @@ private:
     std::vector<Project> project_list;
     // current date
     QDate current_date;
+    // Recruitement center
+    RecruitementCenter rc;
+    // Event stack
+    EventStack es;
 };
 
 #endif // MAINWINDOW_H
