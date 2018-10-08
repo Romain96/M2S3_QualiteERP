@@ -309,22 +309,23 @@ void MainWindow::update_projects()
 void MainWindow::on_pushButton_simulate_clicked()
 {
     // building event stack
-    es.build_event_stack(project_list);
+    es.build_event_stack(project_list, rc);
+
+    // retrieving current "closest deadline" project
+    std::vector<Project>::iterator current_project_it = project_list.begin();
+    QDate end_date = current_date;
 
     // for each project, computing the end date and comparing it to the deadline of the project
     while (!es.event_stack.empty())
     {
-        // retrieving current "closest deadline" event
-        Event e = es.event_stack.top();
-
         // computing the end date of the project according to the current workforce
-        int dev_days = e.proj.get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
-        int man_days = e.proj.get_managing_time() / team.project_managers.size();
+        int dev_days = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
+        int man_days = (*current_project_it).get_managing_time() / team.project_managers.size();
 
         // adding max(dev_time,man_time) to current date (5 days/week -> mon-fri)
         int days = std::max(dev_days, man_days);
 
-        std::cerr << "starting on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+        std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         // going to first monday (1=monday, 7=sunday)
         switch (current_date.dayOfWeek())
         {
@@ -335,36 +336,36 @@ void MainWindow::on_pushButton_simulate_clicked()
         // tuesday
         case 2:
             // advancing 6 days (4 working days)
-            current_date = current_date.addDays(6);
+            end_date = current_date.addDays(6);
             days -= 4;
             break;
         // wednesday
         case 3:
             // advancing 5 days (3 working days)
-            current_date = current_date.addDays(5);
+            end_date = current_date.addDays(5);
             days -= 3;
             break;
         // thursday
         case 4:
             // advancing 4 days (2 working days)
-            current_date = current_date.addDays(4);
+            end_date = current_date.addDays(4);
             days -= 2;
             break;
         // friday
         case 5:
             // advancing 3 days (1 working day)
-            current_date = current_date.addDays(3);
+            end_date = current_date.addDays(3);
             days -= 1;
             break;
         // saturday
         case 6:
             // advancing 2 days (no working day)
-            current_date = current_date.addDays(2);
+            end_date = current_date.addDays(2);
             break;
         // sunday
         case 7:
             // advancing 1 day (no working day)
-            current_date = current_date.addDays(1);
+            end_date = current_date.addDays(1);
             break;
         default: std::cerr << "ERROR dayOfWeek outside of range 1-7 !" << std::endl;
         }
@@ -372,23 +373,56 @@ void MainWindow::on_pushButton_simulate_clicked()
         // advancing the number of weeks
         int weeks = days/5;
         days = days - weeks*5;
-        current_date = current_date.addDays(7*weeks + days);
-        std::cerr << "finishing on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+        end_date = end_date.addDays(7*weeks + days);
+        std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
-        // comparing end date with deadline
-        if (current_date < e.proj.get_deadline())
+        /*
+         * retrieving the closest event from the event stack that is a project
+         * and storing all employee events in a temporary event stack
+         */
+        EventStack tes;
+        Event e = es.event_stack.top();
+        while (!e.is_proj)
         {
-            std::cerr << "Project " << e.proj.get_name() << " validated ( "
-                      << current_date.toString("yyyy.MM.dd").toStdString() << " < "
-                      << e.proj.get_deadline().toString("yyyy.MM.dd").toStdString() << ")" << std::endl;
+            tes.event_stack.push(e);
+            es.event_stack.pop();
+            e = es.event_stack.top();
         }
+
+        /*
+         * if the temporary event stack is empty there is no recruitement event between
+         * the computed date and the deadline of the closest project
+         */
+        if (tes.event_stack.empty())
+        {
+            // if the computed end date is before the deadline, the project is validated
+            if (end_date <= e.date)
+            {
+                std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
+                es.event_stack.pop();
+                current_project_it++;
+                current_date = end_date;
+            }
+            // if the computed end date is after the deadline, the project in invalidated !
+            else
+            {
+                std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                es.event_stack.pop();
+                current_project_it++;
+                current_date = end_date;
+                // TODO : compute needed ressources to complete the project
+            }
+        }
+        /*
+         * if the temporary event stack is not empty there are one or several recruitements taking
+         * place before the deadline of the project but not neccessarily before our computed end date
+         * we need to check whether we need to smplit the computation of our end date
+         * (one of these events happens before our computed end date) of not (our computed end date is the closest event)
+         */
         else
         {
-            std::cerr << "Project " << e.proj.get_name() << " invalidated ( "
-                      << current_date.toString("yyyy.MM.dd").toStdString() << " >= "
-                      << e.proj.get_deadline().toString("yyyy.MM.dd").toStdString() << ")" << std::endl;
+            // TODO checking if recruitement events happen before/after computed end date
+            // TODO recompute if needed
         }
-
-        es.event_stack.pop();
     }
 }

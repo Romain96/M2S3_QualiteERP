@@ -5,6 +5,7 @@
 #include <stack>
 #include <vector>
 #include "include/event.h"
+#include "include/recruitementcenter.h"
 
 /*
  * EventStack class holds a list of Events
@@ -20,7 +21,11 @@ public:
     EventStack();
 
     // construct stack from list of projects
-    void build_event_stack(std::vector<Project>& project_list);
+    void build_event_stack(std::vector<Project>& project_list, RecruitementCenter& rc);
+
+    // event stack internal building method
+    void __build(std::vector<Project>::iterator pro_it, std::vector<std::pair<std::string,std::pair<int,QDate>>>::iterator rec_it,
+                 std::vector<Project>& project_list, std::vector<std::pair<std::string,std::pair<int,QDate>>>& recruitement_list);
 };
 
 #endif // EVENTSTACK_H
