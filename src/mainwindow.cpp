@@ -176,6 +176,14 @@ void MainWindow::update()
     // *** Updating Projects display ***
     update_projects();
 
+    // if efficiency is more than 100% a special teatment needs to be applied
+    // to show the right value (real value is correct but shown value is wrong)
+    if (team.team_efficiency > 100)
+    {
+        ui->progressBar_efficiency->setRange(0,team.team_efficiency);
+        ui->progressBar_efficiency->setFormat("%v%");
+    }
+
     // updating efficiency display
     ui->progressBar_efficiency->setValue(team.team_efficiency);
 
