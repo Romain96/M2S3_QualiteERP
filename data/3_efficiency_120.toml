@@ -1,5 +1,5 @@
-title = "ERP team 1 Example"
-team_efficiency = 100
+title = "ERP team 1 Example 3 with 120% efficiency"
+team_efficiency = 120
 starting_date = 2019-06-01
 
 [team]

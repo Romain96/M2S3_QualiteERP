@@ -275,9 +275,9 @@ void MainWindow::on_pushButton_simulate_clicked()
         int man_days = (*current_project_it).get_managing_time() / team.project_managers.size();
 
         // computing maximum time (days) required to finish the project
-        int dev_days_remaining = dev_days;
-        int man_days_remaining = man_days;
-        int total_days_remaining = std::max(dev_days, man_days);
+        int dev_days_remaining = static_cast<int>(std::ceil(static_cast<double>(dev_days) * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0));
+        int man_days_remaining = static_cast<int>(std::ceil(static_cast<double>(man_days) * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0));
+        int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         end_date = __end_date_from_days(current_date, total_days_remaining);
