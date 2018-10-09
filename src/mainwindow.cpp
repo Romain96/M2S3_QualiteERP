@@ -81,7 +81,7 @@ void MainWindow::project_creation_data_received(std::string project_name,
 void MainWindow::on_actionImport_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    "/home",
+                                                    ":/data",
                                                     tr("data (*.toml)"));
 
     // converting QString to c++ string
