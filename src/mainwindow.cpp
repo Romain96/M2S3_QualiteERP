@@ -271,8 +271,21 @@ void MainWindow::update_projects()
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
+    std::cerr << "RUNNING SIMULATION..." << std::endl;
     // building event stack
     es.build_event_stack(project_list, rc);
+    // DEBUG -> printing event stack
+    EventStack temp = es;
+    std::cerr << "STACK :" << std::endl;
+    while (!temp.event_stack.empty())
+    {
+        if (temp.event_stack.top().is_proj)
+            std::cerr << "\t" << temp.event_stack.top().proj.get_name() << std::endl;
+        else
+            std::cerr << "\t" << temp.event_stack.top().employee.first << std::endl;
+
+        temp.event_stack.pop();
+    }
 
     // putting project list in the right order again
     std::reverse(project_list.begin(), project_list.end());
@@ -284,6 +297,19 @@ void MainWindow::on_pushButton_simulate_clicked()
     // for each project, computing the end date and comparing it to the deadline of the project
     while (!es.event_stack.empty())
     {
+        // DEBUG -> printing event stack
+        EventStack temp = es;
+        std::cerr << "STACK :" << std::endl;
+        while (!temp.event_stack.empty())
+        {
+            if (temp.event_stack.top().is_proj)
+                std::cerr << "\t" << temp.event_stack.top().proj.get_name() << std::endl;
+            else
+                std::cerr << "\t" << temp.event_stack.top().employee.first << std::endl;
+
+            temp.event_stack.pop();
+        }
+
         // computing the end date of the project according to the current workforce
         int dev_days = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
         int man_days = (*current_project_it).get_managing_time() / team.project_managers.size();
@@ -292,7 +318,6 @@ void MainWindow::on_pushButton_simulate_clicked()
         int dev_days_remaining = dev_days;
         int man_days_remaining = man_days;
         int total_days_remaining = std::max(dev_days, man_days);
-        bool dev_is_max = dev_days > man_days;
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         end_date = __end_date_from_days(current_date, total_days_remaining);
@@ -357,11 +382,11 @@ void MainWindow::on_pushButton_simulate_clicked()
             std::cerr << "temporary event holder not empty" <<std::endl;
 
             QDate new_end_date = current_date;
-            int total_dev = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
-            int total_man = (*current_project_it).get_managing_time() / team.project_managers.size();
-            int remaining_days = std::max(total_dev,total_man);
-            int remaining_weeks = remaining_days/5;
-            remaining_days = remaining_days - 5*remaining_weeks;
+            dev_days_remaining = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
+            man_days_remaining = (*current_project_it).get_managing_time() / team.project_managers.size();
+            int remaining_days = std::max(dev_days_remaining,man_days_remaining);
+
+            std::cerr << "dev remaining : " << dev_days_remaining << ", man remaining : " << man_days_remaining << std::endl;
 
             // for each date until the end of the project computing the new end date
             while (!temporary_event_holder.empty())
@@ -371,14 +396,13 @@ void MainWindow::on_pushButton_simulate_clicked()
                 // computing number of days from current date to first event
                 qint64 days_to_event = new_end_date.daysTo(e.date);
                 std::cerr << "days to event " << days_to_event << std::endl;
-                int weeks_to_event = days_to_event/7;
-                days_to_event = days_to_event - 7*weeks_to_event;
+                // computing maximum number of days (working days) left before event
+                int max_days = __working_days_between_dates(current_date, e.date);
 
                 // if remaining project days are smaller than the number of days to the event
-                if (7*remaining_weeks + remaining_days < 7*weeks_to_event + days_to_event)
+                if (remaining_days < max_days)
                 {
-                    std::cerr << "remaining days smaller than event " << 7*remaining_weeks + remaining_days
-                              << " < " << 7*weeks_to_event + days_to_event << std::endl;
+                    std::cerr << "remaining days smaller than event " << remaining_days << " < " << max_days << std::endl;
                     // all subsequent events including this one need to be replaced on the the event stack
                     while (!temporary_event_holder.empty())
                     {
@@ -387,7 +411,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                         std::cerr << "replacing event " << e.employee.first << " in event stack" << std::endl;
                         temporary_event_holder.pop_back();
                     }
-                    new_end_date = current_date.addDays(7*remaining_weeks + remaining_days);
+                    new_end_date = current_date.addDays(remaining_days);
                     current_date = new_end_date;
                     std::cerr << "* Project " << (*current_project_it).get_name() << " is validated" << std::endl;
                     current_project_it++;
@@ -396,14 +420,14 @@ void MainWindow::on_pushButton_simulate_clicked()
                 // if remaining project days are bigger then the number of days to the event
                 else
                 {
-                    std::cerr << "remaining days bigger than event " << 7*remaining_weeks + remaining_days
-                              << " >= " << 7*weeks_to_event + days_to_event << std::endl;
+                    std::cerr << "remaining days bigger than event " << remaining_days << " >= " << max_days << std::endl;
                     // computing new remaining days/weeks
-                    remaining_days = 5*remaining_weeks + remaining_days;
-                    remaining_weeks = remaining_days - (7*weeks_to_event + days_to_event)/5;
-                    remaining_days = remaining_days - 5*remaining_weeks;
-                    std::cerr << "new remaining time : " << 5*remaining_weeks + remaining_days << std::endl;
-                    new_end_date = current_date.addDays(7*weeks_to_event + days_to_event);
+                    dev_days_remaining = std::max(0, dev_days_remaining - max_days);
+                    man_days_remaining = std::max(0,man_days_remaining - max_days);
+                    total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
+
+                    std::cerr << "new remaining time : " << remaining_days << std::endl;
+                    new_end_date = current_date.addDays(max_days);
 
                     // TODO add employee to team
                     switch (e.employee.second.first)
@@ -420,13 +444,23 @@ void MainWindow::on_pushButton_simulate_clicked()
                     // if temporary event holder is empty we have to decide whether the project is validated
                     if (temporary_event_holder.empty())
                     {
-                        std::cerr << "TODO" << temporary_event_holder.size() << std::endl;
+                        new_end_date = __end_date_from_days(new_end_date, total_days_remaining);
+                        if(new_end_date < (*current_project_it).get_deadline())
+                        {
+                            std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
+                        }
+                        else
+                        {
+                            std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                        }
+                        current_date = new_end_date;
                         current_project_it++;
                     }
                 }
             }
         }
     }
+    std::cerr << "SIMULATION COMPLETED !" << std::endl;
 }
 
 /*
@@ -469,8 +503,6 @@ int MainWindow::__working_days_in_week(QDate date)
  */
 int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
 {
-    std::cerr << "__working_days_between_dates" << std::endl;
-
     // working days in the first week (week of date1)
     int wd_first = __working_days_in_week(date1);
     // working days in the last week (week of date2) before date2

@@ -60,31 +60,32 @@ void EventStack::__build(std::vector<Project>::iterator pro_it, std::vector<std:
     // general case
     else if (!project_list.empty() && !recruitement_list.empty())
     {
-        while (pro_it != project_list.end() && rec_it != recruitement_list.end())
+        while (pro_it != project_list.end() || rec_it != recruitement_list.end())
         {
-            if (pro_it != project_list.end() && rec_it == recruitement_list.end())
+            if (rec_it == recruitement_list.end())
             {
                 event_stack.push(Event((*pro_it), (*pro_it).get_deadline()));
                 pro_it++;
             }
-
             // case : end, no end
-            if (pro_it == project_list.end() && rec_it != recruitement_list.end())
+            else if (pro_it == project_list.end())
             {
                 event_stack.push(Event((*rec_it), (*rec_it).second.second));
                 rec_it++;
-            }
-
-            // general case
-            if ((*pro_it).get_deadline() < (*rec_it).second.second)
-            {
-                event_stack.push(Event((*pro_it), (*pro_it).get_deadline()));
-                pro_it++;
             }
             else
             {
-                event_stack.push(Event((*rec_it), (*rec_it).second.second));
-                rec_it++;
+                // general case
+                if ((*pro_it).get_deadline() > (*rec_it).second.second)
+                {
+                    event_stack.push(Event((*pro_it), (*pro_it).get_deadline()));
+                    pro_it++;
+                }
+                else
+                {
+                    event_stack.push(Event((*rec_it), (*rec_it).second.second));
+                    rec_it++;
+                }
             }
         }
     }
