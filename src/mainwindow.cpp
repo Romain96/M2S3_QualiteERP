@@ -8,6 +8,7 @@
 #include "include/eventstack.h"
 #include <deque>
 #include <algorithm>
+#include <cmath>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -287,11 +288,14 @@ void MainWindow::on_pushButton_simulate_clicked()
         int dev_days = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
         int man_days = (*current_project_it).get_managing_time() / team.project_managers.size();
 
-        // adding max(dev_time,man_time) to current date (5 days/week -> mon-fri)
-        int days = std::max(dev_days, man_days);
+        // computing maximum time (days) required to finish the project
+        int dev_days_remaining = dev_days;
+        int man_days_remaining = man_days;
+        int total_days_remaining = std::max(dev_days, man_days);
+        bool dev_is_max = dev_days > man_days;
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
-        end_date = __end_date_from_days(current_date, days);
+        end_date = __end_date_from_days(current_date, total_days_remaining);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
         /*
@@ -328,10 +332,18 @@ void MainWindow::on_pushButton_simulate_clicked()
             {
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+
+                // computing ressources necessary to complete project before deadline
+                int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
+                int ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
+                int ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
+
+                std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+
+                // removing project from event stack, going to end date and iterating
                 es.event_stack.pop();
                 current_project_it++;
                 current_date = end_date;
-                // TODO : compute needed ressources to complete the project
             }
         }
         /*
@@ -469,11 +481,6 @@ int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
 
     // number of full working weeks = weeks - 2 (first and last already computed)
     int wd = (weeks - 2) * 5 + wd_first + wd_last;
-
-    std::cerr << "first : " << wd_first
-              << "last : " << wd_last
-              << "weeks : " << weeks
-              << "wd : " << wd << std::endl;
 
     return wd;
 }
