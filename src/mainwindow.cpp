@@ -274,18 +274,6 @@ void MainWindow::on_pushButton_simulate_clicked()
     std::cerr << "RUNNING SIMULATION..." << std::endl;
     // building event stack
     es.build_event_stack(project_list, rc);
-    // DEBUG -> printing event stack
-    EventStack temp = es;
-    std::cerr << "STACK :" << std::endl;
-    while (!temp.event_stack.empty())
-    {
-        if (temp.event_stack.top().is_proj)
-            std::cerr << "\t" << temp.event_stack.top().proj.get_name() << std::endl;
-        else
-            std::cerr << "\t" << temp.event_stack.top().employee.first << std::endl;
-
-        temp.event_stack.pop();
-    }
 
     // putting project list in the right order again
     std::reverse(project_list.begin(), project_list.end());
@@ -329,9 +317,12 @@ void MainWindow::on_pushButton_simulate_clicked()
          */
         std::deque<Event> temporary_event_holder;
         Event e = es.event_stack.top();
-        while (!es.event_stack.empty() && !e.is_proj)
+        while (!es.event_stack.empty())
         {
             e = es.event_stack.top();
+            if (e.is_proj)
+                    break;
+
             std::cerr << "[FIFO] building with " << e.employee.first << std::endl;
             temporary_event_holder.push_back(e);
             es.event_stack.pop();         
@@ -403,6 +394,9 @@ void MainWindow::on_pushButton_simulate_clicked()
                 if (remaining_days < max_days)
                 {
                     std::cerr << "remaining days smaller than event " << remaining_days << " < " << max_days << std::endl;
+                    // removing project from event stack
+                    es.event_stack.pop();
+
                     // all subsequent events including this one need to be replaced on the the event stack
                     while (!temporary_event_holder.empty())
                     {
@@ -453,6 +447,8 @@ void MainWindow::on_pushButton_simulate_clicked()
                         {
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
                         }
+                        // removing project from event stack
+                        es.event_stack.pop();
                         current_date = new_end_date;
                         current_project_it++;
                     }

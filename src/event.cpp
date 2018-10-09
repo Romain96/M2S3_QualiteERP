@@ -16,7 +16,6 @@ Event::Event(Project pro, QDate date) :
     employee()
 {
     // nothing
-    std::cerr << "PROJECT" << std::endl;
 }
 
 /*
@@ -29,5 +28,4 @@ Event::Event(std::pair<std::string,std::pair<int,QDate>> employee, QDate date) :
     employee(employee)
 {
     // nothing
-    std::cerr << "EMPLOYEE" << std::endl;
 }
