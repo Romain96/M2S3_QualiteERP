@@ -7,6 +7,7 @@
 #include "include/event.h"
 #include "include/eventstack.h"
 #include <deque>
+#include <algorithm>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -272,6 +273,9 @@ void MainWindow::on_pushButton_simulate_clicked()
     // building event stack
     es.build_event_stack(project_list, rc);
 
+    // putting project list in the right order again
+    std::reverse(project_list.begin(), project_list.end());
+
     // retrieving current "closest deadline" project
     std::vector<Project>::iterator current_project_it = project_list.begin();
     QDate end_date = current_date;
@@ -287,59 +291,8 @@ void MainWindow::on_pushButton_simulate_clicked()
         int days = std::max(dev_days, man_days);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
-
-        /*
-        // going to first monday (1=monday, 7=sunday)
-        switch (current_date.dayOfWeek())
-        {
-        // monday
-        case 1:
-            // already on right starting day
-            break;
-        // tuesday
-        case 2:
-            // advancing 6 days (4 working days)
-            end_date = current_date.addDays(6);
-            days -= 4;
-            break;
-        // wednesday
-        case 3:
-            // advancing 5 days (3 working days)
-            end_date = current_date.addDays(5);
-            days -= 3;
-            break;
-        // thursday
-        case 4:
-            // advancing 4 days (2 working days)
-            end_date = current_date.addDays(4);
-            days -= 2;
-            break;
-        // friday
-        case 5:
-            // advancing 3 days (1 working day)
-            end_date = current_date.addDays(3);
-            days -= 1;
-            break;
-        // saturday
-        case 6:
-            // advancing 2 days (no working day)
-            end_date = current_date.addDays(2);
-            break;
-        // sunday
-        case 7:
-            // advancing 1 day (no working day)
-            end_date = current_date.addDays(1);
-            break;
-        default: std::cerr << "ERROR dayOfWeek outside of range 1-7 !" << std::endl;
-        }
-
-
-        // advancing the number of weeks
-        int weeks = days/5;
-        days = days - weeks*5;
-        end_date = end_date.addDays(7*weeks + days);
+        end_date = __end_date_from_days(current_date, days);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
-        */
 
         /*
          * retrieving the closest event from the event stack that is a project
@@ -365,6 +318,7 @@ void MainWindow::on_pushButton_simulate_clicked()
             if (end_date <= e.date)
             {
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
+                std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
                 es.event_stack.pop();
                 current_project_it++;
                 current_date = end_date;
@@ -373,6 +327,7 @@ void MainWindow::on_pushButton_simulate_clicked()
             else
             {
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
                 es.event_stack.pop();
                 current_project_it++;
                 current_date = end_date;
@@ -524,7 +479,7 @@ int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
 }
 
 /*
- * Internal use only : computes the end date (first day from which a project can begin)
+ * Internal use only : computes the end date (first day from which the project is finished)
  * from "date" (included) with "days" working days
  */
 QDate MainWindow::__end_date_from_days(QDate date, int days)
@@ -546,7 +501,36 @@ QDate MainWindow::__end_date_from_days(QDate date, int days)
     int nb_days = days - nb_weeks * 5;
 
     // advancing the correct amount of weeks/days
-    end_date = end_date.addDays(5*nb_weeks + nb_days);
+    end_date = end_date.addDays(7*nb_weeks + nb_days);
 
-    return end_date;
+    // returning previous last working day
+    return __earliest_last_working_day(end_date);
+}
+
+/*
+ * Intenal use only : computes the earliest last working day before the beginning of
+ * the day indicated by "date" (ex : for monday 12th semptember -> friday 9th september)
+ */
+QDate MainWindow::__earliest_last_working_day(QDate date)
+{
+    QDate last = date;
+    std::cerr << "__earliest date " << last.toString("yyyy.MM.dd").toStdString() << std::endl;
+
+    // if monday then last friday
+    if (date.dayOfWeek() == 1)
+    {
+        last = date.addDays(-3);
+    }
+    // if sunday then last friday
+    else if (date.dayOfWeek() == 7)
+    {
+        last = date.addDays(-2);
+    }
+    // else the previous day
+    else
+    {
+        last = date.addDays(-1);
+    }
+
+    return last;
 }
