@@ -78,6 +78,11 @@ private:
     RecruitementCenter rc;
     // Event stack
     EventStack es;
+
+    // internal methods
+    int __working_days_in_week(QDate date);
+    int __working_days_between_dates(QDate date1, QDate date2);
+    QDate __end_date_from_days(QDate date, int days);
 };
 
 #endif // MAINWINDOW_H
