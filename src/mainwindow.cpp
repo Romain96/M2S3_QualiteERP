@@ -287,10 +287,11 @@ void MainWindow::on_pushButton_simulate_clicked()
                 << QDate::currentDate().toString("yyyy.MM.dd").toStdString()
                 << " by 'Inside Out's very minimalistic ERP'\n\n"
                 << "-------------------------------------------------------------------------------\n"
-                << "***** Inside Out's Team on "
+                << "********** Inside Out's Team on "
                 << team.starting_date.toString("yyyy.MM.dd").toStdString()
-                << " *****\n";
+                << " **********\n\n";
 
+    // Inside Out's employee list
     output_file << "// Chief Excutive Officers carries no management or development duties...\n"
                 << "* [CEO] Chief Executive Officer(s) :\n";
     for (std::string ceo: team.pdgs)
@@ -311,8 +312,23 @@ void MainWindow::on_pushButton_simulate_clicked()
     for (std::string dev: team.developers)
         output_file << "\t- " << dev << "\n";
 
+    output_file << "-------------------------------------------------------------------------------\n" << std::endl;
+
+    // Inside Out's project list
     output_file << "-------------------------------------------------------------------------------\n"
-                << std::endl;
+                << "********** Inside Out's Project list on "
+                << team.starting_date.toString("yyyy.MM.dd").toStdString()
+                << " **********\n\n";
+
+    for (Project pro: project_list)
+    {
+        output_file << "* " << pro.get_name() << "\n"
+                    << "\t- " << pro.get_managing_time() << " day(s) of management\n"
+                    << "\t- " << pro.get_dev_time() << " day(s) of development\n"
+                    << "\t- " << pro.get_deadline().toString("yyyy.MM.dd").toStdString() << " fixed deadline\n\n";
+    }
+
+    output_file << "-------------------------------------------------------------------------------\n" << std::endl;
 
     // if unsufficient ressources, general needed ressources are stored here
     int general_needed_dev = 0;
