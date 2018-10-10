@@ -506,15 +506,32 @@ void MainWindow::on_pushButton_simulate_clicked()
                     std::cerr << "new remaining days : " << remaining_days << std::endl;
                     new_end_date = current_date.addDays(max_days);
 
-                    // adding employee to the team
+                    // adding employee to the team + writing log
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << "* " << e.date.toString("yyyy.MM.dd").toStdString() << " : The new ";
+
                     switch (e.employee.second.first)
                     {
-                    case 0: team.pdgs.push_back(e.employee.first); break;
-                    case 1: team.duty_coordinators.push_back(e.employee.first); break;
-                    case 2: team.project_managers.push_back(e.employee.first); break;
-                    case 3: team.developers.push_back(e.employee.first); break;
+                    case 0:
+                        team.pdgs.push_back(e.employee.first);
+                        output_file << "CEO " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        break;
+                    case 1:
+                        team.duty_coordinators.push_back(e.employee.first);
+                        output_file << "DCO " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        break;
+                    case 2:
+                        team.project_managers.push_back(e.employee.first);
+                        output_file << "PM " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        break;
+                    case 3:
+                        team.developers.push_back(e.employee.first);
+                        output_file << "DEV " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        break;
                     default: std::cerr << "ERROR index of employee is invalid !" << std::endl;
                     }
+
+                    output_file << "-------------------------------------------------------------------------------\n\n";
 
                     // updating the display of employees
                     update_employees();
@@ -528,10 +545,19 @@ void MainWindow::on_pushButton_simulate_clicked()
                         if(new_end_date < (*current_project_it).get_deadline())
                         {
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
+
+                            // writing project validation log
+                            output_file << "-------------------------------------------------------------------------------\n"
+                                        << "* " << new_end_date.toString("yyyy.MM.dd").toStdString() << " : Project "
+                                        << (*current_project_it).get_name() << " is finished before deadline\n"
+                                        << "-------------------------------------------------------------------------------\n\n";
                         }
                         else
                         {
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+
+                            // writing project invalidation log ? or rejection ?
+                            // TODO
                         }
                         // removing project from event stack
                         es.event_stack.pop();
