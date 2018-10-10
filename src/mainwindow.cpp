@@ -312,7 +312,13 @@ void MainWindow::on_pushButton_simulate_clicked()
     for (std::string dev: team.developers)
         output_file << "\t- " << dev << "\n";
 
-    output_file << "-------------------------------------------------------------------------------\n" << std::endl;
+    output_file << "\n// The efficiency is the measure of the quantity of work an employee\n"
+                << "// is able to accomplish in a single day of work\n"
+                << "// The lower the efficiency the longer it will take to complete a project\n"
+                << "// The higher the efficiency the shorter it will take to complete a project\n"
+                << "// The efficiency is global (the same for all employees) and fixed\n"
+                << "* [Efficiency] Team Efficiency : " << team.team_efficiency << "\n"
+                << "-------------------------------------------------------------------------------\n" << std::endl;
 
     // Inside Out's project list
     output_file << "-------------------------------------------------------------------------------\n"
