@@ -338,10 +338,10 @@ void MainWindow::on_pushButton_simulate_clicked()
         int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
-        output_file << "--------------------------------------------------------------------------------\n"
+        output_file << "-------------------------------------------------------------------------------\n"
                     << "* " << current_date.toString("yyyy.MM.dd").toStdString()
                     << " : starting project " << (*current_project_it).get_name()
-                    << "\n------------------------------------------------------------------------------\n\n";
+                    << "\n-------------------------------------------------------------------------------\n\n";
 
         end_date = __end_date_from_days(current_date, total_days_remaining);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
@@ -393,33 +393,58 @@ void MainWindow::on_pushButton_simulate_clicked()
 
                 // computing ressources necessary to complete project before deadline
                 int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
-                int ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
-                int ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
+                int ideal_dev = 0;
+                int ideal_man = 0;
+                std::cerr << "MAX_WORKING_DAYS : " << max_working_days << std::endl;
 
-                std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
-                general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
-                general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
+                if (max_working_days > 0)
+                {
+                    ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
+                    ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
 
+                    std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+                    general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
+                    general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
+
+                    // writing incomplete ressources log
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
+                                << "\t- Number of development personel needed : " << ideal_dev << " ("
+                                << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
+                                << "\t- Number of management personel needed : " << ideal_man << " ("
+                                << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
+                                << "-------------------------------------------------------------------------------\n\n";
+
+                    // writing project invalidation log
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << " * " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
+                                << (*current_project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
+                                << "-------------------------------------------------------------------------------\n\n";
+
+                    // supposing project finished on deadline day
+                    current_date = (*current_project_it).get_deadline();
+                    current_project_it++;
+                }
+                else
+                {
+                    // writing impossible project completion log (deadline date < starting date)
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << "* IMPOSSIBLE COMPLETION of project " << (*current_project_it).get_name() << "\n"
+                                << "deadline date " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
+                                << " is earlier than starting date " << current_date.toString("yyyy.MM.dd").toStdString() << "\n"
+                                << "-------------------------------------------------------------------------------\n\n";
+
+                    // writing project rejection log
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
+                                << (*current_project_it).get_name() << " rejected\n"
+                                << "-------------------------------------------------------------------------------\n\n";
+
+                    // skipping project (date is not advancing)
+                    current_project_it++;
+                }
                 // removing project from event stack
-                es.event_stack.pop();
-
-                // writing logs (issue with ressources, computed needed ressources, end date on deadline date)
-                output_file << "-------------------------------------------------------------------------------\n"
-                            << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
-                            << "\t- Number of development personel needed : " << ideal_dev << " ("
-                            << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
-                            << "\t- Number of management personel needed : " << ideal_man << " ("
-                            << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
-                            << "-------------------------------------------------------------------------------\n\n";
-
-                output_file << "-------------------------------------------------------------------------------\n"
-                            << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
-                            << (*current_project_it).get_name() << " invalidated but supposed as finished on deadline day with additionnal computed ressources\n"
-                            << "-------------------------------------------------------------------------------\n\n";
-
-                // supposing thant the computed needed amount of ressources is here going to deadline
-                current_date = (*current_project_it).get_deadline();
-                current_project_it++;
+                es.event_stack.pop();  
             }
         }
         /*
@@ -574,13 +599,22 @@ int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
     // working days in the last week (week of date2) before date2
     int wd_last = 5 - __working_days_in_week(date2);
 
-    // computing number of weeks between the two dates
-    int weeks = date2.weekNumber() - date1.weekNumber();
-
-    // number of full working weeks = weeks - 2 (first and last already computed)
-    int wd = (weeks - 2) * 5 + wd_first + wd_last;
-
-    return wd;
+    qint64 days = date1.daysTo(date2);
+    if (days < 1)
+    {
+        // date1 >= date2
+        return 0;
+    }
+    else if (days < 7)
+    {
+        // date1 and date2 are in the same week
+        return std::min(wd_first, wd_last);
+    }
+    else
+    {
+        int inter_weeks = static_cast<int>(std::ceil(static_cast<double>(days - wd_first - wd_last + 2) / 7));
+        return 5 * inter_weeks + wd_first + wd_last;
+    }
 }
 
 /*
