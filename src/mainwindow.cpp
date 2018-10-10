@@ -421,7 +421,6 @@ void MainWindow::on_pushButton_simulate_clicked()
                 int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
                 int ideal_dev = 0;
                 int ideal_man = 0;
-                std::cerr << "MAX_WORKING_DAYS : " << max_working_days << std::endl;
 
                 if (max_working_days > 0)
                 {
@@ -530,11 +529,15 @@ void MainWindow::on_pushButton_simulate_clicked()
                     total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
                     std::cerr << "new remaining days : " << remaining_days << std::endl;
-                    new_end_date = current_date.addDays(max_days);
+                    //new_end_date = current_date.addDays(max_days);
 
                     // adding employee to the team + writing log
                     output_file << "-------------------------------------------------------------------------------\n"
                                 << "* " << e.date.toString("yyyy.MM.dd").toStdString() << " : The new ";
+
+                    // before adding new employee, computing real number of days (not divided)
+                    dev_days = dev_days_remaining * static_cast<int>(team.developers.size() + team.duty_coordinators.size());
+                    man_days = man_days_remaining * static_cast<int>(team.project_managers.size());
 
                     switch (e.employee.second.first)
                     {
@@ -556,8 +559,24 @@ void MainWindow::on_pushButton_simulate_clicked()
                         break;
                     default: std::cerr << "ERROR index of employee is invalid !" << std::endl;
                     }
-
                     output_file << "-------------------------------------------------------------------------------\n\n";
+
+                    // then dividing work again
+                    dev_days_remaining = static_cast<int>(std::ceil(dev_days / static_cast<double>(team.developers.size() + team.duty_coordinators.size())));
+                    man_days_remaining = static_cast<int>(std::ceil(man_days / static_cast<double>(team.project_managers.size())));
+                    total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
+                    new_end_date = __end_date_from_days(e.date, total_days_remaining);
+
+                    // writing infos about current project (updated)
+                    output_file << "-------------------------------------------------------------------------------\n"
+                                << "* " << e.date.toString("yyyy.MM.dd").toStdString()
+                                << " : project " << (*current_project_it).get_name() << " advancement report :\n"
+                                << "\t- " << man_days_remaining << " day(s) of management are needed "
+                                << "(" << man_days << " days splitted on " << team.project_managers.size() << " PMs)\n"
+                                << "\t- " << dev_days_remaining << " day(s) of development are needed "
+                                << "(" << dev_days << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
+                                << "\t- Expected end date with current workforce : " << new_end_date.toString("yyyy.MM.dd").toStdString()
+                                << "\n-------------------------------------------------------------------------------\n\n";
 
                     // updating the display of employees
                     update_employees();
@@ -567,7 +586,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                     // if temporary event holder is empty we have to decide whether the project is validated
                     if (temporary_event_holder.empty())
                     {
-                        new_end_date = __end_date_from_days(new_end_date, total_days_remaining);
+                        //new_end_date = __end_date_from_days(new_end_date, total_days_remaining);
                         if(new_end_date < (*current_project_it).get_deadline())
                         {
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
@@ -593,7 +612,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                 }
             }
         }
-    }
+    } 
     // needed ressources (default : 0)
     std::cerr << "Minimum needed ressources to complete all projects :"
               << "\n\t" << general_needed_dev << " dev(s)/duty coordinator(s)"
