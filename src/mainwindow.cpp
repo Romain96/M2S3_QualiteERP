@@ -84,56 +84,59 @@ void MainWindow::on_actionImport_triggered()
                                                     ":/data",
                                                     tr("data (*.toml)"));
 
-    // converting QString to c++ string
-    std::string name = fileName.toStdString();
-    ERPConfig *config;
-    try {
-        config = new ERPConfig(name);
-    } catch (const cpptoml::parse_exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
-
-    // *** Initializing team and project list ***
-
-    // clearing current team & project list
-    team.pdgs.clear();
-    team.project_managers.clear();
-    team.duty_coordinators.clear();
-    team.developers.clear();
-    project_list.clear();
-
-    // initializing with config data
-    for(std::string pdg: config->get_team()->pdgs)
+    if (!fileName.isEmpty())
     {
-        team.pdgs.push_back(pdg);
+        // converting QString to c++ string
+        std::string name = fileName.toStdString();
+        ERPConfig *config;
+        try {
+            config = new ERPConfig(name);
+        } catch (const cpptoml::parse_exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
+
+        // *** Initializing team and project list ***
+
+        // clearing current team & project list
+        team.pdgs.clear();
+        team.project_managers.clear();
+        team.duty_coordinators.clear();
+        team.developers.clear();
+        project_list.clear();
+
+        // initializing with config data
+        for(std::string pdg: config->get_team()->pdgs)
+        {
+            team.pdgs.push_back(pdg);
+        }
+
+        for(std::string pm: config->get_team()->project_managers)
+        {
+            team.project_managers.push_back(pm);
+        }
+
+        for(std::string dco: config->get_team()->duty_coordinators)
+        {
+            team.duty_coordinators.push_back(dco);
+        }
+
+        for(std::string dev: config->get_team()->developers)
+        {
+            team.developers.push_back(dev);
+        }
+
+        team.team_efficiency = config->get_team()->team_efficiency;
+        team.starting_date = config->get_team()->starting_date;
+        current_date = team.starting_date;
+
+        for(Project *p: config->get_project_list())
+        {
+            project_list.push_back(*p);
+        }
+
+        // updating screen infos
+        update();
     }
-
-    for(std::string pm: config->get_team()->project_managers)
-    {
-        team.project_managers.push_back(pm);
-    }
-
-    for(std::string dco: config->get_team()->duty_coordinators)
-    {
-        team.duty_coordinators.push_back(dco);
-    }
-
-    for(std::string dev: config->get_team()->developers)
-    {
-        team.developers.push_back(dev);
-    }
-
-    team.team_efficiency = config->get_team()->team_efficiency;
-    team.starting_date = config->get_team()->starting_date;
-    current_date = team.starting_date;
-
-    for(Project *p: config->get_project_list())
-    {
-        project_list.push_back(*p);
-    }
-
-    // updating screen infos
-    update();
 }
 
 /*
