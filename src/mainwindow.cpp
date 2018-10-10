@@ -271,6 +271,10 @@ void MainWindow::on_pushButton_simulate_clicked()
     // building event stack
     es.build_event_stack(project_list, rc);
 
+    // if unsufficient ressources, general needed ressources are stored here
+    int general_needed_dev = 0;
+    int general_needed_man = 0;
+
     // putting project list in the right order again
     std::reverse(project_list.begin(), project_list.end());
 
@@ -330,7 +334,7 @@ void MainWindow::on_pushButton_simulate_clicked()
             else
             {
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
-                std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+                std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
                 // computing ressources necessary to complete project before deadline
                 int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
@@ -338,11 +342,15 @@ void MainWindow::on_pushButton_simulate_clicked()
                 int ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
 
                 std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+                general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
+                general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
 
-                // removing project from event stack, going to end date and iterating
+                // removing project from event stack
                 es.event_stack.pop();
+
+                // supposing thant the computed needed amount of ressources is here going to deadline
+                current_date = (*current_project_it).get_deadline();
                 current_project_it++;
-                current_date = end_date;
             }
         }
         /*
@@ -440,6 +448,11 @@ void MainWindow::on_pushButton_simulate_clicked()
             }
         }
     }
+    // needed ressources (default : 0)
+    std::cerr << "Minimum needed ressources to complete all projects :"
+              << "\n\t" << general_needed_dev << " dev(s)/duty coordinator(s)"
+              << "\n\t" << general_needed_man << " PMs" << std::endl;
+
     std::cerr << "SIMULATION COMPLETED !" << std::endl;
     update();
 }
