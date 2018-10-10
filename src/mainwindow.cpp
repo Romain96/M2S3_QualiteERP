@@ -303,7 +303,7 @@ void MainWindow::on_pushButton_simulate_clicked()
         output_file << "\t- " << dco << "\n";
 
     output_file << "\n// Project Managers are purely managers and only carries management duties...\n"
-                << "* [PM] Project Manager(s :\n";
+                << "* [PM] Project Manager(s) :\n";
     for (std::string pm: team.project_managers)
         output_file << "\t- " << pm << "\n";
 
@@ -354,12 +354,16 @@ void MainWindow::on_pushButton_simulate_clicked()
         int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+        end_date = __end_date_from_days(current_date, total_days_remaining);
         output_file << "-------------------------------------------------------------------------------\n"
                     << "* " << current_date.toString("yyyy.MM.dd").toStdString()
-                    << " : starting project " << (*current_project_it).get_name()
+                    << " : starting project " << (*current_project_it).get_name() << "\n"
+                    << "\t- " << man_days_remaining << " day(s) of management are needed "
+                    << "(" << (*current_project_it).get_managing_time() << " days splitted on " << team.project_managers.size() << " PMs)\n"
+                    << "\t- " << dev_days_remaining << " day(s) of development are needed "
+                    << "(" << (*current_project_it).get_dev_time() << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
+                    << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
                     << "\n-------------------------------------------------------------------------------\n\n";
-
-        end_date = __end_date_from_days(current_date, total_days_remaining);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
         /*
