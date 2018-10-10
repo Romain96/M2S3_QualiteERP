@@ -286,7 +286,7 @@ void MainWindow::on_pushButton_simulate_clicked()
     output_file << "This file has been generated on "
                 << QDate::currentDate().toString("yyyy.MM.dd").toStdString()
                 << " by 'Inside Out's very minimalistic ERP'\n\n"
-                << "----------------------------------------------------------------------------------------------\n"
+                << "-------------------------------------------------------------------------------\n"
                 << "***** Inside Out's Team on "
                 << team.starting_date.toString("yyyy.MM.dd").toStdString()
                 << " *****\n";
@@ -311,7 +311,7 @@ void MainWindow::on_pushButton_simulate_clicked()
     for (std::string dev: team.developers)
         output_file << "\t- " << dev << "\n";
 
-    output_file << "----------------------------------------------------------------------------------------------\n"
+    output_file << "-------------------------------------------------------------------------------\n"
                 << std::endl;
 
     // if unsufficient ressources, general needed ressources are stored here
@@ -338,10 +338,10 @@ void MainWindow::on_pushButton_simulate_clicked()
         int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
-        output_file << "----------------------------------------------------------------------------------------------\n"
+        output_file << "--------------------------------------------------------------------------------\n"
                     << "* " << current_date.toString("yyyy.MM.dd").toStdString()
                     << " : starting project " << (*current_project_it).get_name()
-                    << "\n----------------------------------------------------------------------------------------------\n\n";
+                    << "\n------------------------------------------------------------------------------\n\n";
 
         end_date = __end_date_from_days(current_date, total_days_remaining);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
@@ -375,8 +375,15 @@ void MainWindow::on_pushButton_simulate_clicked()
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
                 es.event_stack.pop();
-                current_project_it++;
                 current_date = end_date;
+
+                // writing log
+                output_file << "-------------------------------------------------------------------------------\n"
+                            << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
+                            << (*current_project_it).get_name() << " is finished before deadline\n"
+                            << "-------------------------------------------------------------------------------\n\n";
+
+                current_project_it++;
             }
             // if the computed end date is after the deadline, the project in invalidated !
             else
@@ -395,6 +402,20 @@ void MainWindow::on_pushButton_simulate_clicked()
 
                 // removing project from event stack
                 es.event_stack.pop();
+
+                // writing logs (issue with ressources, computed needed ressources, end date on deadline date)
+                output_file << "-------------------------------------------------------------------------------\n"
+                            << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
+                            << "\t- Number of development personel needed : " << ideal_dev << " ("
+                            << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
+                            << "\t- Number of management personel needed : " << ideal_man << " ("
+                            << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
+                            << "-------------------------------------------------------------------------------\n\n";
+
+                output_file << "-------------------------------------------------------------------------------\n"
+                            << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
+                            << (*current_project_it).get_name() << " invalidated but supposed as finished on deadline day with additionnal computed ressources\n"
+                            << "-------------------------------------------------------------------------------\n\n";
 
                 // supposing thant the computed needed amount of ressources is here going to deadline
                 current_date = (*current_project_it).get_deadline();
