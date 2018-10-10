@@ -9,6 +9,7 @@
 #include <deque>
 #include <algorithm>
 #include <cmath>
+#include <fstream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -263,13 +264,55 @@ void MainWindow::update_projects()
 }
 
 /*
- * Running simulation
+ * *** Running simulation ***
+ * - computes start/end dates for each projects
+ * - dynamically adds new employees (recruits)
+ * - computes minimal needed ressources in case of non completion of a project
+ * - writes the result in a file (chronological order)
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
     std::cerr << "RUNNING SIMULATION..." << std::endl;
+
     // building event stack
     es.build_event_stack(project_list, rc);
+
+    // output stream
+    std::ofstream output_file;
+    std::string output_file_name = "./results";
+    output_file.open(output_file_name);
+
+    // writing general informations
+    output_file << "This file has been generated on "
+                << QDate::currentDate().toString("yyyy.MM.dd").toStdString()
+                << " by 'Inside Out's very minimalistic ERP'\n\n"
+                << "----------------------------------------------------------------------------------------------\n"
+                << "***** Inside Out's Team on "
+                << team.starting_date.toString("yyyy.MM.dd").toStdString()
+                << " *****\n";
+
+    output_file << "// Chief Excutive Officers carries no management or development duties...\n"
+                << "* [CEO] Chief Executive Officer(s) :\n";
+    for (std::string ceo: team.pdgs)
+        output_file << "\t- " << ceo << "\n";
+
+    output_file << "\n// Duty Coordinators are technical experts and carries development duties...\n"
+                << "* [DCO] Duty Coordinator(s) :\n";
+    for (std::string dco: team.duty_coordinators)
+        output_file << "\t- " << dco << "\n";
+
+    output_file << "\n// Project Managers are purely managers and only carries management duties...\n"
+                << "* [PM] Project Manager(s :\n";
+    for (std::string pm: team.project_managers)
+        output_file << "\t- " << pm << "\n";
+
+    output_file << "\n// Developers are the backbone of the team and carries development duties...\n"
+                << "* [DEV] Developer(s) :\n";
+    for (std::string dev: team.developers)
+        output_file << "\t- " << dev << "\n";
+
+    output_file << "----------------------------------------------------------------------------------------------\n"
+                << std::endl;
 
     // if unsufficient ressources, general needed ressources are stored here
     int general_needed_dev = 0;
@@ -295,6 +338,11 @@ void MainWindow::on_pushButton_simulate_clicked()
         int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+        output_file << "----------------------------------------------------------------------------------------------\n"
+                    << "* " << current_date.toString("yyyy.MM.dd").toStdString()
+                    << " : starting project " << (*current_project_it).get_name()
+                    << "\n----------------------------------------------------------------------------------------------\n\n";
+
         end_date = __end_date_from_days(current_date, total_days_remaining);
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
@@ -452,6 +500,9 @@ void MainWindow::on_pushButton_simulate_clicked()
     std::cerr << "Minimum needed ressources to complete all projects :"
               << "\n\t" << general_needed_dev << " dev(s)/duty coordinator(s)"
               << "\n\t" << general_needed_man << " PMs" << std::endl;
+
+    // closing output stream
+    output_file.close();
 
     std::cerr << "SIMULATION COMPLETED !" << std::endl;
     update();
