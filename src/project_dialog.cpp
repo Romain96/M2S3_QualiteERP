@@ -72,3 +72,13 @@ void ProjectDialog::on_buttonBox_accepted()
     // sending verified data
     emit project_creation_send_data(project_name, dev_time, management_time, deadline_year, deadline_month, deadline_day);
 }
+
+/*
+ * "cancel" when creating a new project
+ * has no effect for now
+ */
+void ProjectDialog::on_buttonBox_rejected()
+{
+    // debug
+    std::cerr << "ProjectDialog : Employee creation aborted !" << std::endl;
+}
