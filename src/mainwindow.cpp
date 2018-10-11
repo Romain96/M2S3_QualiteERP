@@ -254,9 +254,7 @@ void MainWindow::update_projects()
         line = line + " * " + pro.get_name() + "\n"
                 + "\tdev time : " + std::to_string(pro.get_dev_time()) + " day(s)\n"
                 + "\tmanagement time : " + std::to_string(pro.get_managing_time()) + " day(s)\n"
-                + "\tdeadline : " + std::to_string(pro.get_deadline().year()) + "-"
-                + std::to_string(pro.get_deadline().month()) + "-"
-                + std::to_string(pro.get_deadline().day()) + "\n";
+                + "\tdeadline : " + pro.get_deadline().toString("yyyy.MM.dd").toStdString() + "\n";
     }
 
     QString qtext = QString::fromStdString(line);
