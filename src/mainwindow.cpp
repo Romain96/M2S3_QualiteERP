@@ -666,6 +666,21 @@ void MainWindow::on_pushButton_simulate_clicked()
               << "\n\t" << general_needed_dev << " dev(s)/duty coordinator(s)"
               << "\n\t" << general_needed_man << " PMs" << std::endl;
 
+    // writing needed ressources (if more than 0)
+    if (std::max(general_needed_dev, general_needed_man) > 0)
+    {
+        output_file << "-------------------------------------------------------------------------------\n"
+                    << " This message only appears when at least one project couldn't be terminated\n"
+                    << " before its deadline with the current workforce.\n"
+                    << " Keep in mind that the additionnal needed employees are considered fully part\n"
+                    << " of the team on its starting day; the usual 3 months recruting period and\n"
+                    << " 1 month integration to reach the desired efficiency are not taken into account.\n\n"
+                    << " Minimal needed ressources in order to complete all planned projects :\n"
+                    << "\t- " << general_needed_man << " additionnal managing staff (PMs)\n"
+                    << "\t- " << general_needed_dev << " additionnal development staff (DEVs/DCOs)\n"
+                    << "-------------------------------------------------------------------------------\n";
+    }
+
     // closing output stream
     output_file.close();
 
