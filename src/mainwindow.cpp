@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <iostream>
 #include "include/event.h"
-#include "include/eventstack.h"
+#include "include/event_stack.h"
 #include <deque>
 #include <algorithm>
 #include <cmath>

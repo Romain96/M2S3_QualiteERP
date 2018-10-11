@@ -10,8 +10,8 @@
 #include "lib/cpptoml.h"
 #include "include/erp_config.h"
 #include "include/event.h"
-#include "include/eventstack.h"
-#include "include/recruitementcenter.h"
+#include "include/event_stack.h"
+#include "include/recruitement_center.h"
 
 namespace Ui {
 class MainWindow;
