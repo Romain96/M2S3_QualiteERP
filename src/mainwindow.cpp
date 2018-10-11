@@ -599,10 +599,58 @@ void MainWindow::on_pushButton_simulate_clicked()
                         }
                         else
                         {
-                            std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                            // same as project invalidation when temporary_event_holder is empty when constructed
 
-                            // writing project invalidation log ? or rejection ?
-                            // TODO
+                            std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                            std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+
+                            // computing ressources necessary to complete project before deadline
+                            int max_working_days = __working_days_between_dates(e.date, (*current_project_it).get_deadline());
+                            int ideal_dev = 0;
+                            int ideal_man = 0;
+
+                            if (max_working_days > 0)
+                            {
+                                ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
+                                ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
+
+                                std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+                                general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
+                                general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
+
+                                // writing incomplete ressources log
+                                output_file << "-------------------------------------------------------------------------------\n"
+                                            << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
+                                            << "\t- Number of development personel needed : " << ideal_dev << " ("
+                                            << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
+                                            << "\t- Number of management personel needed : " << ideal_man << " ("
+                                            << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
+                                            << "-------------------------------------------------------------------------------\n\n";
+
+                                // writing project invalidation log
+                                output_file << "-------------------------------------------------------------------------------\n"
+                                            << " * " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
+                                            << (*current_project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
+                                            << "-------------------------------------------------------------------------------\n\n";
+
+                                // supposing project finished on deadline day
+                                new_end_date = (*current_project_it).get_deadline();
+                            }
+                            else
+                            {
+                                // writing impossible project completion log (deadline date < starting date)
+                                output_file << "-------------------------------------------------------------------------------\n"
+                                            << "* IMPOSSIBLE COMPLETION of project " << (*current_project_it).get_name() << "\n"
+                                            << "deadline date " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
+                                            << " is earlier than starting date " << current_date.toString("yyyy.MM.dd").toStdString() << "\n"
+                                            << "-------------------------------------------------------------------------------\n\n";
+
+                                // writing project rejection log
+                                output_file << "-------------------------------------------------------------------------------\n"
+                                            << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
+                                            << (*current_project_it).get_name() << " rejected\n"
+                                            << "-------------------------------------------------------------------------------\n\n";
+                            }
                         }
                         // removing project from event stack
                         es.event_stack.pop();
