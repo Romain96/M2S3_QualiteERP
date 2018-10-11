@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <cmath>
 #include <fstream>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -282,8 +283,9 @@ void MainWindow::on_pushButton_simulate_clicked()
 
     // writing general informations
     output_file << "This file has been generated on "
-                << QDate::currentDate().toString("yyyy.MM.dd").toStdString()
-                << " by 'Inside Out's very minimalistic ERP'\n\n"
+                << QDate::currentDate().toString("yyyy.MM.dd").toStdString() << " at "
+                << QTime::currentTime().toString("hh:mm:ss").toStdString() << " "
+                << "\nby 'Inside Out's very minimalistic ERP'\n\n"
                 << "-------------------------------------------------------------------------------\n"
                 << "********** Inside Out's Team on "
                 << team.starting_date.toString("yyyy.MM.dd").toStdString()

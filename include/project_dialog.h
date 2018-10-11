@@ -18,6 +18,8 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_buttonBox_rejected();
+
 signals:
     void project_creation_send_data(std::string project_name,
                                     int development_time,
