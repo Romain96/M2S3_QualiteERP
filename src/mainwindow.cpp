@@ -336,6 +336,11 @@ void MainWindow::on_pushButton_simulate_clicked()
 
     output_file << "-------------------------------------------------------------------------------\n" << std::endl;
 
+    // writing start of simulation
+    output_file << "-------------------------------------------------------------------------------\n"
+                << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : Starting simulation\n"
+                << "-------------------------------------------------------------------------------\n\n";
+
     // if unsufficient ressources, general needed ressources are stored here
     int general_needed_dev = 0;
     int general_needed_man = 0;
@@ -678,8 +683,13 @@ void MainWindow::on_pushButton_simulate_clicked()
                     << " Minimal needed ressources in order to complete all planned projects :\n"
                     << "\t- " << general_needed_man << " additionnal managing staff (PMs)\n"
                     << "\t- " << general_needed_dev << " additionnal development staff (DEVs/DCOs)\n"
-                    << "-------------------------------------------------------------------------------\n";
+                    << "-------------------------------------------------------------------------------\n\n";
     }
+
+    // end of simulation log
+    output_file << "-------------------------------------------------------------------------------\n"
+                << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
+                << "-------------------------------------------------------------------------------\n";
 
     // closing output stream
     output_file.close();
