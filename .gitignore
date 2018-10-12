@@ -1,2 +1,5 @@
 # ignoring QT pro user files
 *.pro.user
+
+#ignoring Rhistory files
+*.Rhistory
