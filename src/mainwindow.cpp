@@ -668,6 +668,8 @@ void MainWindow::on_pushButton_simulate_clicked()
                 }
             }
         }
+        // advancing to next day (project if finished at the end of the current day)
+        current_date = current_date.addDays(1);
     } 
     // needed ressources (default : 0)
     std::cerr << "Minimum needed ressources to complete all projects :"
