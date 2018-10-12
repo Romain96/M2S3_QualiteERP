@@ -6,15 +6,16 @@
 
 class Event
 {
-    // TODO add project//employee disambiguation
-    // for now only projects
-
 public:
     QDate date;
-    Project *proj;
+    bool is_proj;
+
+    Project proj;
+    std::pair<std::string,std::pair<int,QDate>> employee;
 
     Event();
-    Event(Project *pro, QDate date);
+    Event(Project pro, QDate date);
+    Event(std::pair<std::string,std::pair<int,QDate>> employee, QDate date);
 };
 
 #endif // EVENT_H

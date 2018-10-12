@@ -71,5 +71,5 @@ void EmployeeDialog::on_buttonBox_accepted()
 void EmployeeDialog::on_buttonBox_rejected()
 {
     // for debug purposes
-    std::cerr << "Employee creation rejected !" << std::endl;
+    std::cerr << "EmployeeDialog : Employee creation aborted !" << std::endl;
 }

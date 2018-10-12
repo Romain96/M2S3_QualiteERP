@@ -9,6 +9,9 @@
 #include "include/team.h"
 #include "lib/cpptoml.h"
 #include "include/erp_config.h"
+#include "include/event.h"
+#include "include/event_stack.h"
+#include "include/recruitement_center.h"
 
 namespace Ui {
 class MainWindow;
@@ -53,6 +56,8 @@ private slots:
                                          int employee_month,
                                          int employee_day);
 
+    void on_pushButton_simulate_clicked();
+
 private:
 
     // new project creation window
@@ -67,6 +72,18 @@ private:
     Team team;
     // Inside Out's project list
     std::vector<Project> project_list;
+    // current date
+    QDate current_date;
+    // Recruitement center
+    RecruitementCenter rc;
+    // Event stack
+    EventStack es;
+
+    // internal methods
+    int __working_days_in_week(QDate date);
+    int __working_days_between_dates(QDate date1, QDate date2);
+    QDate __end_date_from_days(QDate date, int days);
+    QDate __earliest_last_working_day(QDate date);
 };
 
 #endif // MAINWINDOW_H
