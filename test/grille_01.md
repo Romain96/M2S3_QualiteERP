@@ -2,7 +2,8 @@
 
 ## Données
 
-Date de ébut de la simulation : 2019-06-01
+Date de début de la simulation : 2019-06-01
+
 Efficience globale : 100%
 
 Equipe Inside Out pour la simulation :
@@ -20,9 +21,10 @@ Projets Inside Out pour la simulation :
 
 | Projet | Début théorique | Début simulé | Delta_debut | Fin théorique | Fin simulée | Delta_fin | Delta |
 |---|---|---|---|---|---|---|---|
-| NINETENDO | 2019-06-03 | 2019-06-01 | XX | 2019-07-05 | 2019-07-05 | 0 | XX |
-| AIRBUS    | 2019-07-08 | 2019-07-05 | X | 2019-09-13 | 2019-09-12 | X | X |
-| HTC VR    | 2019-09-16 | 2019-09-12 | X | 2019-11-22 | 2019-11-20 | X | X |
+| NINETENDO | 2019-06-03 | 2019-06-03 | 0 | 2019-07-05 | 2019-07-05 | 0 | 0 |
+| AIRBUS    | 2019-07-08 | 2019-07-08 | 0 | 2019-09-13 | 2019-09-13 | 0 | 0 |
+| HTC VR    | 2019-09-16 | 2019-09-16 | 0 | 2019-11-22 | 2019-11-22 | 0 | 0 |
 
 
 ## Conclusion
+ TODO
