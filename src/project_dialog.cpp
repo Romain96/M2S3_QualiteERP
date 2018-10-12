@@ -67,10 +67,13 @@ void ProjectDialog::on_buttonBox_accepted()
     }
 
     // project price (currently unused)
-    float price = ui->lineEdit_price->text().toFloat();
+    int price = ui->lineEdit_price->text().toInt();
+
+    if(price < 0)
+        price = 0;
 
     // sending verified data
-    emit project_creation_send_data(project_name, dev_time, management_time, deadline_year, deadline_month, deadline_day);
+    emit project_creation_send_data(project_name, dev_time, management_time, price, deadline_year, deadline_month, deadline_day);
 }
 
 /*

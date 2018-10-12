@@ -61,12 +61,13 @@ void MainWindow::on_pushButton_new_project_clicked()
 void MainWindow::project_creation_data_received(std::string project_name,
                                                 int development_time,
                                                 int management_time,
+                                                int price,
                                                 int deadline_year,
                                                 int deadline_month,
                                                 int deadline_day)
 {
     // creating a new project
-    Project pro = Project(project_name, development_time, management_time, deadline_year, deadline_month, deadline_day);
+    Project pro = Project(project_name, development_time, management_time, price, deadline_year, deadline_month, deadline_day);
 
     // adding it to the project list
     project_list.push_back(pro);

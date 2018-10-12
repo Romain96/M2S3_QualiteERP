@@ -45,6 +45,7 @@ private slots:
     void project_creation_data_received(std::string project_name,
                                         int development_time,
                                         int management_time,
+                                        int price,
                                         int deadline_year,
                                         int deadline_month,
                                         int deadline_day);

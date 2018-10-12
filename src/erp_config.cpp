@@ -25,10 +25,11 @@ ERPConfig::ERPConfig(string filename)
 			auto name = project->get_as<string>("name").value_or("Unnamed project");
 			auto dev_time = project->get_as<int>("dev_time").value_or(0);
 			auto managing_time = project->get_as<int>("managing_time").value_or(0);
+            auto price = project->get_as<int>("price").value_or(0);
 			cpptoml::local_datetime date;
             auto deadline = project->get_as<cpptoml::local_date>("deadline").value_or(date);
 			// cout << deadline.day << "/" << deadline.month << "/" << deadline.year << endl;
-			this->project_list.push_back(new Project(name, dev_time, managing_time, deadline.year, deadline.month, deadline.day));
+            this->project_list.push_back(new Project(name, dev_time, managing_time, price, deadline.year, deadline.month, deadline.day));
 		}
 	}
 	catch(const cpptoml::parse_exception& e)

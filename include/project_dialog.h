@@ -24,6 +24,7 @@ signals:
     void project_creation_send_data(std::string project_name,
                                     int development_time,
                                     int management_time,
+                                    int price,
                                     int deadline_year,
                                     int deadline_month,
                                     int deadline_day);
