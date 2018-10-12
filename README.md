@@ -29,3 +29,18 @@
 - Documentation: dossier **doc**
 - Fichiers librairies: dossier **lib**
 - Noms de variable: **snake\_case**
+
+## Compilation et lancement de l'ERP
+
+Il faut ouvrir le .pro avec qtcreator, le compiler et le lancer.
+
+## Déroulement d'une simulation
+
+On peut:
+- Ajouter des membres d'équipe
+- Ajouter des projets
+- Charger un fichier qui contient l'ensemble des informations nécessaires à la simulation dans la barre déroulante
+
+Une fois l'ensemble des données entrée, on lance la simulation et les résultats s'affichent dans une nouvelle fenêtre.
+
+Dans le dossier tests, plusieurs simulations ont été effectuées, et un comparatif des résultats obtenus à l'aide de l'ERP part rapport aux résultats attendus (calculés à la main).
