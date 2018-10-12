@@ -364,6 +364,9 @@ void MainWindow::on_pushButton_simulate_clicked()
         int man_days_remaining = static_cast<int>(std::ceil(static_cast<double>(man_days) * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0));
         int total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
+        // advancing to first working day from current date
+        current_date = __earliest_working_day_from_date(current_date);
+
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         end_date = __end_date_from_days(current_date, total_days_remaining);
         output_file << "-------------------------------------------------------------------------------\n"
@@ -815,4 +818,21 @@ QDate MainWindow::__earliest_last_working_day(QDate date)
     }
 
     return last;
+}
+
+/*
+ *  Internal use only : computes the earliest working starting from "date"
+ *  if "date" is monday-friday the returning date else returning following monday
+ */
+QDate MainWindow::__earliest_working_day_from_date(QDate date)
+{
+    // saturday
+    if (date.dayOfWeek() == 6)
+        return date.addDays(2);
+    // sunday
+    else if (date.dayOfWeek() == 7)
+        return date.addDays(1);
+    // monday to friday
+    else
+        return date;
 }
