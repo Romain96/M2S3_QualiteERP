@@ -12,7 +12,18 @@ struct ProjectComparator
 {
     inline bool operator() (Project p1, Project p2)
     {
-        return p1.get_deadline() > p2.get_deadline();
+        if (p1.get_deadline() > p2.get_deadline())
+            return true;
+        if (p1.get_deadline() < p2.get_deadline())
+            return false;
+        else
+        {
+            // highest value...
+            if (p1.get_price() > p2.get_price())
+                return true;
+            else
+                return false;
+        }
     }
 };
 

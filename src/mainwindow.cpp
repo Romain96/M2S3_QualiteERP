@@ -52,8 +52,8 @@ void MainWindow::on_pushButton_new_project_clicked()
     newproj->setWindowTitle("Project creation window");
     newproj->setModal(true);
 
-    QObject::connect(newproj, SIGNAL(project_creation_send_data(std::string,int,int,int,int,int)),
-                     this, SLOT(project_creation_data_received(std::string,int,int,int,int,int)));
+    QObject::connect(newproj, SIGNAL(project_creation_send_data(std::string,int,int,int,int,int,int)),
+                     this, SLOT(project_creation_data_received(std::string,int,int,int,int,int,int)));
 
     newproj->show();
 }
