@@ -13,15 +13,18 @@ name = "AIRBUS"
 dev_time = 150
 managing_time = 40
 deadline = 2019-12-01
+price = 150000
 
 [[projects]]
 name = "NINETENDO"
 dev_time = 75
 managing_time = 25
 deadline = 2019-09-01
+price = 250000
 
 [[projects]]
 name = "HTC VR"
 dev_time = 150
 managing_time = 45
 deadline = 2020-01-01
+price = 10000
