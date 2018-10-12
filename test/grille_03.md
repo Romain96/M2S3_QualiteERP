@@ -29,4 +29,7 @@ Projets Inside Out pour la simulation :
 | HTC VR    | XXXX-XX-XX | 2019-12-16 | X | XXXX-XX-XX | 2020-02-07 | X | X |
 
 ## Conclusion
- TODO
+ 
+ * Nous trouvons les mêmes dates en les calculant à la main et par la simulation.
+ * Avec une efficience de 120%, nous pouvons terminer au plus tôt le 07/02/2020.
+ * D'après notre simulation, il faut au moins embaucher trois personnes (deux développeurs et un gestionnaire de projet) pour tenir les délais avec une efficience de 120% (ces valeurs ont été vérifiées par un calcul à la main).
