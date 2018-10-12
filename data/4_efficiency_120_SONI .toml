@@ -1,0 +1,37 @@
+title = "ERP team 1 Example 3 with 120% efficiency"
+team_efficiency = 120
+starting_date = 2019-06-01
+
+[team]
+	pdgs = ["Tan Dat"]
+	project_managers = ["Romain"]
+	duty_coordinators = ["Maxime"]
+	developers = ["Isabelle", "Tan Dat"]
+
+[[projects]]
+name = "AIRBUS"
+dev_time = 150
+managing_time = 40
+deadline = 2019-12-01
+price = 150000
+
+[[projects]]
+name = "NINETENDO"
+dev_time = 75
+managing_time = 25
+deadline = 2019-09-01
+price = 25000
+
+[[projects]]
+name = "HTC VR"
+dev_time = 150
+managing_time = 45
+deadline = 2020-01-01
+price = 10000
+
+[[projects]]
+name = "SONI"
+dev_time = 300
+managing_time = 80
+deadline = 2020-01-01
+price = 50000
