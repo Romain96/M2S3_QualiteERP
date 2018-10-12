@@ -24,9 +24,11 @@ Projets Inside Out pour la simulation :
 |---|---|---|---|---|---|---|---|
 | NINETENDO | 2019-06-03 | 2019-06-03 | 0 | 2019-06-28 | 2019-06-28 | 0 | 0 |
 | AIRBUS    | 2019-07-01 | 2019-07-01 | 0 | 2019-08-23 | 2019-08-23 | 0 | 0 |
-| HTC VR    | 2019-08-26 | XXXX-XX-XX | 0 | 2019-10-18 | XXXX-XX-XX | 0 | 0 |
-| SONI      | 2019-10-21 | 2019-08-26 | X | 2020-02-07 | 2019-12-13 | X | X |
-| HTC VR    | XXXX-XX-XX | 2019-12-16 | X | XXXX-XX-XX | 2020-02-07 | X | X |
+| HTC VR    | 2019-08-26 | 2019-08-26 | 0 | 2019-10-18 | 2019-10-18 | 0 | 0 |
+| SONI      | 2019-10-21 | 2019-10-21 | 0 | 2020-02-07 | 2020-02-07 | 0 | 0 |
 
 ## Conclusion
- TODO
+ 
+ * Nous trouvons les mêmes dates en les calculant à la main et par la simulation.
+ * Avec une efficience de 120%, nous pouvons terminer au plus tôt le 07/02/2020.
+ * D'après notre simulation, il faut au moins embaucher trois personnes (deux développeurs et un gestionnaire de projet) pour tenir les délais avec une efficience de 120% (ces valeurs ont été vérifiées par un calcul à la main).
