@@ -2,6 +2,10 @@
 
 ## Données
 
+Date de ébut de la simulation : XXXX-XX-XX
+
+Efficience globale : XXX%
+
 Equipe Inside Out pour la simulation :
 * XXX CEO
 * XXX DCO
