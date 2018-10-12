@@ -274,6 +274,8 @@ void MainWindow::on_pushButton_simulate_clicked()
 {
     std::cerr << "RUNNING SIMULATION..." << std::endl;
 
+    std::vector<Project> invalidated_proj;
+
     // building event stack
     es.build_event_stack(project_list, rc);
 
@@ -424,6 +426,7 @@ void MainWindow::on_pushButton_simulate_clicked()
             else
             {
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                invalidated_proj.push_back((*current_project_it));
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
                 // computing ressources necessary to complete project before deadline
@@ -611,6 +614,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                             // same as project invalidation when temporary_event_holder is empty when constructed
 
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
+                            invalidated_proj.push_back((*current_project_it));
                             std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
                             // computing ressources necessary to complete project before deadline
@@ -705,9 +709,22 @@ void MainWindow::on_pushButton_simulate_clicked()
 
 
     this->result_diag = new Result_Dialog();
-    std::string res = "additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev) + "\n" + "additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
+    std::string res = "Simulation ended :\n\n";
+    if(invalidated_proj.empty()){
+        res+= "All projects are validated";
+    }
+    else{
+        res+= "The following project(s) need more ressources :\n ";
+        for(Project pr: invalidated_proj)
+        res += "\t- " + pr.get_name() + "\n";
+
+        res+= "Ressources needed : \n";
+        res += "\t- Additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev) + "\n" + "\t- Additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
+    }
+    res += "\n\nSee the full log for more detailed informations.";
     this->result_diag->display_result(res);
     this->result_diag->show();
+    invalidated_proj.clear();
 
 }
 
