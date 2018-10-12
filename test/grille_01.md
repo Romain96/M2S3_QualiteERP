@@ -28,6 +28,6 @@ Projets Inside Out pour la simulation :
 
 ## Conclusion
  
- Nous trouvons les mêmes dates en les calculant à la main et par la simulation.
- Avec une efficience de 100%, les trois projets sont terminés à temps.
- --> Tout est donc faisable par l'équipe dans le temps imparti.
+ * Nous trouvons les mêmes dates en les calculant à la main et par la simulation.
+ * Avec une efficience de 100%, les trois projets sont terminés à temps.
+ * Tout est donc faisable par l'équipe dans le temps imparti.
