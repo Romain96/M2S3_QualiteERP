@@ -33,7 +33,8 @@ SOURCES += \
     src/project_dialog.cpp \
     src/event.cpp \
     src/event_stack.cpp \
-    src/recruitement_center.cpp
+    src/recruitement_center.cpp \
+    src/result_dialog.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -45,12 +46,14 @@ HEADERS += \
     include/project_dialog.h \
     include/event.h \
     include/event_stack.h \
-    include/recruitement_center.h
+    include/recruitement_center.h \
+    include/result_dialog.h
 
 FORMS += \
         mainwindow.ui \
     project_dialog.ui \
-    employee_dialog.ui
+    employee_dialog.ui \
+    src/result_dialog.ui
 
 RESOURCES += \
     src.qrc

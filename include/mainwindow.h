@@ -12,6 +12,7 @@
 #include "include/event.h"
 #include "include/event_stack.h"
 #include "include/recruitement_center.h"
+#include "include/result_dialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -65,6 +66,11 @@ private:
     ProjectDialog *newproj;
     // new employee recuirtement window
     EmployeeDialog *newempl;
+
+    //result window
+    Result_Dialog *result_diag;
+
+
     // main UI
     Ui::MainWindow *ui;
 

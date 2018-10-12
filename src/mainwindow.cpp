@@ -702,7 +702,17 @@ void MainWindow::on_pushButton_simulate_clicked()
 
     std::cerr << "SIMULATION COMPLETED !" << std::endl;
     update();
+
+
+    this->result_diag = new Result_Dialog();
+    std::string res = "additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev) + "\n" + "additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
+    this->result_diag->display_result(res);
+    this->result_diag->show();
+
 }
+
+
+
 
 /*
  * Internal use only : computes the working days in the week beginning on the days indicated by the date
