@@ -44,3 +44,8 @@ On peut:
 Une fois l'ensemble des données entrée, on lance la simulation et les résultats s'affichent dans une nouvelle fenêtre.
 
 Dans le dossier tests, plusieurs simulations ont été effectuées, et un comparatif des résultats obtenus à l'aide de l'ERP part rapport aux résultats attendus (calculés à la main).
+
+* [simulation 1](./test/grille_01.md)
+* [simulation 2](./test/grille_02.md)
+* [simulation 3](./test/grille_03.md)
+* TODO simulation 4
