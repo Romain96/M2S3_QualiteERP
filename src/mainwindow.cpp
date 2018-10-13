@@ -708,12 +708,17 @@ void MainWindow::on_pushButton_simulate_clicked()
     update();
 
 
+    // opening a quick results window
     this->result_diag = new Result_Dialog();
-    std::string res = "Simulation ended :\n\n";
+    this->result_diag->setWindowTitle("Simulation results");
+
+    std::string res = "Simulation ended with success !\n\n";
     if(invalidated_proj.empty()){
-        res+= "All projects are validated";
+        res+= "All projects are validated :)";
     }
-    else{
+    else
+    {
+        res += "Not all projects could be finished with current workforce :(\n\n";
         res+= "The following project(s) need more ressources :\n ";
         for(Project pr: invalidated_proj)
         res += "\t- " + pr.get_name() + "\n";
