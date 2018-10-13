@@ -24,8 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src/main.cpp \
-        src/mainwindow.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
     src/erp_config.cpp \
     src/project.cpp \
     src/team.cpp \
@@ -50,10 +50,10 @@ HEADERS += \
     include/result_dialog.h
 
 FORMS += \
-        mainwindow.ui \
+    mainwindow.ui \
     project_dialog.ui \
     employee_dialog.ui \
-    src/result_dialog.ui
+    result_dialog.ui
 
 RESOURCES += \
     src.qrc
