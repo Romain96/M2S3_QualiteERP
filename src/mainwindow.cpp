@@ -200,9 +200,6 @@ void MainWindow::update()
             + std::to_string(current_date.day());
     QString qdate = QString::fromStdString(date);
     ui->label_start_date->setText(qdate);
-
-    // *** Updating Result display ***
-    // TODO
 }
 
 /*
@@ -733,8 +730,81 @@ void MainWindow::on_pushButton_simulate_clicked()
 
 }
 
+/*
+ ******************************************************************************
+ *                              LOG WRITING METHODS
+ ******************************************************************************
+ */
 
+/*
+ * writes the general infos in output :
+ * - generation date/time
+ * - Inside Out team
+ * - Inside Out projects
+ */
+void MainWindow::__log_write_general_infos(std::ofstream output)
+{
+    // writing general informations
+    output << "This file has been generated on "
+                << QDate::currentDate().toString("yyyy.MM.dd").toStdString() << " at "
+                << QTime::currentTime().toString("hh:mm:ss").toStdString() << " "
+                << "\nby 'Inside Out's very minimalistic ERP'\n\n"
+                << "-------------------------------------------------------------------------------\n"
+                << "********** Inside Out's Team on "
+                << team.starting_date.toString("yyyy.MM.dd").toStdString()
+                << " **********\n\n";
 
+    // Inside Out's employee list
+    output << "// Chief Excutive Officers carries no management or development duties...\n"
+                << "* [CEO] Chief Executive Officer(s) :\n";
+    for (std::string ceo: team.pdgs)
+        output << "\t- " << ceo << "\n";
+
+    output << "\n// Duty Coordinators are technical experts and carries development duties...\n"
+                << "* [DCO] Duty Coordinator(s) :\n";
+    for (std::string dco: team.duty_coordinators)
+        output << "\t- " << dco << "\n";
+
+    output << "\n// Project Managers are purely managers and only carries management duties...\n"
+                << "* [PM] Project Manager(s) :\n";
+    for (std::string pm: team.project_managers)
+        output << "\t- " << pm << "\n";
+
+    output << "\n// Developers are the backbone of the team and carries development duties...\n"
+                << "* [DEV] Developer(s) :\n";
+    for (std::string dev: team.developers)
+        output << "\t- " << dev << "\n";
+
+    output << "\n// The efficiency is the measure of the quantity of work an employee\n"
+                << "// is able to accomplish in a single day of work\n"
+                << "// The lower the efficiency the longer it will take to complete a project\n"
+                << "// The higher the efficiency the shorter it will take to complete a project\n"
+                << "// The efficiency is global (the same for all employees) and fixed\n"
+                << "* [Efficiency] Team Efficiency : " << team.team_efficiency << "\n"
+                << "-------------------------------------------------------------------------------\n" << std::endl;
+
+    // Inside Out's project list
+    output << "-------------------------------------------------------------------------------\n"
+                << "********** Inside Out's Project list on "
+                << team.starting_date.toString("yyyy.MM.dd").toStdString()
+                << " **********\n\n";
+
+    for (Project pro: project_list)
+    {
+        output << "* " << pro.get_name() << "\n"
+                    << "\t- " << pro.get_managing_time() << " day(s) of management\n"
+                    << "\t- " << pro.get_dev_time() << " day(s) of development\n"
+                    << "\t- " << pro.get_deadline().toString("yyyy.MM.dd").toStdString() << " fixed deadline\n\n";
+    }
+
+    output << "-------------------------------------------------------------------------------\n" << std::endl;
+}
+
+/*
+ ******************************************************************************
+ *                              INTERNAL METHODS
+ ******************************************************************************
+ */
 
 /*
  * Internal use only : computes the working days in the week beginning on the days indicated by the date
