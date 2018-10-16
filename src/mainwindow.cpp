@@ -403,10 +403,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                     __log_write_project_impossible_completion(output_file, current_project_it, current_date);
 
                     // writing project rejection log
-                    output_file << "-------------------------------------------------------------------------------\n"
-                                << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
-                                << (*current_project_it).get_name() << " rejected\n"
-                                << "-------------------------------------------------------------------------------\n\n";
+                    __log_write_project_rejection(output_file, current_project_it, current_date);
 
                     // skipping project (date is not advancing)
                     current_project_it++;
@@ -511,15 +508,16 @@ void MainWindow::on_pushButton_simulate_clicked()
                     new_end_date = __end_date_from_days(e.date, total_days_remaining);
 
                     // writing infos about current project (updated)
-                    output_file << "-------------------------------------------------------------------------------\n"
-                                << "* " << e.date.toString("yyyy.MM.dd").toStdString()
-                                << " : project " << (*current_project_it).get_name() << " advancement report :\n"
-                                << "\t- " << man_days_remaining << " day(s) of management are needed "
-                                << "(" << man_days << " days splitted on " << team.project_managers.size() << " PMs)\n"
-                                << "\t- " << dev_days_remaining << " day(s) of development are needed "
-                                << "(" << dev_days << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
-                                << "\t- Expected end date with current workforce : " << new_end_date.toString("yyyy.MM.dd").toStdString()
-                                << "\n-------------------------------------------------------------------------------\n\n";
+                    __log_write_new_employee_addition(output_file,
+                                                      e.date,
+                                                      current_project_it,
+                                                      man_days_remaining,
+                                                      man_days,
+                                                      static_cast<int>(team.project_managers.size()),
+                                                      dev_days_remaining,
+                                                      dev_days,
+                                                      static_cast<int>(team.developers.size() + team.duty_coordinators.size()),
+                                                      new_end_date);
 
                     // updating the display of employees
                     update_employees();
@@ -579,10 +577,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                                 __log_write_project_impossible_completion(output_file, current_project_it, current_date);
 
                                 // writing project rejection log
-                                output_file << "-------------------------------------------------------------------------------\n"
-                                            << " * " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
-                                            << (*current_project_it).get_name() << " rejected\n"
-                                            << "-------------------------------------------------------------------------------\n\n";
+                                __log_write_project_rejection(output_file, current_project_it, current_date);
                             }
                         }
                         // removing project from event stack
@@ -823,6 +818,37 @@ void MainWindow::__log_write_project_impossible_completion(std::ostream& output,
 /*
  * writes project rejection event in log
  */
+void MainWindow::__log_write_project_rejection(std::ofstream& output,
+                                               std::vector<Project>::iterator project_it,
+                                               QDate date)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << " * " << date.toString("yyyy.MM.dd").toStdString() << " : Project "
+           << (*project_it).get_name() << " rejected\n"
+           << "-------------------------------------------------------------------------------\n\n";
+}
+
+void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
+                                                   QDate date,
+                                                   std::vector<Project>::iterator project_it,
+                                                   int man_days_remaining,
+                                                   int man_days,
+                                                   int man_team_size,
+                                                   int dev_days_remaining,
+                                                   int dev_days,
+                                                   int dev_team_size,
+                                                   QDate end_date)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << "* " << date.toString("yyyy.MM.dd").toStdString()
+           << " : project " << (*project_it).get_name() << " advancement report :\n"
+           << "\t- " << man_days_remaining << " day(s) of management are needed "
+           << "(" << man_days << " days splitted on " << man_team_size << " PMs)\n"
+           << "\t- " << dev_days_remaining << " day(s) of development are needed "
+           << "(" << dev_days << " days splitted on " << dev_team_size << " DCOs/DEVs)\n"
+           << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
+           << "\n-------------------------------------------------------------------------------\n\n";
+}
 
 /*
  ******************************************************************************

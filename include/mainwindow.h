@@ -121,7 +121,19 @@ private:
                                                    QDate date);
 
     void __log_write_project_rejection(std::ofstream& output,
-                                       std::vector<Project>::iterator project_it);
+                                       std::vector<Project>::iterator project_it,
+                                       QDate date);
+
+    void __log_write_new_employee_addition(std::ofstream& output,
+                                           QDate date,
+                                           std::vector<Project>::iterator project_it,
+                                           int man_days_remaining,
+                                           int man_days,
+                                           int man_team_size,
+                                           int dev_days_remaining,
+                                           int dev_days,
+                                           int dev_team_size,
+                                           QDate end_date);
 
     // internal methods
     int __working_days_in_week(QDate date);
