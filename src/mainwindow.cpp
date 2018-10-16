@@ -269,8 +269,10 @@ void MainWindow::update_projects()
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
+    // DEBUG
     std::cerr << "RUNNING SIMULATION..." << std::endl;
 
+    // list of invalidated projects
     std::vector<Project> invalidated_proj;
 
     // building event stack
@@ -282,64 +284,7 @@ void MainWindow::on_pushButton_simulate_clicked()
     output_file.open(output_file_name);
 
     // writing general informations
-    output_file << "This file has been generated on "
-                << QDate::currentDate().toString("yyyy.MM.dd").toStdString() << " at "
-                << QTime::currentTime().toString("hh:mm:ss").toStdString() << " "
-                << "\nby 'Inside Out's very minimalistic ERP'\n\n"
-                << "-------------------------------------------------------------------------------\n"
-                << "********** Inside Out's Team on "
-                << team.starting_date.toString("yyyy.MM.dd").toStdString()
-                << " **********\n\n";
-
-    // Inside Out's employee list
-    output_file << "// Chief Excutive Officers carries no management or development duties...\n"
-                << "* [CEO] Chief Executive Officer(s) :\n";
-    for (std::string ceo: team.pdgs)
-        output_file << "\t- " << ceo << "\n";
-
-    output_file << "\n// Duty Coordinators are technical experts and carries development duties...\n"
-                << "* [DCO] Duty Coordinator(s) :\n";
-    for (std::string dco: team.duty_coordinators)
-        output_file << "\t- " << dco << "\n";
-
-    output_file << "\n// Project Managers are purely managers and only carries management duties...\n"
-                << "* [PM] Project Manager(s) :\n";
-    for (std::string pm: team.project_managers)
-        output_file << "\t- " << pm << "\n";
-
-    output_file << "\n// Developers are the backbone of the team and carries development duties...\n"
-                << "* [DEV] Developer(s) :\n";
-    for (std::string dev: team.developers)
-        output_file << "\t- " << dev << "\n";
-
-    output_file << "\n// The efficiency is the measure of the quantity of work an employee\n"
-                << "// is able to accomplish in a single day of work\n"
-                << "// The lower the efficiency the longer it will take to complete a project\n"
-                << "// The higher the efficiency the shorter it will take to complete a project\n"
-                << "// The efficiency is global (the same for all employees) and fixed\n"
-                << "* [Efficiency] Team Efficiency : " << team.team_efficiency << "\n"
-                << "-------------------------------------------------------------------------------\n" << std::endl;
-
-    // Inside Out's project list
-    output_file << "-------------------------------------------------------------------------------\n"
-                << "********** Inside Out's Project list on "
-                << team.starting_date.toString("yyyy.MM.dd").toStdString()
-                << " **********\n\n";
-
-    for (Project pro: project_list)
-    {
-        output_file << "* " << pro.get_name() << "\n"
-                    << "\t- " << pro.get_managing_time() << " day(s) of management\n"
-                    << "\t- " << pro.get_dev_time() << " day(s) of development\n"
-                    << "\t- " << pro.get_deadline().toString("yyyy.MM.dd").toStdString() << " fixed deadline\n\n";
-    }
-
-    output_file << "-------------------------------------------------------------------------------\n" << std::endl;
-
-    // writing start of simulation
-    output_file << "-------------------------------------------------------------------------------\n"
-                << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : Starting simulation\n"
-                << "-------------------------------------------------------------------------------\n\n";
+    __log_write_general_infos(output_file);
 
     // if unsufficient ressources, general needed ressources are stored here
     int general_needed_dev = 0;
@@ -367,17 +312,14 @@ void MainWindow::on_pushButton_simulate_clicked()
         // advancing to first working day from current date
         current_date = __earliest_working_day_from_date(current_date);
 
-        std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+        // computing theorical end date from current date with total working days remaining
         end_date = __end_date_from_days(current_date, total_days_remaining);
-        output_file << "-------------------------------------------------------------------------------\n"
-                    << "* " << current_date.toString("yyyy.MM.dd").toStdString()
-                    << " : starting project " << (*current_project_it).get_name() << "\n"
-                    << "\t- " << man_days_remaining << " day(s) of management are needed "
-                    << "(" << (*current_project_it).get_managing_time() << " days splitted on " << team.project_managers.size() << " PMs)\n"
-                    << "\t- " << dev_days_remaining << " day(s) of development are needed "
-                    << "(" << (*current_project_it).get_dev_time() << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
-                    << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
-                    << "\n-------------------------------------------------------------------------------\n\n";
+
+        // writing project start in log
+        __log_write_project_start(output_file, current_project_it, man_days_remaining, dev_days_remaining, current_date, end_date);
+
+        // DEBUG
+        std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
         /*
@@ -742,7 +684,7 @@ void MainWindow::on_pushButton_simulate_clicked()
  * - Inside Out team
  * - Inside Out projects
  */
-void MainWindow::__log_write_general_infos(std::ofstream output)
+void MainWindow::__log_write_general_infos(std::ofstream& output)
 {
     // writing general informations
     output << "This file has been generated on "
@@ -798,6 +740,35 @@ void MainWindow::__log_write_general_infos(std::ofstream output)
     }
 
     output << "-------------------------------------------------------------------------------\n" << std::endl;
+}
+
+/*
+ * writing simulation start event in log
+ */
+void MainWindow::__log_write_project_start(std::ofstream& output,
+                                           std::vector<Project>::iterator& project_it,
+                                           int man_days_remaining,
+                                           int dev_days_remaining,
+                                           QDate start_date,
+                                           QDate end_date)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << "* " << start_date.toString("yyyy.MM.dd").toStdString()
+           << " : starting project " << (*project_it).get_name() << "\n"
+           << "\t- " << man_days_remaining << " day(s) of management are needed "
+           << "(" << (*project_it).get_managing_time() << " days splitted on " << team.project_managers.size() << " PMs)\n"
+           << "\t- " << dev_days_remaining << " day(s) of development are needed "
+           << "(" << (*project_it).get_dev_time() << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
+           << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
+           << "\n-------------------------------------------------------------------------------\n\n";
+}
+
+/*
+ * writing simulation end event in log
+ */
+void MainWindow::__log_write_simulation_end(std::ofstream& output)
+{
+
 }
 
 /*
