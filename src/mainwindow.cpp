@@ -391,10 +391,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                                                                current_project_it);
 
                     // writing project invalidation log
-                    output_file << "-------------------------------------------------------------------------------\n"
-                                << " * " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
-                                << (*current_project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
-                                << "-------------------------------------------------------------------------------\n\n";
+                    __log_write_project_invalidation(output_file, current_project_it);
 
                     // supposing project finished on deadline day
                     current_date = (*current_project_it).get_deadline();
@@ -575,10 +572,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                                                                            current_project_it);
 
                                 // writing project invalidation log
-                                output_file << "-------------------------------------------------------------------------------\n"
-                                            << " * " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
-                                            << (*current_project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
-                                            << "-------------------------------------------------------------------------------\n\n";
+                                __log_write_project_invalidation(output_file, current_project_it);
 
                                 // supposing project finished on deadline day
                                 new_end_date = (*current_project_it).get_deadline();
@@ -809,7 +803,19 @@ void MainWindow::__log_write_project_ressources_computation(std::ofstream& outpu
 }
 
 /*
- *
+ * writes project forced validation event in log
+ */
+void MainWindow::__log_write_project_invalidation(std::ofstream& output,
+                                                       std::vector<Project>::iterator project_it)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << " * " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
+           << (*project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
+           << "-------------------------------------------------------------------------------\n\n";
+}
+
+/*
+ * writes project rejection event in log
  */
 
 /*

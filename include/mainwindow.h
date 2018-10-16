@@ -113,6 +113,9 @@ private:
                                                     int ideal_dev_more,
                                                     std::vector<Project>::iterator project_it);
 
+    void __log_write_project_invalidation(std::ofstream& output,
+                                          std::vector<Project>::iterator project_it);
+
     void __log_write_project_rejection(std::ofstream& output);
 
     // internal methods
