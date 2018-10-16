@@ -357,10 +357,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                 current_date = end_date;
 
                 // writing log
-                output_file << "-------------------------------------------------------------------------------\n"
-                            << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : Project "
-                            << (*current_project_it).get_name() << " is finished before deadline\n"
-                            << "-------------------------------------------------------------------------------\n\n";
+                __log_write_project_validation(output_file,current_project_it, current_date);
 
                 current_project_it++;
             }
@@ -749,12 +746,22 @@ void MainWindow::__log_write_general_infos(std::ofstream& output)
 void MainWindow::__log_write_simulation_start(std::ofstream& output, QDate date)
 {
     output << "-------------------------------------------------------------------------------\n"
+           << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation started !\n"
+           << "-------------------------------------------------------------------------------\n";
+}
+
+/*
+ * writes simulation end event in log
+ */
+void MainWindow::__log_write_simulation_end(std::ofstream& output, QDate date)
+{
+    output << "-------------------------------------------------------------------------------\n"
            << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
            << "-------------------------------------------------------------------------------\n";
 }
 
 /*
- * writing project start event in log
+ * writes project start event in log
  */
 void MainWindow::__log_write_project_start(std::ofstream& output,
                                            std::vector<Project>::iterator& project_it,
@@ -775,14 +782,25 @@ void MainWindow::__log_write_project_start(std::ofstream& output,
 }
 
 /*
- * writing simulation end event in log
+ * writes project validation event in log
  */
-void MainWindow::__log_write_simulation_end(std::ofstream& output, QDate date)
+void MainWindow::__log_write_project_validation(std::ofstream& output,
+                                                std::vector<Project>::iterator project_it,
+                                                QDate date)
 {
     output << "-------------------------------------------------------------------------------\n"
-           << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
-           << "-------------------------------------------------------------------------------\n";
+           << "* " << date.toString("yyyy.MM.dd").toStdString() << " : Project "
+           << (*project_it).get_name() << " is finished before deadline\n"
+           << "-------------------------------------------------------------------------------\n\n";
 }
+
+/*
+ * writes project ressources computation event in log
+ */
+
+/*
+ *
+ */
 
 /*
  ******************************************************************************

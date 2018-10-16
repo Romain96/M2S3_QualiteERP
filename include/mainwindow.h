@@ -102,7 +102,9 @@ private:
                                    QDate start_date,
                                    QDate end_date);
 
-    void __log_write_project_validation(std::ofstream& output, QDate end_date);
+    void __log_write_project_validation(std::ofstream& output,
+                                        std::vector<Project>::iterator project_it,
+                                        QDate end_date);
 
     void __log_write_project_ressources_computation(std::ofstream& output);
 
