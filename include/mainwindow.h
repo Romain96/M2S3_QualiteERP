@@ -116,7 +116,12 @@ private:
     void __log_write_project_invalidation(std::ofstream& output,
                                           std::vector<Project>::iterator project_it);
 
-    void __log_write_project_rejection(std::ofstream& output);
+    void __log_write_project_impossible_completion(std::ostream& output,
+                                                   std::vector<Project>::iterator project_it,
+                                                   QDate date);
+
+    void __log_write_project_rejection(std::ofstream& output,
+                                       std::vector<Project>::iterator project_it);
 
     // internal methods
     int __working_days_in_week(QDate date);

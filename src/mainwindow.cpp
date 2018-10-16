@@ -400,11 +400,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                 else
                 {
                     // writing impossible project completion log (deadline date < starting date)
-                    output_file << "-------------------------------------------------------------------------------\n"
-                                << "* IMPOSSIBLE COMPLETION of project " << (*current_project_it).get_name() << "\n"
-                                << "deadline date " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
-                                << " is earlier than starting date " << current_date.toString("yyyy.MM.dd").toStdString() << "\n"
-                                << "-------------------------------------------------------------------------------\n\n";
+                    __log_write_project_impossible_completion(output_file, current_project_it, current_date);
 
                     // writing project rejection log
                     output_file << "-------------------------------------------------------------------------------\n"
@@ -580,11 +576,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                             else
                             {
                                 // writing impossible project completion log (deadline date < starting date)
-                                output_file << "-------------------------------------------------------------------------------\n"
-                                            << "* IMPOSSIBLE COMPLETION of project " << (*current_project_it).get_name() << "\n"
-                                            << "deadline date " << (*current_project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
-                                            << " is earlier than starting date " << current_date.toString("yyyy.MM.dd").toStdString() << "\n"
-                                            << "-------------------------------------------------------------------------------\n\n";
+                                __log_write_project_impossible_completion(output_file, current_project_it, current_date);
 
                                 // writing project rejection log
                                 output_file << "-------------------------------------------------------------------------------\n"
@@ -811,6 +803,20 @@ void MainWindow::__log_write_project_invalidation(std::ofstream& output,
     output << "-------------------------------------------------------------------------------\n"
            << " * " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
            << (*project_it).get_name() << " invalidated \nbut supposed as finished on deadline day with additionnal computed ressources\n"
+           << "-------------------------------------------------------------------------------\n\n";
+}
+
+/*
+ * writes project impossible completion event in log
+ */
+void MainWindow::__log_write_project_impossible_completion(std::ostream& output,
+                                                           std::vector<Project>::iterator project_it,
+                                                           QDate date)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << "* IMPOSSIBLE COMPLETION of project " << (*project_it).get_name() << "\n"
+           << "deadline date " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
+           << " is earlier than starting date " << date.toString("yyyy.MM.dd").toStdString() << "\n"
            << "-------------------------------------------------------------------------------\n\n";
 }
 
