@@ -106,7 +106,12 @@ private:
                                         std::vector<Project>::iterator project_it,
                                         QDate end_date);
 
-    void __log_write_project_ressources_computation(std::ofstream& output);
+    void __log_write_project_ressources_computation(std::ofstream& output,
+                                                    int ideal_man,
+                                                    int ideal_man_more,
+                                                    int ideal_dev,
+                                                    int ideal_dev_more,
+                                                    std::vector<Project>::iterator project_it);
 
     void __log_write_project_rejection(std::ofstream& output);
 

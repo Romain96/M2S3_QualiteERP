@@ -383,13 +383,12 @@ void MainWindow::on_pushButton_simulate_clicked()
                     general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
 
                     // writing incomplete ressources log
-                    output_file << "-------------------------------------------------------------------------------\n"
-                                << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
-                                << "\t- Number of development personel needed : " << ideal_dev << " ("
-                                << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
-                                << "\t- Number of management personel needed : " << ideal_man << " ("
-                                << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
-                                << "-------------------------------------------------------------------------------\n\n";
+                    __log_write_project_ressources_computation(output_file,
+                                                               ideal_man,
+                                                               ideal_man - static_cast<int>(team.project_managers.size()),
+                                                               ideal_dev,
+                                                               ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()),
+                                                               current_project_it);
 
                     // writing project invalidation log
                     output_file << "-------------------------------------------------------------------------------\n"
@@ -543,10 +542,7 @@ void MainWindow::on_pushButton_simulate_clicked()
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
 
                             // writing project validation log
-                            output_file << "-------------------------------------------------------------------------------\n"
-                                        << "* " << new_end_date.toString("yyyy.MM.dd").toStdString() << " : Project "
-                                        << (*current_project_it).get_name() << " is finished before deadline\n"
-                                        << "-------------------------------------------------------------------------------\n\n";
+                            __log_write_project_validation(output_file, current_project_it, new_end_date);
                         }
                         else
                         {
@@ -571,13 +567,12 @@ void MainWindow::on_pushButton_simulate_clicked()
                                 general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
 
                                 // writing incomplete ressources log
-                                output_file << "-------------------------------------------------------------------------------\n"
-                                            << "* INSUFFICIENT RESSOURCES to complete project " << (*current_project_it).get_name() << "\n"
-                                            << "\t- Number of development personel needed : " << ideal_dev << " ("
-                                            << ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()) << " more)\n"
-                                            << "\t- Number of management personel needed : " << ideal_man << " ("
-                                            << ideal_man - static_cast<int>(team.project_managers.size()) << " more)\n"
-                                            << "-------------------------------------------------------------------------------\n\n";
+                                __log_write_project_ressources_computation(output_file,
+                                                                           ideal_man,
+                                                                           ideal_man - static_cast<int>(team.project_managers.size()),
+                                                                           ideal_dev,
+                                                                           ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()),
+                                                                           current_project_it);
 
                                 // writing project invalidation log
                                 output_file << "-------------------------------------------------------------------------------\n"
@@ -747,7 +742,7 @@ void MainWindow::__log_write_simulation_start(std::ofstream& output, QDate date)
 {
     output << "-------------------------------------------------------------------------------\n"
            << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation started !\n"
-           << "-------------------------------------------------------------------------------\n";
+           << "-------------------------------------------------------------------------------\n\n";
 }
 
 /*
@@ -797,6 +792,21 @@ void MainWindow::__log_write_project_validation(std::ofstream& output,
 /*
  * writes project ressources computation event in log
  */
+void MainWindow::__log_write_project_ressources_computation(std::ofstream& output,
+                                                            int ideal_man,
+                                                            int ideal_man_more,
+                                                            int ideal_dev,
+                                                            int ideal_dev_more,
+                                                            std::vector<Project>::iterator project_it)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << "* INSUFFICIENT RESSOURCES to complete project " << (*project_it).get_name() << "\n"
+           << "\t- Number of management personel needed : " << ideal_man << " ("
+           << ideal_man_more << " more)\n"
+           << "\t- Number of development personel needed : " << ideal_dev << " ("
+           << ideal_dev_more << " more)\n"
+           << "-------------------------------------------------------------------------------\n\n";
+}
 
 /*
  *
