@@ -286,6 +286,9 @@ void MainWindow::on_pushButton_simulate_clicked()
     // writing general informations
     __log_write_general_infos(output_file);
 
+    // writing simulation start
+    __log_write_simulation_start(output_file, current_date);
+
     // if unsufficient ressources, general needed ressources are stored here
     int general_needed_dev = 0;
     int general_needed_man = 0;
@@ -636,9 +639,7 @@ void MainWindow::on_pushButton_simulate_clicked()
     }
 
     // end of simulation log
-    output_file << "-------------------------------------------------------------------------------\n"
-                << "* " << current_date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
-                << "-------------------------------------------------------------------------------\n";
+    __log_write_simulation_end(output_file, current_date);
 
     // closing output stream
     output_file.close();
@@ -743,7 +744,17 @@ void MainWindow::__log_write_general_infos(std::ofstream& output)
 }
 
 /*
- * writing simulation start event in log
+ * writes simulation start event in log
+ */
+void MainWindow::__log_write_simulation_start(std::ofstream& output, QDate date)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
+           << "-------------------------------------------------------------------------------\n";
+}
+
+/*
+ * writing project start event in log
  */
 void MainWindow::__log_write_project_start(std::ofstream& output,
                                            std::vector<Project>::iterator& project_it,
@@ -766,9 +777,11 @@ void MainWindow::__log_write_project_start(std::ofstream& output,
 /*
  * writing simulation end event in log
  */
-void MainWindow::__log_write_simulation_end(std::ofstream& output)
+void MainWindow::__log_write_simulation_end(std::ofstream& output, QDate date)
 {
-
+    output << "-------------------------------------------------------------------------------\n"
+           << "* " << date.toString("yyyy.MM.dd").toStdString() << " : simulation finished !\n"
+           << "-------------------------------------------------------------------------------\n";
 }
 
 /*

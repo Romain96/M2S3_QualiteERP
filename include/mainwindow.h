@@ -91,9 +91,9 @@ private:
     // log writing methods
     void __log_write_general_infos(std::ofstream& output);
 
-    void __log_write_simulation_start(std::ofstream& output);
+    void __log_write_simulation_start(std::ofstream& output, QDate date);
 
-    void __log_write_simulation_end(std::ofstream& output);
+    void __log_write_simulation_end(std::ofstream& output, QDate date);
 
     void __log_write_project_start(std::ofstream& output,
                                    std::vector<Project>::iterator& project_it,
@@ -102,7 +102,7 @@ private:
                                    QDate start_date,
                                    QDate end_date);
 
-    void __log_write_project_validation(std::ofstream& output);
+    void __log_write_project_validation(std::ofstream& output, QDate end_date);
 
     void __log_write_project_ressources_computation(std::ofstream& output);
 
