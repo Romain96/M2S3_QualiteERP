@@ -742,9 +742,11 @@ void MainWindow::__log_write_project_start(std::ofstream& output,
            << "* " << start_date.toString("yyyy.MM.dd").toStdString()
            << " : starting project " << (*project_it).get_name() << "\n"
            << "\t- " << man_days_remaining << " day(s) of management are needed "
-           << "(" << (*project_it).get_managing_time() << " days splitted on " << team.project_managers.size() << " PMs)\n"
+           << "(" << static_cast<int>(std::ceil((*project_it).get_managing_time() * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0))
+           << " days splitted on " << team.project_managers.size() << " PMs)\n"
            << "\t- " << dev_days_remaining << " day(s) of development are needed "
-           << "(" << (*project_it).get_dev_time() << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
+           << "(" << static_cast<int>(std::ceil((*project_it).get_dev_time() * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0))
+           << " days splitted on " << team.duty_coordinators.size() + team.developers.size() << " DCOs/DEVs)\n"
            << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
            << "\n-------------------------------------------------------------------------------\n\n";
 }
