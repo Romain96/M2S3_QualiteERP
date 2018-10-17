@@ -135,6 +135,10 @@ private:
                                            int dev_team_size,
                                            QDate end_date);
 
+    void __log_write_general_needed_ressources(std::ostream& output,
+                                               int general_needed_man,
+                                               int general_needed_dev);
+
     // internal methods
     int __working_days_in_week(QDate date);
     int __working_days_between_dates(QDate date1, QDate date2);

@@ -599,16 +599,7 @@ void MainWindow::on_pushButton_simulate_clicked()
     // writing needed ressources (if more than 0)
     if (std::max(general_needed_dev, general_needed_man) > 0)
     {
-        output_file << "-------------------------------------------------------------------------------\n"
-                    << " This message only appears when at least one project couldn't be terminated\n"
-                    << " before its deadline with the current workforce.\n"
-                    << " Keep in mind that the additionnal needed employees are considered fully part\n"
-                    << " of the team on its starting day; the usual 3 months recruting period and\n"
-                    << " 1 month integration to reach the desired efficiency are not taken into account.\n\n"
-                    << " Minimal needed ressources in order to complete all planned projects :\n"
-                    << "\t- " << general_needed_man << " additionnal managing staff (PMs)\n"
-                    << "\t- " << general_needed_dev << " additionnal development staff (DEVs/DCOs)\n"
-                    << "-------------------------------------------------------------------------------\n\n";
+        __log_write_general_needed_ressources(output_file, general_needed_man, general_needed_dev);
     }
 
     // end of simulation log
@@ -828,6 +819,9 @@ void MainWindow::__log_write_project_rejection(std::ofstream& output,
            << "-------------------------------------------------------------------------------\n\n";
 }
 
+/*
+ * writes new employee addition (current project advancement log)
+ */
 void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
                                                    QDate date,
                                                    std::vector<Project>::iterator project_it,
@@ -848,6 +842,25 @@ void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
            << "(" << dev_days << " days splitted on " << dev_team_size << " DCOs/DEVs)\n"
            << "\t- Expected end date with current workforce : " << end_date.toString("yyyy.MM.dd").toStdString()
            << "\n-------------------------------------------------------------------------------\n\n";
+}
+
+/*
+ * writes general needed ressources (managers/developers)
+ */
+void MainWindow::__log_write_general_needed_ressources(std::ostream& output,
+                                                       int general_needed_man,
+                                                       int general_needed_dev)
+{
+    output << "-------------------------------------------------------------------------------\n"
+           << " This message only appears when at least one project couldn't be terminated\n"
+           << " before its deadline with the current workforce.\n"
+           << " Keep in mind that the additionnal needed employees are considered fully part\n"
+           << " of the team on its starting day; the usual 3 months recruting period and\n"
+           << " 1 month integration to reach the desired efficiency are not taken into account.\n\n"
+           << " Minimal needed ressources in order to complete all planned projects :\n"
+           << "\t- " << general_needed_man << " additionnal managing staff (PMs)\n"
+           << "\t- " << general_needed_dev << " additionnal development staff (DEVs/DCOs)\n"
+           << "-------------------------------------------------------------------------------\n\n";
 }
 
 /*
