@@ -304,8 +304,8 @@ void MainWindow::on_pushButton_simulate_clicked()
     while (!es.event_stack.empty())
     {
         // computing the end date of the project according to the current workforce
-        int dev_days = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
-        int man_days = (*current_project_it).get_managing_time() / team.project_managers.size();
+        int dev_days = (*current_project_it).get_dev_time() / static_cast<int>((team.developers.size() + team.duty_coordinators.size()));
+        int man_days = (*current_project_it).get_managing_time() / static_cast<int>(team.project_managers.size());
 
         // computing maximum time (days) required to finish the project
         int dev_days_remaining = static_cast<int>(std::ceil(static_cast<double>(dev_days) * (100.0 + (100.0 - static_cast<double>(team.team_efficiency)))/100.0));
@@ -423,8 +423,8 @@ void MainWindow::on_pushButton_simulate_clicked()
             std::cerr << "temporary event holder not empty" <<std::endl;
 
             QDate new_end_date = current_date;
-            dev_days_remaining = (*current_project_it).get_dev_time() / (team.developers.size() + team.duty_coordinators.size());
-            man_days_remaining = (*current_project_it).get_managing_time() / team.project_managers.size();
+            dev_days_remaining = (*current_project_it).get_dev_time() / static_cast<int>((team.developers.size() + team.duty_coordinators.size()));
+            man_days_remaining = (*current_project_it).get_managing_time() / static_cast<int>(team.project_managers.size());
             int remaining_days = std::max(dev_days_remaining,man_days_remaining);
 
             std::cerr << "dev remaining : " << dev_days_remaining << ", man remaining : " << man_days_remaining << std::endl;
@@ -483,19 +483,19 @@ void MainWindow::on_pushButton_simulate_clicked()
                     {
                     case 0:
                         team.pdgs.push_back(e.employee.first);
-                        output_file << "CEO " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        output_file << "CEO " << e.employee.first << " recruited last month \n is now a full member of the team\n";
                         break;
                     case 1:
                         team.duty_coordinators.push_back(e.employee.first);
-                        output_file << "DCO " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        output_file << "DCO " << e.employee.first << " recruited last month \n is now a full member of the team\n";
                         break;
                     case 2:
                         team.project_managers.push_back(e.employee.first);
-                        output_file << "PM " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        output_file << "PM " << e.employee.first << " recruited last month \n is now a full member of the team\n";
                         break;
                     case 3:
                         team.developers.push_back(e.employee.first);
-                        output_file << "DEV " << e.employee.first << " recruited last month \nis now a full member of the team\n";
+                        output_file << "DEV " << e.employee.first << " recruited last month \n is now a full member of the team\n";
                         break;
                     default: std::cerr << "ERROR index of employee is invalid !" << std::endl;
                     }
@@ -628,7 +628,8 @@ void MainWindow::on_pushButton_simulate_clicked()
         res += "\t- " + pr.get_name() + "\n";
 
         res+= "Ressources needed : \n";
-        res += "\t- Additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev) + "\n" + "\t- Additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
+        res += "\t- Additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev)
+                + "\n" + "\t- Additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
     }
     res += "\n\nSee the full log for more detailed informations.";
     this->result_diag->display_result(res);
@@ -773,9 +774,9 @@ void MainWindow::__log_write_project_ressources_computation(std::ofstream& outpu
 {
     output << "-------------------------------------------------------------------------------\n"
            << "* INSUFFICIENT RESSOURCES to complete project " << (*project_it).get_name() << "\n"
-           << "\t- Number of management personel needed : " << ideal_man << " ("
+           << "\t- Number of management staff needed : " << ideal_man << " ("
            << ideal_man_more << " more)\n"
-           << "\t- Number of development personel needed : " << ideal_dev << " ("
+           << "\t- Number of development staff needed : " << ideal_dev << " ("
            << ideal_dev_more << " more)\n"
            << "-------------------------------------------------------------------------------\n\n";
 }
@@ -801,7 +802,7 @@ void MainWindow::__log_write_project_impossible_completion(std::ostream& output,
 {
     output << "-------------------------------------------------------------------------------\n"
            << "* IMPOSSIBLE COMPLETION of project " << (*project_it).get_name() << "\n"
-           << "deadline date " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
+           << " deadline date " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString()
            << " is earlier than starting date " << date.toString("yyyy.MM.dd").toStdString() << "\n"
            << "-------------------------------------------------------------------------------\n\n";
 }
