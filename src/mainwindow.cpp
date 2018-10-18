@@ -165,6 +165,9 @@ void MainWindow::on_pushButton_new_employee_clicked()
 
 }
 
+/*
+ * SLOT receiving treated infos needed to create a new employee
+ */
 void MainWindow::employee_creation_data_received(std::string employee_name,
                                                  int employee_job,
                                                  int employee_year,
@@ -662,10 +665,9 @@ void MainWindow::on_pushButton_simulate_clicked()
  */
 
 /*
- * writes the general infos in output :
- * - generation date/time
- * - Inside Out team
- * - Inside Out projects
+ * writes the general infos in output (generation date/time, projects, employees)
+ *
+ * - output : output stream in which to write on (file)
  */
 void MainWindow::__log_write_general_infos(std::ofstream& output)
 {
