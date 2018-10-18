@@ -633,8 +633,8 @@ void MainWindow::on_pushButton_simulate_clicked()
         res += "\t- " + pr.get_name() + "\n";
 
         res+= "Ressources needed : \n";
-        res += "\t- Additionnal development staff (DEVs/DCOs): " + std::to_string(general_needed_dev)
-                + "\n" + "\t- Additionnal managing staff (PMs) : " + std::to_string(general_needed_man) + ".";
+        res += "\t- Additionnal managing staff (DEVs/DCOs): " + std::to_string(general_needed_man)
+                + "\n" + "\t- Additionnal development staff (PMs) : " + std::to_string(general_needed_dev) + ".";
     }
     res += "\n\nSee the full log for more detailed informations.";
     this->result_diag->display_result(res);
