@@ -12,6 +12,13 @@
 #include <fstream>
 #include <QTime>
 
+/*
+ * MACRO FOR DEBUG VERSION
+ * uncomment to see debug messages in (cerr)
+ * comment to hide them
+ */
+//#define __DEBUG_MODE_ACTIVATED__
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -284,8 +291,10 @@ void MainWindow::update_projects()
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
+#ifdef __DEBUG_MODE_ACTIVATED__
     // DEBUG
     std::cerr << "RUNNING SIMULATION..." << std::endl;
+#endif
 
     // list of invalidated projects
     std::vector<Project> invalidated_proj;
@@ -336,9 +345,11 @@ void MainWindow::on_pushButton_simulate_clicked()
         // writing project start in log
         __log_write_project_start(output_file, current_project_it, man_days_remaining, dev_days_remaining, current_date, end_date);
 
+#ifdef __DEBUG_MODE_ACTIVATED__
         // DEBUG
         std::cerr << "starting project on " << current_date.toString("yyyy.MM.dd").toStdString() << std::endl;
         std::cerr << "finishing project on " << end_date.toString("yyyy.MM.dd").toStdString() << std::endl;
+#endif
 
         /*
          * retrieving the closest event from the event stack that is a project
@@ -352,7 +363,10 @@ void MainWindow::on_pushButton_simulate_clicked()
             if (e.is_proj)
                     break;
 
+#ifdef __DEBUG_MODE_ACTIVATED__
             std::cerr << "[FIFO] building with " << e.employee.first << std::endl;
+#endif
+
             temporary_event_holder.push_back(e);
             es.event_stack.pop();         
         }
@@ -366,8 +380,12 @@ void MainWindow::on_pushButton_simulate_clicked()
             // if the computed end date is before the deadline, the project is validated
             if (end_date <= e.date)
             {
+#ifdef __DEBUG_MODE_ACTIVATED__
+                // DEBUG
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " <= " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+#endif
+
                 es.event_stack.pop();
                 current_date = end_date;
 
@@ -379,9 +397,12 @@ void MainWindow::on_pushButton_simulate_clicked()
             // if the computed end date is after the deadline, the project in invalidated !
             else
             {
+#ifdef __DEBUG_MODE_ACTIVATED__
+                // DEBUG
                 std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
-                invalidated_proj.push_back((*current_project_it));
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+#endif
+                invalidated_proj.push_back((*current_project_it));
 
                 // computing ressources necessary to complete project before deadline
                 int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
@@ -395,7 +416,11 @@ void MainWindow::on_pushButton_simulate_clicked()
                     ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
                     ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
 
+#ifdef __DEBUG_MODE_ACTIVATED__
+                    // DEBUG
                     std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+#endif
+
                     general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
                     general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
 
@@ -437,14 +462,20 @@ void MainWindow::on_pushButton_simulate_clicked()
          */
         else
         {
+#ifdef __DEBUG_MODE_ACTIVATED__
+            // DEBUG
             std::cerr << "temporary event holder not empty" <<std::endl;
+#endif
 
             QDate new_end_date = current_date;
             dev_days_remaining = (*current_project_it).get_dev_time() / static_cast<int>((team.developers.size() + team.duty_coordinators.size()));
             man_days_remaining = (*current_project_it).get_managing_time() / static_cast<int>(team.project_managers.size());
             int remaining_days = std::max(dev_days_remaining,man_days_remaining);
 
+#ifdef __DEBUG_MODE_ACTIVATED__
+            // DEBUG
             std::cerr << "dev remaining : " << dev_days_remaining << ", man remaining : " << man_days_remaining << std::endl;
+#endif
 
             // for each date until the end of the project computing the new end date
             while (!temporary_event_holder.empty())
@@ -454,12 +485,20 @@ void MainWindow::on_pushButton_simulate_clicked()
 
                 // computing maximum number of days (working days) left before event
                 int max_days = __working_days_between_dates(current_date, e.date);
+
+#ifdef __DEBUG_MODE_ACTIVATED__
+                // DEBUG
                 std::cerr << "working days to event " << max_days << std::endl;
+#endif
 
                 // if remaining project days are smaller than the number of days to the event
                 if (remaining_days <= max_days)
                 {
+#ifdef __DEBUG_MODE_ACTIVATED__
+                    // DEBUG
                     std::cerr << "remaining days smaller than event " << remaining_days << " < " << max_days << std::endl;
+#endif
+
                     // removing project from event stack
                     es.event_stack.pop();
 
@@ -468,24 +507,43 @@ void MainWindow::on_pushButton_simulate_clicked()
                     {
                         Event e = temporary_event_holder.back();
                         es.event_stack.push(e);
+
+#ifdef __DEBUG_MODE_ACTIVATED__
+                        // DEBUG
                         std::cerr << "replacing [employee] event " << e.employee.first << " in event stack" << std::endl;
+#endif
+
                         temporary_event_holder.pop_back();
                     }
                     new_end_date = current_date.addDays(remaining_days);
                     current_date = new_end_date;
+
+#ifdef __DEBUG_MODE_ACTIVATED__
+                    // DEBUG
                     std::cerr << "* Project " << (*current_project_it).get_name() << " is validated" << std::endl;
+#endif
+
+
                     current_project_it++;
                 }
                 // if remaining project days are bigger then the number of days to the event
                 else
                 {
+#ifdef __DEBUG_MODE_ACTIVATED__
+                    // DEBUG
                     std::cerr << "remaining days bigger than event " << remaining_days << " >= " << max_days << std::endl;
+#endif
+
                     // computing new remaining days/weeks
                     dev_days_remaining = std::max(0, dev_days_remaining - max_days);
                     man_days_remaining = std::max(0, man_days_remaining - max_days);
                     total_days_remaining = std::max(dev_days_remaining, man_days_remaining);
 
+#ifdef __DEBUG_MODE_ACTIVATED__
+                    // DEBUG
                     std::cerr << "new remaining days : " << remaining_days << std::endl;
+#endif
+
                     //new_end_date = current_date.addDays(max_days);
 
                     // adding employee to the team + writing log
@@ -547,7 +605,10 @@ void MainWindow::on_pushButton_simulate_clicked()
                         //new_end_date = __end_date_from_days(new_end_date, total_days_remaining);
                         if(new_end_date < (*current_project_it).get_deadline())
                         {
+#ifdef __DEBUG_MODE_ACTIVATED__
+                            // DEBUG
                             std::cerr << "* Project " << (*current_project_it).get_name() << " is validated !" << std::endl;
+#endif
 
                             // writing project validation log
                             __log_write_project_validation(output_file, current_project_it, new_end_date);
@@ -556,9 +617,13 @@ void MainWindow::on_pushButton_simulate_clicked()
                         {
                             // same as project invalidation when temporary_event_holder is empty when constructed
 
-                            std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;
-                            invalidated_proj.push_back((*current_project_it));
+#ifdef __DEBUG_MODE_ACTIVATED__
+                            // DEBUG
+                            std::cerr << "* Project " << (*current_project_it).get_name() << " is invalidated !" << std::endl;                            
                             std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
+#endif
+
+                            invalidated_proj.push_back((*current_project_it));
 
                             // computing ressources necessary to complete project before deadline
                             int max_working_days = __working_days_between_dates(e.date, (*current_project_it).get_deadline());
@@ -573,7 +638,11 @@ void MainWindow::on_pushButton_simulate_clicked()
                                 ideal_dev = (*current_project_it).get_dev_time() / max_working_days;
                                 ideal_man = static_cast<int>(std::ceil(static_cast<double>((*current_project_it).get_managing_time()) / static_cast<double>(max_working_days)));
 
+#ifdef __DEBUG_MODE_ACTIVATED__
+                                // DEBUG
                                 std::cerr << "Needed ressources : " << ideal_dev << " devs & " << ideal_man << " PM" << std::endl;
+#endif
+
                                 general_needed_dev = std::max(general_needed_dev, ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()));
                                 general_needed_man = std::max(general_needed_man, ideal_man - static_cast<int>(team.project_managers.size()));
 
@@ -611,10 +680,12 @@ void MainWindow::on_pushButton_simulate_clicked()
         // advancing to next day (project if finished at the end of the current day)
         current_date = current_date.addDays(1);
     } 
+#ifdef __DEBUG_MODE_ACTIVATED__
     // needed ressources (default : 0)
     std::cerr << "Minimum needed ressources to complete all projects :"
               << "\n\t" << general_needed_dev << " dev(s)/duty coordinator(s)"
               << "\n\t" << general_needed_man << " PMs" << std::endl;
+#endif
 
     // writing needed ressources (if more than 0)
     if (std::max(general_needed_dev, general_needed_man) > 0)
@@ -628,7 +699,11 @@ void MainWindow::on_pushButton_simulate_clicked()
     // closing output stream
     output_file.close();
 
+#ifdef __DEBUG_MODE_ACTIVATED__
+    // DEBUG
     std::cerr << "SIMULATION COMPLETED !" << std::endl;
+#endif
+
     update();
 
 

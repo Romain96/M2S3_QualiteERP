@@ -24,7 +24,6 @@ Team::Team(string filename)
         cpptoml::local_date date;
         auto starting_date = config->get_as<cpptoml::local_date>("starting_date").value_or(date);
         this->starting_date = QDate(starting_date.year, starting_date.month, starting_date.day);
-        cerr << "Starting date: " << this->starting_date.year() << "/" << this->starting_date.month() << "/" << this->starting_date.day() << endl;
 		auto team = config->get_table("team");
 		
 		auto pdgs = team->get_array_of<string>("pdgs");
