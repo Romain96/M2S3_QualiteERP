@@ -727,6 +727,9 @@ void MainWindow::__log_write_general_infos(std::ofstream& output)
 
 /*
  * writes simulation start event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - date : date of the event (simulation start)
  */
 void MainWindow::__log_write_simulation_start(std::ofstream& output, QDate date)
 {
@@ -737,6 +740,9 @@ void MainWindow::__log_write_simulation_start(std::ofstream& output, QDate date)
 
 /*
  * writes simulation end event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - date : date of the event (simulation end)
  */
 void MainWindow::__log_write_simulation_end(std::ofstream& output, QDate date)
 {
@@ -747,6 +753,13 @@ void MainWindow::__log_write_simulation_end(std::ofstream& output, QDate date)
 
 /*
  * writes project start event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - project_it : iterator pointing on the current project
+ * - man_days_remaining : number of working days of management left to complete the current project
+ * - dev_days_remaining : number of working days of development left to complete the current project
+ * - start_date : date from which the project is started (included and is a working day)
+ * - end date : expected end date of the project with current workforce (included and is a working day)
  */
 void MainWindow::__log_write_project_start(std::ofstream& output,
                                            std::vector<Project>::iterator& project_it,
