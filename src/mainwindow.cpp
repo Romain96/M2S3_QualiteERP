@@ -841,6 +841,17 @@ void MainWindow::__log_write_project_rejection(std::ofstream& output,
 
 /*
  * writes new employee addition (current project advancement log)
+ *
+ * - output : output stream in which to write on (file)
+ * - date : date of the event (employe is operational)
+ * - project_it : iterator pointing on the current project of the team
+ * - man_days_remaining : number of effective working days left to complete the current project per employee (management only)
+ * - man_days : number of effective working days left to complete the current project (management only)
+ * - man_team_size : number og employees affecting the management of the current project
+ * - dev_days_remaining : number of effective working days left to complete the current project per employee (development only)
+ * - dev_days : number of effective working days left to complete the current project (development only)
+ * - dev_team_size : number of employee affecting the development of the current project
+ * - end_date
  */
 void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
                                                    QDate date,
@@ -866,6 +877,10 @@ void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
 
 /*
  * writes general needed ressources (managers/developers)
+ *
+ * - output : output stream in which to write on (file)
+ * - general_needed_man : minimal number of additional managing staff required
+ * - general_needed_dev : minimal number of additional development staff required
  */
 void MainWindow::__log_write_general_needed_ressources(std::ostream& output,
                                                        int general_needed_man,
@@ -890,7 +905,8 @@ void MainWindow::__log_write_general_needed_ressources(std::ostream& output,
  */
 
 /*
- * Internal use only : computes the working days in the week beginning on the days indicated by the date
+ * Internal use only : computes the working days in the week
+ * beginning on the days indicated by the date (included)
  */
 int MainWindow::__working_days_in_week(QDate date)
 {
