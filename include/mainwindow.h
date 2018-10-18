@@ -88,6 +88,9 @@ private:
     // Event stack
     EventStack es;
 
+    // preventing the simulation to be run without data !
+    bool can_simulate;
+
     // log writing methods
     void __log_write_general_infos(std::ofstream& output);
 

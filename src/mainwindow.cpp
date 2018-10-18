@@ -23,7 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     team(),
-    current_date()
+    current_date(),
+    can_simulate(false)
 {
     QMovie *movie=new QMovie(":/img/img/giphy.gif");
     if (!movie->isValid())
@@ -41,6 +42,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     this->setWindowTitle("Inside Out's very minimalistic ERP");
+
+    // setting default values (starting date, team efficiency)
+    team.starting_date = QDate(2019, 6, 1); // 1st of june 2019 by default
+    current_date = team.starting_date;
+    team.team_efficiency = 100; // 100% by default
+    update();
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +78,9 @@ void MainWindow::on_pushButton_new_project_clicked()
     newproj->show();
 }
 
+/*
+ * SLOT that receives data from a project creation
+ */
 void MainWindow::project_creation_data_received(std::string project_name,
                                                 int development_time,
                                                 int management_time,
@@ -84,6 +94,9 @@ void MainWindow::project_creation_data_received(std::string project_name,
 
     // adding it to the project list
     project_list.push_back(pro);
+
+    // allowing to start a simulation
+    can_simulate = true;
 
     // updating project infos
     update_projects();
@@ -149,6 +162,9 @@ void MainWindow::on_actionImport_triggered()
         {
             project_list.push_back(*p);
         }
+
+        // allowing to launch simlulation
+        can_simulate = true;
 
         // updating screen infos
         update();
@@ -291,6 +307,13 @@ void MainWindow::update_projects()
  */
 void MainWindow::on_pushButton_simulate_clicked()
 {
+    // checking if enough data is here !
+    if (!can_simulate)
+    {
+        std::cerr << "ERROR : cannot launch simulation, not enough data !" << std::endl;
+        return;
+    }
+
 #ifdef __DEBUG_MODE_ACTIVATED__
     // DEBUG
     std::cerr << "RUNNING SIMULATION..." << std::endl;
