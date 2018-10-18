@@ -369,9 +369,9 @@ void MainWindow::on_pushButton_simulate_clicked()
                 std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
                 // computing ressources necessary to complete project before deadline
-                //int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
+                int max_working_days = __working_days_between_dates(current_date, (*current_project_it).get_deadline());
                 // TEST WITH 4 MONTHS BEFORE RECRUITEMENT & FIRST WORKING DAY
-                int max_working_days = __working_days_between_dates(team.starting_date.addMonths(4), (*current_project_it).get_deadline());
+                //int max_working_days = __working_days_between_dates(team.starting_date.addMonths(4), (*current_project_it).get_deadline());
                 int ideal_dev = 0;
                 int ideal_man = 0;
 
@@ -546,9 +546,9 @@ void MainWindow::on_pushButton_simulate_clicked()
                             std::cerr << "\t(" << end_date.toString("yyyy.MM.dd").toStdString() << " > " << e.date.toString("yyyy.MM.dd").toStdString() << std::endl;
 
                             // computing ressources necessary to complete project before deadline
-                            //int max_working_days = __working_days_between_dates(e.date, (*current_project_it).get_deadline());
+                            int max_working_days = __working_days_between_dates(e.date, (*current_project_it).get_deadline());
                             // TEST WITH 4 MONTHS BEFORE RECRUITEMENT & FIRST WORKING DAY
-                            int max_working_days = __working_days_between_dates(team.starting_date.addMonths(4), (*current_project_it).get_deadline());
+                            //int max_working_days = __working_days_between_dates(team.starting_date.addMonths(4), (*current_project_it).get_deadline());
 
                             int ideal_dev = 0;
                             int ideal_man = 0;
