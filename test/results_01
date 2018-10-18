@@ -1,0 +1,91 @@
+This file has been generated on 2018.10.18 at 14:13:30 
+by 'Inside Out's very minimalistic ERP'
+
+-------------------------------------------------------------------------------
+********** Inside Out's Team on 2019.06.01 **********
+
+// Chief Excutive Officers carries no management or development duties...
+* [CEO] Chief Executive Officer(s) :
+	- Tan Dat
+
+// Duty Coordinators are technical experts and carries development duties...
+* [DCO] Duty Coordinator(s) :
+	- Maxime
+
+// Project Managers are purely managers and only carries management duties...
+* [PM] Project Manager(s) :
+	- Romain
+
+// Developers are the backbone of the team and carries development duties...
+* [DEV] Developer(s) :
+	- Isabelle
+	- Tan Dat
+
+// The efficiency is the measure of the quantity of work an employee
+// is able to accomplish in a single day of work
+// The lower the efficiency the longer it will take to complete a project
+// The higher the efficiency the shorter it will take to complete a project
+// The efficiency is global (the same for all employees) and fixed
+* [Efficiency] Team Efficiency : 100
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+********** Inside Out's Project list on 2019.06.01 **********
+
+* HTC VR
+	- 45 day(s) of management
+	- 150 day(s) of development
+	- 2020.01.01 fixed deadline
+
+* AIRBUS
+	- 40 day(s) of management
+	- 150 day(s) of development
+	- 2019.12.01 fixed deadline
+
+* NINETENDO
+	- 25 day(s) of management
+	- 75 day(s) of development
+	- 2019.09.01 fixed deadline
+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.06.01 : simulation started !
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.06.03 : starting project NINETENDO
+	- 25 day(s) of management are needed (25 days splitted on 1 PMs)
+	- 25 day(s) of development are needed (75 days splitted on 3 DCOs/DEVs)
+	- Expected end date with current workforce : 2019.07.05
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.07.05 : Project NINETENDO is finished before deadline
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.07.08 : starting project AIRBUS
+	- 40 day(s) of management are needed (40 days splitted on 1 PMs)
+	- 50 day(s) of development are needed (150 days splitted on 3 DCOs/DEVs)
+	- Expected end date with current workforce : 2019.09.13
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.09.13 : Project AIRBUS is finished before deadline
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.09.16 : starting project HTC VR
+	- 45 day(s) of management are needed (45 days splitted on 1 PMs)
+	- 50 day(s) of development are needed (150 days splitted on 3 DCOs/DEVs)
+	- Expected end date with current workforce : 2019.11.22
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.11.22 : Project HTC VR is finished before deadline
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+* 2019.11.23 : simulation finished !
+-------------------------------------------------------------------------------
