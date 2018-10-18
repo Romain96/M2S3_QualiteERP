@@ -42,6 +42,12 @@ MainWindow::~MainWindow()
 }
 
 /*
+ ******************************************************************************
+ *                                  SLOTS
+ ******************************************************************************
+ */
+
+/*
  * When "New Project" button is clicked,
  * adding a new project to the project list
  */
@@ -168,6 +174,12 @@ void MainWindow::employee_creation_data_received(std::string employee_name,
     // adding the new employee to the recruitement center
     rc.add_employee(employee_name, employee_job, QDate(employee_year, employee_month, employee_day));
 }
+
+/*
+ ******************************************************************************
+ *                              METHODS
+ ******************************************************************************
+ */
 
 /*
  * When adding a new employee/project
@@ -912,8 +924,11 @@ int MainWindow::__working_days_in_week(QDate date)
 }
 
 /*
- * Internal use only : computes the working days from the day indicated by the first date (included)
- * to the day indicated by the second date (not included)
+ * Internal use only : computes the number of working days from the day indicated
+ * by the first date to the day indicated by the second date
+ *
+ * - date1 : date from which the computation starts (included)
+ * - date2 : date up to which the computation goes (not included)
  */
 int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
 {
@@ -941,8 +956,11 @@ int MainWindow::__working_days_between_dates(QDate date1, QDate date2)
 }
 
 /*
- * Internal use only : computes the end date (first day from which the project is finished)
- * from "date" (included) with "days" working days
+ * Internal use only : computes the end date of a project given a starting date
+ * and a number of working days, returning the last working day of project
+ *
+ * - date : date from which the computation starts (included)
+ * - days : number of working days (5 working days per weeks) to execute
  */
 QDate MainWindow::__end_date_from_days(QDate date, int days)
 {
@@ -997,8 +1015,9 @@ QDate MainWindow::__earliest_last_working_day(QDate date)
 }
 
 /*
- *  Internal use only : computes the earliest working starting from "date"
- *  if "date" is monday-friday the returning date else returning following monday
+ *  Internal use only : returns the earliest working day following
+ * the given date if the given date is not a working date
+ * otherwise it returns the date given as argument
  */
 QDate MainWindow::__earliest_working_day_from_date(QDate date)
 {
