@@ -44,9 +44,9 @@ On peut:
 - Ajouter des projets
 - Charger un fichier qui contient l'ensemble des informations nécessaires à la simulation dans la barre déroulante
 
-Une fois l'ensemble des données entrée, on lance la simulation et les résultats s'affichent dans une nouvelle fenêtre.
+Une fois l'ensemble des données entrées, on lance la simulation et les résultats s'affichent dans une nouvelle fenêtre.
 
-Dans le dossier tests, plusieurs simulations ont été effectuées, et un comparatif des résultats obtenus à l'aide de l'ERP part rapport aux résultats attendus (calculés à la main).
+Dans le dossier test, plusieurs simulations ont été effectuées, et un comparatif des résultats obtenus à l'aide de l'ERP par rapport aux résultats attendus (calculés à la main).
 
 * [simulation 1](./test/grille_01.md)
 * [simulation 2](./test/grille_02.md)
