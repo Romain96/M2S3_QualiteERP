@@ -770,6 +770,10 @@ void MainWindow::__log_write_project_start(std::ofstream& output,
 
 /*
  * writes project validation event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - project_it : iterator pointing on the current project
+ * - date : date of the event (project validation)
  */
 void MainWindow::__log_write_project_validation(std::ofstream& output,
                                                 std::vector<Project>::iterator project_it,
@@ -783,6 +787,13 @@ void MainWindow::__log_write_project_validation(std::ofstream& output,
 
 /*
  * writes project ressources computation event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - ideal_man : number of managing staff required to complete the current project
+ * - ideal_man_more : number of additional managing staff required to complete the current project
+ * - ideal_dev : number of development staff required to complete the current project
+ * - ideal_dev_more : number of additional development staff required to complete the current project
+ * - project_it : iterator pointing on the current project
  */
 void MainWindow::__log_write_project_ressources_computation(std::ofstream& output,
                                                             int ideal_man,
@@ -802,9 +813,12 @@ void MainWindow::__log_write_project_ressources_computation(std::ofstream& outpu
 
 /*
  * writes project forced validation event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - project_it : iterator pointing on the current project
  */
 void MainWindow::__log_write_project_invalidation(std::ofstream& output,
-                                                       std::vector<Project>::iterator project_it)
+                                                  std::vector<Project>::iterator project_it)
 {
     output << "-------------------------------------------------------------------------------\n"
            << " * " << (*project_it).get_deadline().toString("yyyy.MM.dd").toStdString() << " : Project "
@@ -814,6 +828,10 @@ void MainWindow::__log_write_project_invalidation(std::ofstream& output,
 
 /*
  * writes project impossible completion event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - project_it : iterator pointing on the current project
+ * - date : date of the event (impossible completion of a project)
  */
 void MainWindow::__log_write_project_impossible_completion(std::ostream& output,
                                                            std::vector<Project>::iterator project_it,
@@ -828,6 +846,10 @@ void MainWindow::__log_write_project_impossible_completion(std::ostream& output,
 
 /*
  * writes project rejection event in log
+ *
+ * - output : output stream in which to write on (file)
+ * - project_it : iterator pointing on the current project
+ * - date : date of the event (project rejection)
  */
 void MainWindow::__log_write_project_rejection(std::ofstream& output,
                                                std::vector<Project>::iterator project_it,
@@ -851,7 +873,7 @@ void MainWindow::__log_write_project_rejection(std::ofstream& output,
  * - dev_days_remaining : number of effective working days left to complete the current project per employee (development only)
  * - dev_days : number of effective working days left to complete the current project (development only)
  * - dev_team_size : number of employee affecting the development of the current project
- * - end_date
+ * - end_date : expected end date of the current project
  */
 void MainWindow::__log_write_new_employee_addition(std::ofstream& output,
                                                    QDate date,
