@@ -144,7 +144,7 @@ private:
     int __working_days_between_dates(QDate date1, QDate date2);
     QDate __end_date_from_days(QDate date, int days);
     QDate __earliest_last_working_day(QDate date);
-    QDate __earliest_working_day_from_date(QDate date);    
+    QDate __earliest_working_day_from_date(QDate date);
 };
 
 #endif // MAINWINDOW_H
