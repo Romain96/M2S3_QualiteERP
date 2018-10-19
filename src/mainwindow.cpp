@@ -805,7 +805,7 @@ void MainWindow::__log_write_general_infos(std::ofstream& output)
                 << "// The lower the efficiency the longer it will take to complete a project\n"
                 << "// The higher the efficiency the shorter it will take to complete a project\n"
                 << "// The efficiency is global (the same for all employees) and fixed\n"
-                << "* [Efficiency] Team Efficiency : " << team.team_efficiency << "\n"
+                << "* [Efficiency] Team Efficiency : " << team.team_efficiency << "%\n"
                 << "-------------------------------------------------------------------------------\n" << std::endl;
 
     // Inside Out's project list
