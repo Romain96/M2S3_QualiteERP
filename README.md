@@ -16,6 +16,7 @@
 - Non simulation de l'humeur (l'efficience reste constante)
 - Non prise en compte des congés payés
 - Il y a toujours au moins un projet actif
+- L'outil a été conçu en ayant à l'esprit la feuille de style des ERP des années 80, d'ou son design retro.
 
 
 ## Conventions de nommage
@@ -34,12 +35,27 @@ Il faut ouvrir le .pro avec qtcreator, le compiler et le lancer.
 
 ## Déroulement d'une simulation
 
+Voici l'interface qui s'affiche lors du lancement de l'ERP:
+
+![Screenshot](img/launch.png)
+
 On peut:
+
+- Charger un fichier qui contient au préalable l'ensemble des informations nécessaires à la simulation dans la barre déroulante
+
+Puis, au besoin:
+
 - Ajouter des membres d'équipe
+
+![Screenshot](img/add_employee.png)
+
 - Ajouter des projets
-- Charger un fichier qui contient l'ensemble des informations nécessaires à la simulation dans la barre déroulante
+
+![Screenshot](img/add_project.png)
 
 Une fois l'ensemble des données entrées, on lance la simulation et les résultats s'affichent dans une nouvelle fenêtre.
+
+Ces résultats contiennent seulement à la question principale: est-ce que les projets sont faisables dans les délais impartis avec les ressources à disposition, et dans le cas contraire, les resssources supplémentaires nécessaires. Pour le détail des évènements, on pourra se reporter au log généré dans le répertoire d'éxecution.
 
 Dans le dossier **test**, plusieurs simulations ont été effectuées, et un comparatif des résultats obtenus à l'aide de l'ERP par rapport aux résultats attendus (calculés à la main). On y trouve également un fichier log obtenu en sortie du programme pour chaque simulation.
 
@@ -51,3 +67,18 @@ Dans le dossier **test**, plusieurs simulations ont été effectuées, et un com
   * [log simulation 3](./test/results_03)
 * [simulation 4](./test/grille_04.md)
   * [log simulation 4](./test/results_04)
+
+## Résumé de l'algorithme:
+
+L'algorithme principal se trouve dans le fichier mainwindow.cpp, la gestion des évènements (la liste des projets ainsi que la liste des projets) est réalisée à l'aide d'une pile.
+
+Pour le calcul du nombre de jours de travail:
+
+nombre de jours par dev = nombre de jour de dev du projet / nombre de dev
+
+nombre de jours par manager = nombre de jours de management / nombre de jours de management
+
+
+Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
+
+**Toute faille est totalement volontaire et entièrement maîtrisée et testée**
