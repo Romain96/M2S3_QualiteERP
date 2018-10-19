@@ -9,18 +9,13 @@
 
 ## Hypothèses simplificatrices
 
-- Nous sommes le 01/06/19
-- Initialement trois développeurs et un gestionnaire de projet
-- Efficience de base de 100%
 - Nous choisissons de prendre les projets se terminant les plus tôt en premiers.
 - Non prise en compte des jours fériés
 - Prise en compte des week-end
 - Non simulation des maladies (chaque employé travaille exactement 5 jours par semaine)
 - Non simulation de l'humeur (l'efficience reste constante)
 - Non prise en compte des congés payés
-- Non prise en compte des années bissextiles
 - Il y a toujours au moins un projet actif
-- Un recrutement de personnel dure exactement 4 mois (3 mois de recherche et 1 mois de formation avant d’être opérationnel et d’avoir la même efficience que le reste de l’équipe)
 
 
 ## Conventions de nommage
