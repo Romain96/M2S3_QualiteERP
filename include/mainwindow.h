@@ -114,7 +114,8 @@ private:
                                                     int ideal_man_more,
                                                     int ideal_dev,
                                                     int ideal_dev_more,
-                                                    std::vector<Project>::iterator project_it);
+                                                    std::vector<Project>::iterator project_it,
+                                                    QDate start_date);
 
     void __log_write_project_invalidation(std::ofstream& output,
                                           std::vector<Project>::iterator project_it);

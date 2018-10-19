@@ -453,7 +453,8 @@ void MainWindow::on_pushButton_simulate_clicked()
                                                                ideal_man - static_cast<int>(team.project_managers.size()),
                                                                ideal_dev,
                                                                ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()),
-                                                               current_project_it);
+                                                               current_project_it,
+                                                               current_date);
 
                     // writing project invalidation log
                     __log_write_project_invalidation(output_file, current_project_it);
@@ -675,7 +676,8 @@ void MainWindow::on_pushButton_simulate_clicked()
                                                                            ideal_man - static_cast<int>(team.project_managers.size()),
                                                                            ideal_dev,
                                                                            ideal_dev - static_cast<int>(team.developers.size() + team.duty_coordinators.size()),
-                                                                           current_project_it);
+                                                                           current_project_it,
+                                                                           current_date);
 
                                 // writing project invalidation log
                                 __log_write_project_invalidation(output_file, current_project_it);
@@ -913,14 +915,18 @@ void MainWindow::__log_write_project_ressources_computation(std::ofstream& outpu
                                                             int ideal_man_more,
                                                             int ideal_dev,
                                                             int ideal_dev_more,
-                                                            std::vector<Project>::iterator project_it)
+                                                            std::vector<Project>::iterator project_it,
+                                                            QDate start_date)
 {
+    // test with the latest date on which the recruitement offer should be publiched
     output << "-------------------------------------------------------------------------------\n"
            << "* INSUFFICIENT RESSOURCES to complete project " << (*project_it).get_name() << "\n"
            << "\t- Number of management staff needed : " << ideal_man << " ("
            << ideal_man_more << " more)\n"
            << "\t- Number of development staff needed : " << ideal_dev << " ("
            << ideal_dev_more << " more)\n"
+           << "\t- The recruitement offer(s) should be emitted at most on "
+           << start_date.addMonths(-4).toString("yyyy.MM.dd").toStdString() << "\n"
            << "-------------------------------------------------------------------------------\n\n";
 }
 
