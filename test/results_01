@@ -1,4 +1,4 @@
-This file has been generated on 2018.10.18 at 14:13:30 
+This file has been generated on 2018.10.19 at 12:52:33 
 by 'Inside Out's very minimalistic ERP'
 
 -------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ by 'Inside Out's very minimalistic ERP'
 // The lower the efficiency the longer it will take to complete a project
 // The higher the efficiency the shorter it will take to complete a project
 // The efficiency is global (the same for all employees) and fixed
-* [Efficiency] Team Efficiency : 100
+* [Efficiency] Team Efficiency : 100%
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
