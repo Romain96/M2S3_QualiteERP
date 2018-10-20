@@ -70,7 +70,9 @@ Dans le dossier **test**, plusieurs simulations ont été effectuées, et un com
 
 ## Résumé de l'algorithme:
 
-L'algorithme principal se trouve dans le fichier mainwindow.cpp, la gestion des évènements (la liste des projets ainsi que la liste des projets) est réalisée à l'aide d'une pile.
+L'algorithme principal se trouve dans le fichier mainwindow.cpp.
+
+La gestion s'effectue à l'aide d'une pile d'événements (les événements sont soit des projets soit des employés).
 
 Pour le calcul du nombre de jours de travail:
 
@@ -78,6 +80,60 @@ nombre de jours par dev = nombre de jour de dev du projet / nombre de dev
 
 nombre de jours par manager = nombre de jours de management / nombre de jours de management
 
+ALGO :
+
+variables utilisées :
+* p : liste d'événements triés dans l'ordre croissant de leurs dates
+* l : liste temporaire d'événements (recrutement uniquement)
+* proj : projet courant
+* e : événement de type recrutement courant
+* date : date de fin de projet calculée
+* date_courante : la date courante de la simulation
+
+Créer une pile d'événements **p** à partir de la liste de projets et de celle des recrutements
+
+TANT QUE la pile p n'est pas vide FAIRE
+
+    TANT QUE la tête de pile **p** n'est pas un projet FAIRE
+        
+        dépiler **p** et placer l'événement dans la liste **l**
+        
+    FIN TANT QUE
+    
+    **proj** = tête de pile **p**
+    
+    SI la liste temporaire **l** est vide
+    
+         calculer la charge de travail par développeur         
+         calculer la charge de travail par manager         
+         calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
+         calculer la date de fin du projet courant dans **date**
+         
+         SI la date de fin de projet **date** est inférieure ou égale à la **deadline* du projet courant ALORS
+         
+             écrire dans le log que le projet courant est validé
+             dépiler la tête de pile **p** (retirer le projet validé)
+             la **date_courante** est désormais égale à la date de fin du projet validé calculée **date** 
+             avancer d'un jour
+         
+         SINON (**date** est supérieure à **deadline**)
+         
+             calculer le nombre minimal de managers requis pour compléter le projet
+             calculer le nombre minimal de développeurs requis pour compléter le projet
+             écrire dans le log la non validation du projet
+             considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
+             écrire dans le log ces infos/valeurs
+             la **date_courante** est désormais la **deadline** du projet courant
+             dépiler le projet de la pile **p**
+             avancer d'un jour
+         
+         FIN SI
+    
+    SINON (la liste temporaire **l** n'est pas vide)
+    
+    FIN SI
+
+FIN FAIRE
 
 Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
 
