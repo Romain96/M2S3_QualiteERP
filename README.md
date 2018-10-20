@@ -101,13 +101,12 @@ TANT QUE la pile p n'est pas vide FAIRE
     FIN TANT QUE
     
     **proj** = tête de pile **p**
+    calculer la charge de travail par développeur         
+    calculer la charge de travail par manager         
+    calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
+    calculer la date de fin du projet courant dans **date**
     
     SI la liste temporaire **l** est vide
-    
-         calculer la charge de travail par développeur         
-         calculer la charge de travail par manager         
-         calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
-         calculer la date de fin du projet courant dans **date**
          
          SI la date de fin de projet **date** est inférieure ou égale à la **deadline* du projet courant ALORS
          
@@ -130,6 +129,46 @@ TANT QUE la pile p n'est pas vide FAIRE
          FIN SI
     
     SINON (la liste temporaire **l** n'est pas vide)
+    
+        TANT QUE la liste **l** n'est pas vide FAIRE
+        
+            retirer le premier élément de la liste **l** et le placer dans **e**
+        
+            SI la date de fin calculée **date** est inférieure ou égale à la date de l'événement **e**
+            
+                dépiler la tête de pile **p** (le projet courant)
+                réempiler tous les événements de la liste temporaire **l** dans la pile **p**
+                
+                SI la date de fin calculée **date** est inférieure ou égale à la **deadline** du projet courant
+                
+                    écrire dans le log que le projet courant est validé
+                    dépiler la tête de pile **p** (retirer le projet validé)
+                    la **date_courante** est désormais égale à la date de fin du projet validé calculée **date** 
+                    avancer d'un jour
+                
+                SINON (**date** est supérieure à **deadline**)
+         
+                    calculer le nombre minimal de managers requis pour compléter le projet
+                    calculer le nombre minimal de développeurs requis pour compléter le projet
+                    écrire dans le log la non validation du projet
+                    considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
+                    écrire dans le log ces infos/valeurs
+                    la **date_courante** est désormais la **deadline** du projet courant
+                    dépiler le projet de la pile **p**
+                    avancer d'un jour
+         
+                FIN SI
+            
+            SINON (**date** supérieure à la date de **e**)
+            
+                ajouter l'employé relatif à **e** dans l'équipe
+                avancer la **date_courante** à la date de **e**
+                retirer le nombre de jours de travail écoulés
+                calculer la nouvelle date de fin avec le nouvel employé **date**
+            
+            FIN SI
+        
+        FIN TANT QUE
     
     FIN SI
 
