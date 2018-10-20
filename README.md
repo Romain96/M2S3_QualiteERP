@@ -90,81 +90,82 @@ variables utilisées :
 * date : date de fin de projet calculée
 * date_courante : la date courante de la simulation
 
-Créer une pile d'événements **p** à partir de la liste de projets et de celle des recrutements
+<pre>
+Créer une pile d'événements <b>p</b> à partir de la liste de projets et de celle des recrutements
 
-TANT QUE la pile p n'est pas vide FAIRE
+TANT QUE la pile <b>p</b> n'est pas vide FAIRE
 
-    TANT QUE la tête de pile **p** n'est pas un projet FAIRE
+    TANT QUE la tête de pile <b>p</b> n'est pas un projet FAIRE
         
-        dépiler **p** et placer l'événement dans la liste **l**
+        dépiler <b>p</b> et placer l'événement dans la liste <b>l</b>
         
     FIN TANT QUE
     
-    **proj** = tête de pile **p**
+    <b>proj</b> = tête de pile <b>p</b>
     calculer la charge de travail par développeur         
     calculer la charge de travail par manager         
     calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
-    calculer la date de fin du projet courant dans **date**
+    calculer la date de fin du projet courant dans <b>date</b>
     
-    SI la liste temporaire **l** est vide
+    SI la liste temporaire <b>l</b> est vide
          
-         SI la date de fin de projet **date** est inférieure ou égale à la **deadline* du projet courant ALORS
+         SI la date de fin de projet <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant ALORS
          
              écrire dans le log que le projet courant est validé
-             dépiler la tête de pile **p** (retirer le projet validé)
-             la **date_courante** est désormais égale à la date de fin du projet validé calculée **date** 
+             dépiler la tête de pile <b>p</b> (retirer le projet validé)
+             la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
              avancer d'un jour
          
-         SINON (**date** est supérieure à **deadline**)
+         SINON (<b>date</b> est supérieure à <b>deadline</b>)
          
              calculer le nombre minimal de managers requis pour compléter le projet
              calculer le nombre minimal de développeurs requis pour compléter le projet
              écrire dans le log la non validation du projet
              considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
              écrire dans le log ces infos/valeurs
-             la **date_courante** est désormais la **deadline** du projet courant
-             dépiler le projet de la pile **p**
+             la <b>date_courante</b> est désormais la <b>deadline</b> du projet courant
+             dépiler le projet de la pile <b>p</b>
              avancer d'un jour
          
          FIN SI
     
-    SINON (la liste temporaire **l** n'est pas vide)
+    SINON (la liste temporaire <b>l</b> n'est pas vide)
     
-        TANT QUE la liste **l** n'est pas vide FAIRE
+        TANT QUE la liste <b>l</b> n'est pas vide FAIRE
         
-            retirer le premier élément de la liste **l** et le placer dans **e**
+            retirer le premier élément de la liste <b>l</b> et le placer dans <b>e</b>
         
-            SI la date de fin calculée **date** est inférieure ou égale à la date de l'événement **e**
+            SI la date de fin calculée <b>date</b> est inférieure ou égale à la date de l'événement <b>e</b>
             
-                dépiler la tête de pile **p** (le projet courant)
-                réempiler tous les événements de la liste temporaire **l** dans la pile **p**
+                dépiler la tête de pile <b>p</b> (le projet courant)
+                réempiler tous les événements de la liste temporaire <b>l</b> dans la pile <b>p</b>
                 
-                SI la date de fin calculée **date** est inférieure ou égale à la **deadline** du projet courant
+                SI la date de fin calculée <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant
                 
                     écrire dans le log que le projet courant est validé
-                    dépiler la tête de pile **p** (retirer le projet validé)
-                    la **date_courante** est désormais égale à la date de fin du projet validé calculée **date** 
+                    dépiler la tête de pile <b>p</b> (retirer le projet validé)
+                    la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
                     avancer d'un jour
                 
-                SINON (**date** est supérieure à **deadline**)
+                SINON (<b>date</b> est supérieure à <b>deadline</b>)
          
                     calculer le nombre minimal de managers requis pour compléter le projet
                     calculer le nombre minimal de développeurs requis pour compléter le projet
                     écrire dans le log la non validation du projet
                     considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
                     écrire dans le log ces infos/valeurs
-                    la **date_courante** est désormais la **deadline** du projet courant
-                    dépiler le projet de la pile **p**
+                    la <b>date_courante</b> est désormais la <b>deadline</b> du projet courant
+                    dépiler le projet de la pile <b>p</b>
                     avancer d'un jour
          
                 FIN SI
             
-            SINON (**date** supérieure à la date de **e**)
+            SINON (<b>date</b> supérieure à la date de <b>e</b>)
             
-                ajouter l'employé relatif à **e** dans l'équipe
-                avancer la **date_courante** à la date de **e**
+                ajouter l'employé relatif à <b>e</b> dans l'équipe
+                avancer la <b>date_courante</b> à la date de <b>e</b>
                 retirer le nombre de jours de travail écoulés
-                calculer la nouvelle date de fin avec le nouvel employé **date**
+                calculer la nouvelle date de fin avec le nouvel employé <b>date</b>
             
             FIN SI
         
@@ -173,6 +174,7 @@ TANT QUE la pile p n'est pas vide FAIRE
     FIN SI
 
 FIN FAIRE
+</pre>
 
 Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
 
