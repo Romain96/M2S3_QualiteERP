@@ -93,13 +93,13 @@ variables utilisées :
 <pre>
 Créer une pile d'événements <b>p</b> à partir de la liste de projets et de celle des recrutements
 
-TANT QUE la pile <b>p</b> n'est pas vide FAIRE
+<i><b>TANT QUE</b></i> la pile <b>p</b> n'est pas vide <i><b>FAIRE</b></i>
 
-    TANT QUE la tête de pile <b>p</b> n'est pas un projet FAIRE
+    <i><b>TANT QUE</b></i> la tête de pile <b>p</b> n'est pas un projet <i><b>FAIRE</b></i>
         
         dépiler <b>p</b> et placer l'événement dans la liste <b>l</b>
         
-    FIN TANT QUE
+    <i><b>FIN TANT QUE</b></i>
     
     <b>proj</b> = tête de pile <b>p</b>
     calculer la charge de travail par développeur         
@@ -107,16 +107,16 @@ TANT QUE la pile <b>p</b> n'est pas vide FAIRE
     calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
     calculer la date de fin du projet courant dans <b>date</b>
     
-    SI la liste temporaire <b>l</b> est vide
+    <i><b>SI</b></i> la liste temporaire <b>l</b> est vide <i><b>ALORS</b></i>
          
-         SI la date de fin de projet <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant ALORS
+         <i><b>SI</b></i> la date de fin de projet <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
          
              écrire dans le log que le projet courant est validé
              dépiler la tête de pile <b>p</b> (retirer le projet validé)
              la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
              avancer d'un jour
          
-         SINON (<b>date</b> est supérieure à <b>deadline</b>)
+         <i><b>SINON</b></i> (<b>date</b> est supérieure à <b>deadline</b>)
          
              calculer le nombre minimal de managers requis pour compléter le projet
              calculer le nombre minimal de développeurs requis pour compléter le projet
@@ -127,27 +127,27 @@ TANT QUE la pile <b>p</b> n'est pas vide FAIRE
              dépiler le projet de la pile <b>p</b>
              avancer d'un jour
          
-         FIN SI
+         <i><b>FIN SI</b></i>
     
-    SINON (la liste temporaire <b>l</b> n'est pas vide)
+    <i><b>SINON</b></i> (la liste temporaire <b>l</b> n'est pas vide)
     
-        TANT QUE la liste <b>l</b> n'est pas vide FAIRE
+        <i><b>TANT QUE</b></i> la liste <b>l</b> n'est pas vide <i><b>FAIRE</b></i>
         
             retirer le premier élément de la liste <b>l</b> et le placer dans <b>e</b>
         
-            SI la date de fin calculée <b>date</b> est inférieure ou égale à la date de l'événement <b>e</b>
+            <i><b>SI</b></i> la date de fin calculée <b>date</b> est inférieure ou égale à la date de l'événement <b>e</b> <i><b>ALORS</b></i>
             
                 dépiler la tête de pile <b>p</b> (le projet courant)
                 réempiler tous les événements de la liste temporaire <b>l</b> dans la pile <b>p</b>
                 
-                SI la date de fin calculée <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant
+                <i><b>SI</b></i> la date de fin calculée <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
                 
                     écrire dans le log que le projet courant est validé
                     dépiler la tête de pile <b>p</b> (retirer le projet validé)
                     la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
                     avancer d'un jour
                 
-                SINON (<b>date</b> est supérieure à <b>deadline</b>)
+                <i><b>SINON</b></i> (<b>date</b> est supérieure à <b>deadline</b>)
          
                     calculer le nombre minimal de managers requis pour compléter le projet
                     calculer le nombre minimal de développeurs requis pour compléter le projet
@@ -158,22 +158,22 @@ TANT QUE la pile <b>p</b> n'est pas vide FAIRE
                     dépiler le projet de la pile <b>p</b>
                     avancer d'un jour
          
-                FIN SI
+                <i><b>FIN SI</b></i>
             
-            SINON (<b>date</b> supérieure à la date de <b>e</b>)
+            <i><b>SINON</b></i> (<b>date</b> supérieure à la date de <b>e</b>)
             
                 ajouter l'employé relatif à <b>e</b> dans l'équipe
                 avancer la <b>date_courante</b> à la date de <b>e</b>
                 retirer le nombre de jours de travail écoulés
                 calculer la nouvelle date de fin avec le nouvel employé <b>date</b>
             
-            FIN SI
+            <i><b>FIN SI</b></i>
         
-        FIN TANT QUE
+        <i><b>FIN TANT QUE</b></i>
     
-    FIN SI
+    <i><b>FIN SI</b></i>
 
-FIN FAIRE
+<i><b>FIN FAIRE</b></i>
 </pre>
 
 Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
