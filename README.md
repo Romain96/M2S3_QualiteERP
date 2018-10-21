@@ -10,14 +10,13 @@
 ## Hypothèses simplificatrices
 
 - Nous choisissons de prendre les projets se terminant les plus tôt en premiers.
-- Non prise en compte des jours fériés
-- Prise en compte des week-end
-- Non simulation des maladies (chaque employé travaille exactement 5 jours par semaine)
-- Non simulation de l'humeur (l'efficience reste constante)
-- Non prise en compte des congés payés
+- Les jours fériés ne sont pas pris en compte
+- Les week-end sont pris en compte
+- Il n'y a pas d'arrêt maladie (chaque employé travaille exactement 5 jours par semaine)
+- Les employés n'ont pas d'humeur (l'efficience reste constante)
+- Les employés ne peuvent pas prendre de congés payés
 - Il y a toujours au moins un projet actif
 - L'outil a été conçu en ayant à l'esprit la feuille de style des ERP des années 80, d'ou son design retro.
-
 
 ## Conventions de nommage
 
@@ -31,7 +30,8 @@
 
 ## Compilation et lancement de l'ERP
 
-Il faut ouvrir le .pro avec qtcreator, le compiler et le lancer.
+Le projet a été développé avec l'outil Qt Creator.
+La compilation est gérée par le fichier .pro qu'il faut compiler avec Qt Creator.
 
 ## Déroulement d'une simulation
 
