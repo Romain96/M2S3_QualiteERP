@@ -100,7 +100,7 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
     <b>proj</b> = tête de pile <b>p</b>
     calculer la charge de travail par développeur         
     calculer la charge de travail par manager         
-    calculer le nombre total de jours de travail nécessaires pour fininr le projet courant         
+    calculer le nombre total de jours de travail nécessaires pour finir le projet courant         
     calculer la date de fin du projet courant dans <b>date</b>
     
     <i><b>SI</b></i> la liste temporaire <b>l</b> est vide <i><b>ALORS</b></i>
