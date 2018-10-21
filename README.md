@@ -39,17 +39,13 @@ Voici l'interface qui s'affiche lors du lancement de l'ERP:
 
 ![Screenshot](img/launch.png)
 
-On peut:
+Il est possible de charger un fichier de données contenant toutes les informations nécessaires à la simulation. Quatre fichiers de données sont fournis avec le projet correspondant aux quatre scénarios définis dans le sujet.
 
-- Charger un fichier qui contient au préalable l'ensemble des informations nécessaires à la simulation dans la barre déroulante
-
-Puis, au besoin:
-
-- Ajouter des membres d'équipe
+Il est également possible d'ajouter des employés en recrutement. Ces employés seront ajoutés à la date indiquée par l'utilisateur.
 
 ![Screenshot](img/add_employee.png)
 
-- Ajouter des projets
+Il est également possible d'ajouter manuellement des projets. Le prix du projet est pris en compte lorsqu'au moins deux projet ont la même deadline (le plus cher est alors privilégié).
 
 ![Screenshot](img/add_project.png)
 
