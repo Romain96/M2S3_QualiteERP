@@ -16,6 +16,7 @@
 #include "include/recruitement_center.h"
 #include "include/result_dialog.h"
 #include "include/date_dialog.h"
+#include "include/efficiency_dialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -84,9 +85,10 @@ private:
     EmployeeDialog *newempl;
     // date changer window
     DateDialog *dateChanger;
+    // efficiency changer window
+    EfficiencyDialog *efficiencyChanger;
     //result window
     Result_Dialog *result_diag;
-
 
     // main UI
     Ui::MainWindow *ui;
