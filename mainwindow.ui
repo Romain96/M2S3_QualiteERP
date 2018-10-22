@@ -82,8 +82,8 @@ background-color:none;</string>
      <rect>
       <x>440</x>
       <y>400</y>
-      <width>341</width>
-      <height>23</height>
+      <width>221</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -345,11 +345,14 @@ color:white;</string>
       <x>440</x>
       <y>20</y>
       <width>141</width>
-      <height>17</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>...</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_date">
@@ -357,12 +360,80 @@ color:white;</string>
      <rect>
       <x>350</x>
       <y>20</y>
-      <width>51</width>
-      <height>17</height>
+      <width>71</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>Date:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_change_date">
+    <property name="geometry">
+     <rect>
+      <x>664</x>
+      <y>20</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:!hover {
+background-color:rgb(201, 205, 231);
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: rgb(0, 0, 127);
+}
+
+QPushButton:hover {
+    background-color:rgb(85, 86, 200);
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: back;
+
+}
+</string>
+    </property>
+    <property name="text">
+     <string>change date</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_change_efficiency">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>392</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:!hover {
+background-color:rgb(201, 205, 231);
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: rgb(0, 0, 127);
+}
+
+QPushButton:hover {
+    background-color:rgb(85, 86, 200);
+    border-radius:10px;
+    border:1px solid rgb(201, 205, 231);
+    font-family:Arial;
+    font-size:12 pt;
+    color: back;
+
+}
+</string>
+    </property>
+    <property name="text">
+     <string>change efficiency</string>
     </property>
    </widget>
    <zorder>label_fond</zorder>
@@ -383,6 +454,8 @@ color:white;</string>
    <zorder>label_dev_team2</zorder>
    <zorder>label_start_date</zorder>
    <zorder>label_date</zorder>
+   <zorder>pushButton_change_date</zorder>
+   <zorder>pushButton_change_efficiency</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -390,7 +463,7 @@ color:white;</string>
      <x>0</x>
      <y>0</y>
      <width>823</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
