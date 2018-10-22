@@ -34,7 +34,8 @@ SOURCES += \
     src/event.cpp \
     src/event_stack.cpp \
     src/recruitement_center.cpp \
-    src/result_dialog.cpp
+    src/result_dialog.cpp \
+    src/date_dialog.cpp
 
 HEADERS += \
     include/mainwindow.h \
@@ -47,13 +48,15 @@ HEADERS += \
     include/event.h \
     include/event_stack.h \
     include/recruitement_center.h \
-    include/result_dialog.h
+    include/result_dialog.h \
+    include/date_dialog.h
 
 FORMS += \
     mainwindow.ui \
     project_dialog.ui \
     employee_dialog.ui \
-    result_dialog.ui
+    result_dialog.ui \
+    date_dialog.ui
 
 RESOURCES += \
     src.qrc

@@ -15,6 +15,7 @@
 #include "include/event_stack.h"
 #include "include/recruitement_center.h"
 #include "include/result_dialog.h"
+#include "include/date_dialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -60,7 +61,20 @@ private slots:
                                          int employee_month,
                                          int employee_day);
 
+    // launching simulation
     void on_pushButton_simulate_clicked();
+
+    // starts a new window for a date change
+    void on_pushButton_change_date_clicked();
+
+    // used to receive the new date from the date change window
+    void starting_date_receive_new_date(int year, int month, int day);
+
+    // starts a new window for a team efficiency change
+    void on_pushButton_change_efficiency_clicked();
+
+    // used to receive the new team efficiency from the team efficiency change window
+    void team_efficiency_receive_new_efficiency(int efficiency);
 
 private:
 
@@ -68,7 +82,8 @@ private:
     ProjectDialog *newproj;
     // new employee recuirtement window
     EmployeeDialog *newempl;
-
+    // date changer window
+    DateDialog *dateChanger;
     //result window
     Result_Dialog *result_diag;
 

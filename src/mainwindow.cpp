@@ -62,6 +62,55 @@ MainWindow::~MainWindow()
  */
 
 /*
+ * Changing the starting date
+ * creates a new window to enter the new starting date
+ */
+void MainWindow::on_pushButton_change_date_clicked()
+{
+    dateChanger = new DateDialog();
+    dateChanger->setWindowTitle("Starting date changer");
+    dateChanger->setModal(true);
+
+    // TODO connect signal slot
+    QObject::connect(dateChanger, SIGNAL(starting_date_send_new_date(int,int,int)),
+                     this, SLOT(starting_date_receive_new_date(int,int,int)));
+
+    dateChanger->show();
+}
+
+/*
+ * receives the new date
+ */
+void MainWindow::starting_date_receive_new_date(int year, int month, int day)
+{
+    QDate new_date = QDate(year, month, day);
+
+    this->current_date = new_date;
+    this->team.starting_date = new_date;
+
+    update();
+}
+
+/*
+ * Changing the efficiency
+ * creates a new window to enter the new team efficiency
+ */
+void MainWindow::on_pushButton_change_efficiency_clicked()
+{
+    // TODO
+}
+
+/*
+ * receives the new team efficiency
+ */
+void MainWindow::team_efficiency_receive_new_efficiency(int efficiency)
+{
+    this->team.team_efficiency = efficiency;
+
+    update();
+}
+
+/*
  * When "New Project" button is clicked,
  * adding a new project to the project list
  */
