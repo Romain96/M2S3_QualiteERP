@@ -282,6 +282,13 @@ void MainWindow::update()
         ui->progressBar_efficiency->setRange(0,team.team_efficiency);
         ui->progressBar_efficiency->setFormat("%v%");
     }
+    
+    //if previous efficiency is more than 100% and the new efficiency is <=100
+    if (team.team_efficiency <= 100)
+    {
+         ui->progressBar_efficiency->setRange(0,100);
+         ui->progressBar_efficiency->setFormat("%v%");
+    }
 
     // updating efficiency display
     ui->progressBar_efficiency->setValue(team.team_efficiency);
