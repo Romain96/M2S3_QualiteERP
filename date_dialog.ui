@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>160</y>
-     <width>161</width>
+     <width>181</width>
      <height>32</height>
     </rect>
    </property>
@@ -40,43 +40,154 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>181</width>
-     <height>51</height>
+     <width>180</width>
+     <height>40</height>
     </rect>
    </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>180</width>
+     <height>40</height>
+    </size>
+   </property>
    <property name="text">
-    <string>new Star Date (yyyy-mm-dd))</string>
+    <string>new Star Date</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_year">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
-     <width>60</width>
-     <height>30</height>
+     <y>69</y>
+     <width>181</width>
+     <height>81</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_month">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>120</y>
-     <width>50</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_day">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>120</y>
-     <width>50</width>
-     <height>30</height>
-    </rect>
-   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="lineEdit_year">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="lineEdit_day">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lineEdit_month">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_year">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>yy</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="label_month">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>mm</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="label_day">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>dd</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
