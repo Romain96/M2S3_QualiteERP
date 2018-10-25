@@ -37,9 +37,15 @@ La compilation est gérée par le fichier .pro qu'il faut compiler avec Qt Creat
 
 Voici l'interface qui s'affiche lors du lancement de l'ERP:
 
-![Screenshot](img/launch.png)
+![Screenshot](img/interface.png)
 
 Il est possible de charger un fichier de données contenant toutes les informations nécessaires à la simulation. Quatre fichiers de données sont fournis avec le projet correspondant aux quatre scénarios définis dans le sujet.
+
+Il est possible de modifier la date de départ de la simulation en cliquant sur le bouton "change date" de l'interface.
+![Screenshot](img/date_changer.png)
+
+Il est possible de modifier l'efficience de l'équipe en cliquant sur le bouton "change efficiency" de l'interface.
+![Screenshot](img/efficiency_changer.png)
 
 Il est également possible d'ajouter des employés en recrutement. Ces employés seront ajoutés à la date indiquée par l'utilisateur.
 
