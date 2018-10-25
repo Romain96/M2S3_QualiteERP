@@ -13,6 +13,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{background:rgb(231, 238, 245);
+color:rgb(0, 0, 127);
+
+}
+QMenuBar {
+background-color: black;
+color:white;
+}</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -102,6 +112,9 @@
         <width>180</width>
         <height>40</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
