@@ -68,7 +68,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_change_date_clicked()
 {
     dateChanger = new DateDialog();
-    dateChanger->setWindowTitle("Starting date changer window");
+    dateChanger->setWindowTitle("Date Window");
     dateChanger->setModal(true);
 
     QObject::connect(dateChanger, SIGNAL(starting_date_send_new_date(int,int,int)),
@@ -97,7 +97,7 @@ void MainWindow::starting_date_receive_new_date(int year, int month, int day)
 void MainWindow::on_pushButton_change_efficiency_clicked()
 {
     efficiencyChanger = new EfficiencyDialog();
-    efficiencyChanger->setWindowTitle("Efficiency changer window");
+    efficiencyChanger->setWindowTitle("Efficiency Window");
     efficiencyChanger->setModal(true);
 
     QObject::connect(efficiencyChanger, SIGNAL(team_efficiency_send_new_efficiency(int)),
