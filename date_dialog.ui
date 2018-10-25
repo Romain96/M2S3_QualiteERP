@@ -57,7 +57,7 @@
     </size>
    </property>
    <property name="text">
-    <string>new Star Date</string>
+    <string>New Start Date</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -78,14 +78,17 @@
       <property name="minimumSize">
        <size>
         <width>50</width>
-        <height>20</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>20</height>
+        <height>30</height>
        </size>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -94,14 +97,17 @@
       <property name="minimumSize">
        <size>
         <width>50</width>
-        <height>20</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>20</height>
+        <height>30</height>
        </size>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -110,14 +116,17 @@
       <property name="minimumSize">
        <size>
         <width>50</width>
-        <height>20</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>20</height>
+        <height>30</height>
        </size>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
