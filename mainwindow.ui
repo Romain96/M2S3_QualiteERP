@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>481</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -29,10 +41,22 @@ color:white;
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>360</y>
-      <width>131</width>
-      <height>28</height>
+      <y>470</y>
+      <width>130</width>
+      <height>30</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>130</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>130</width>
+      <height>30</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
@@ -81,10 +105,22 @@ background-color:none;</string>
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>400</y>
-      <width>221</width>
-      <height>21</height>
+      <y>520</y>
+      <width>220</width>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>220</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>220</width>
+      <height>25</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QProgressBar {
@@ -106,8 +142,8 @@ width: 20px;
    <widget class="QLabel" name="label_efficiency">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>390</y>
+      <x>340</x>
+      <y>520</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -122,7 +158,7 @@ width: 20px;
       <x>310</x>
       <y>0</y>
       <width>20</width>
-      <height>381</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -136,8 +172,8 @@ width: 20px;
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>170</y>
-      <width>321</width>
+      <y>280</y>
+      <width>320</width>
       <height>16</height>
      </rect>
     </property>
@@ -148,29 +184,11 @@ width: 20px;
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_dev_team1">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>130</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:none;
-font-size:10pt;
-color:white;</string>
-    </property>
-    <property name="text">
-     <string>Tan Dat Truong | Romain Perrin</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_projects">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>240</y>
+      <x>340</x>
+      <y>300</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -183,10 +201,22 @@ color:white;</string>
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>320</y>
-      <width>131</width>
-      <height>28</height>
+      <y>430</y>
+      <width>130</width>
+      <height>30</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>130</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>130</width>
+      <height>30</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
@@ -216,11 +246,23 @@ QPushButton:hover {
    <widget class="QPushButton" name="pushButton_simulate">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>210</y>
-      <width>131</width>
-      <height>71</height>
+      <x>80</x>
+      <y>320</y>
+      <width>150</width>
+      <height>75</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>150</width>
+      <height>75</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>75</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton:hover {
@@ -252,8 +294,8 @@ QPushButton:!hover {
    <widget class="QLabel" name="label_employees">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>70</y>
+      <x>340</x>
+      <y>80</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -266,10 +308,22 @@ QPushButton:!hover {
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>60</y>
-      <width>341</width>
-      <height>151</height>
+      <y>80</y>
+      <width>350</width>
+      <height>200</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>350</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>350</width>
+      <height>200</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">    border-radius:10px;
@@ -281,10 +335,22 @@ QPushButton:!hover {
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>240</y>
-      <width>341</width>
-      <height>141</height>
+      <y>300</y>
+      <width>350</width>
+      <height>200</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>350</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>350</width>
+      <height>200</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">    border-radius:10px;
@@ -297,9 +363,21 @@ background-color:white;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>321</width>
-      <height>431</height>
+      <width>320</width>
+      <height>561</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>320</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>16777215</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">background:qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 255), stop:0.25 rgba(28, 17, 145, 255), stop:0.474576 rgba(14, 8, 73, 255), stop:1 rgba(0, 0, 0, 255));</string>
@@ -321,32 +399,31 @@ background-color:white;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_dev_team2">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>150</y>
-      <width>241</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:none;
-font-size:10pt;
-color:white;</string>
-    </property>
-    <property name="text">
-     <string>Maxime Seyer | Isabelle Wingert</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_start_date">
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>20</y>
-      <width>141</width>
-      <height>21</height>
+      <y>35</y>
+      <width>210</width>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>210</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>210</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;
+border:2px solid;
+border-color: #2156E6;</string>
     </property>
     <property name="text">
      <string>...</string>
@@ -358,8 +435,8 @@ color:white;</string>
    <widget class="QLabel" name="label_date">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>20</y>
+      <x>340</x>
+      <y>35</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -371,11 +448,23 @@ color:white;</string>
    <widget class="QPushButton" name="pushButton_change_date">
     <property name="geometry">
      <rect>
-      <x>664</x>
-      <y>20</y>
-      <width>111</width>
-      <height>31</height>
+      <x>670</x>
+      <y>35</y>
+      <width>120</width>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
@@ -406,10 +495,22 @@ QPushButton:hover {
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>392</y>
-      <width>101</width>
-      <height>31</height>
+      <y>520</y>
+      <width>120</width>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton:!hover {
@@ -436,34 +537,182 @@ QPushButton:hover {
      <string>change efficiency</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_credits_1">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>150</y>
+      <width>120</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background-color:none;</string>
+    </property>
+    <property name="text">
+     <string>Developed by :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_credits_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>180</y>
+      <width>120</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background-color:none;</string>
+    </property>
+    <property name="text">
+     <string>- Romain Perrin</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_credits_3">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>200</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background-color:none;</string>
+    </property>
+    <property name="text">
+     <string>- Maxime Seyer</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_credits_4">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>220</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background-color:none;</string>
+    </property>
+    <property name="text">
+     <string>- Tan Dat Truong</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_credits_5">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>240</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>120</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background-color:none;</string>
+    </property>
+    <property name="text">
+     <string>- Isabelle Wingert</string>
+    </property>
+   </widget>
    <zorder>label_fond</zorder>
    <zorder>pushButton_new_project</zorder>
    <zorder>label_company_name</zorder>
    <zorder>progressBar_efficiency</zorder>
    <zorder>label_efficiency</zorder>
    <zorder>line</zorder>
-   <zorder>line_2</zorder>
-   <zorder>label_dev_team1</zorder>
    <zorder>label_projects</zorder>
    <zorder>pushButton_new_employee</zorder>
    <zorder>pushButton_simulate</zorder>
    <zorder>label_employees</zorder>
    <zorder>textBrowser_employees</zorder>
    <zorder>textBrowser_projects</zorder>
-   <zorder>icone</zorder>
-   <zorder>label_dev_team2</zorder>
    <zorder>label_start_date</zorder>
    <zorder>label_date</zorder>
    <zorder>pushButton_change_date</zorder>
    <zorder>pushButton_change_efficiency</zorder>
+   <zorder>icone</zorder>
+   <zorder>line_2</zorder>
+   <zorder>label_credits_1</zorder>
+   <zorder>label_credits_2</zorder>
+   <zorder>label_credits_3</zorder>
+   <zorder>label_credits_4</zorder>
+   <zorder>label_credits_5</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>823</width>
-     <height>21</height>
+     <width>800</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
