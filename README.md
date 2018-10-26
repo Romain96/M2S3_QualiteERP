@@ -113,7 +113,7 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
     
     <i><b>SI</b></i> la liste temporaire <b>l</b> est vide <i><b>ALORS</b></i>
          
-         <i><b>SI</b></i> la date de fin de projet <b>date_fin</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
+         <i><b>SI</b></i> la <b>date_fin</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
          
              écrire dans le log que le projet courant est validé
              dépiler la tête de pile <b>p</b> (retirer le projet validé)
@@ -125,7 +125,7 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
              calculer le nombre minimal de managers requis pour compléter le projet
              calculer le nombre minimal de développeurs requis pour compléter le projet
              écrire dans le log la non validation du projet
-             considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
+             considérer le projet comme terminé à la deadline (1)
              écrire dans le log ces infos/valeurs
              la <b>date_courante</b> est désormais la <b>deadline</b> du projet courant
              dépiler le projet de la pile <b>p</b>
@@ -139,12 +139,12 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
         
             retirer le premier élément de la liste <b>l</b> et le placer dans <b>e</b>
         
-            <i><b>SI</b></i> la date de fin calculée <b>date_fin</b> est inférieure ou égale à la date de l'événement <b>e</b> <i><b>ALORS</b></i>
+            <i><b>SI</b></i> la <b>date_fin</b> calculée est inférieure ou égale à la date de l'événement <b>e</b> <i><b>ALORS</b></i>
             
                 dépiler la tête de pile <b>p</b> (le projet courant)
                 réempiler tous les événements de la liste temporaire <b>l</b> dans la pile <b>p</b>
                 
-                <i><b>SI</b></i> la date de fin calculée <b>date_fin</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
+                <i><b>SI</b></i> la <b>date_fin</b> calculée est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
                 
                     écrire dans le log que le projet courant est validé
                     dépiler la tête de pile <b>p</b> (retirer le projet validé)
@@ -156,7 +156,7 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
                     calculer le nombre minimal de managers requis pour compléter le projet
                     calculer le nombre minimal de développeurs requis pour compléter le projet
                     écrire dans le log la non validation du projet
-                    considérer le projet comme terminé à la deadline (comme si les ressources nécessaires étaient présentes) 
+                    considérer le projet comme terminé à la deadline (1)
                     écrire dans le log ces infos/valeurs
                     la <b>date_courante</b> est désormais la <b>deadline</b> du projet courant
                     dépiler le projet de la pile <b>p</b>
@@ -179,6 +179,8 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
 
 <i><b>FIN FAIRE</b></i>
 </pre>
+
+(1) On considère le projet comme terminé à la deadline comme si les ressources nécessaires étaient présentes pour faciliter les calculs.
 
 Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
 
