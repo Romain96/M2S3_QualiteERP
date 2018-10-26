@@ -91,7 +91,7 @@ variables utilisées :
 * l : liste temporaire d'événements (recrutement uniquement)
 * proj : projet courant
 * e : événement de type recrutement courant
-* date : date de fin de projet calculée
+* date_fin : date de fin de projet calculée
 * date_courante : la date courante de la simulation
 
 <pre>
@@ -109,18 +109,18 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
     calculer la charge de travail par développeur         
     calculer la charge de travail par manager         
     calculer le nombre total de jours de travail nécessaires pour finir le projet courant         
-    calculer la date de fin du projet courant dans <b>date</b>
+    calculer la date de fin du projet courant dans <b>date_fin</b>
     
     <i><b>SI</b></i> la liste temporaire <b>l</b> est vide <i><b>ALORS</b></i>
          
-         <i><b>SI</b></i> la date de fin de projet <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
+         <i><b>SI</b></i> la date de fin de projet <b>date_fin</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
          
              écrire dans le log que le projet courant est validé
              dépiler la tête de pile <b>p</b> (retirer le projet validé)
-             la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
+             la <b>date_courante</b> est désormais égale à la <b>date_fin</b> du projet validé (calculée)
              avancer d'un jour
          
-         <i><b>SINON</b></i> (<b>date</b> est supérieure à <b>deadline</b>)
+         <i><b>SINON</b></i> (<b>date_fin</b> est supérieure à <b>deadline</b>)
          
              calculer le nombre minimal de managers requis pour compléter le projet
              calculer le nombre minimal de développeurs requis pour compléter le projet
@@ -139,16 +139,16 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
         
             retirer le premier élément de la liste <b>l</b> et le placer dans <b>e</b>
         
-            <i><b>SI</b></i> la date de fin calculée <b>date</b> est inférieure ou égale à la date de l'événement <b>e</b> <i><b>ALORS</b></i>
+            <i><b>SI</b></i> la date de fin calculée <b>date_fin</b> est inférieure ou égale à la date de l'événement <b>e</b> <i><b>ALORS</b></i>
             
                 dépiler la tête de pile <b>p</b> (le projet courant)
                 réempiler tous les événements de la liste temporaire <b>l</b> dans la pile <b>p</b>
                 
-                <i><b>SI</b></i> la date de fin calculée <b>date</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
+                <i><b>SI</b></i> la date de fin calculée <b>date_fin</b> est inférieure ou égale à la <b>deadline</b> du projet courant <i><b>ALORS</b></i>
                 
                     écrire dans le log que le projet courant est validé
                     dépiler la tête de pile <b>p</b> (retirer le projet validé)
-                    la <b>date_courante</b> est désormais égale à la date de fin du projet validé calculée <b>date</b> 
+                    la <b>date_courante</b> est désormais égale à <b>date_fin</b> du projet validé (calculée)
                     avancer d'un jour
                 
                 <i><b>SINON</b></i> (<b>date</b> est supérieure à <b>deadline</b>)
@@ -169,7 +169,7 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
                 ajouter l'employé relatif à <b>e</b> dans l'équipe
                 avancer la <b>date_courante</b> à la date de <b>e</b>
                 retirer le nombre de jours de travail écoulés
-                calculer la nouvelle date de fin avec le nouvel employé <b>date</b>
+                calculer la nouvelle <b>date_fin</b> avec le nouvel employé
             
             <i><b>FIN SI</b></i>
         
