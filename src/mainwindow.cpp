@@ -11,6 +11,7 @@
 #include <cmath>
 #include <fstream>
 #include <QTime>
+#include <QDir>
 
 /*
  * MACRO FOR DEBUG VERSION
@@ -813,7 +814,11 @@ void MainWindow::on_pushButton_simulate_clicked()
         res += "\t- Additionnal managing staff (DEVs/DCOs): " + std::to_string(general_needed_man)
                 + "\n" + "\t- Additionnal development staff (PMs) : " + std::to_string(general_needed_dev) + ".";
     }
-    res += "\n\nSee the full log for more detailed informations.";
+    res += "\n\nSee the full log for more detailed informations :";
+    QDir dir;
+    res += "\n";
+    res += dir.absolutePath().toStdString();
+    res += "/results";
     this->result_diag->display_result(res);
     this->result_diag->show();
     invalidated_proj.clear();
