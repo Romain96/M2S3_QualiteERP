@@ -181,7 +181,6 @@ Créer une pile d'événements <b>p</b> à partir de la liste de projets et de c
 </pre>
 
 (1) On considère le projet comme terminé à la deadline comme si les ressources nécessaires étaient présentes pour faciliter les calculs.
+En réalité on calcule on optimum local plutôt que de rechercher l'optimum global. Il s'agit d'une stratégie gloutonne.
 
 Pour de plus amples informations, se reporter au code commenté dans le fichier correspondant.
-
-**Toute faille est totalement volontaire et entièrement maîtrisée et testée**
